@@ -25,11 +25,11 @@ AbodeXD: Wireframe
 Project Requirements:
 
 Mobile Only UI
-Login feature w/ Authentication 
+Login feature w/ Authentication
 Navigation Bar
 Simple Footer
 Median Calculator
-Unit Equalizer 
+Unit Equalizer
 Line spec page
 jobs
 product tolerances
@@ -39,10 +39,10 @@ tools to change
 process
 conditions
 tool nib rolling process
-timer
+tool change timer
 micron units paired with the tool involved
 
 My Aim for this year is not to get a job but to gain a more depth understanding about programming, I started last July 18 on a 3 month cohort,
 ever since after that I have been doing the self-taught route. I am here to prove my own self that, I have been doing good and improving,
-regardless of all the negative thoughts and imposter syndrome I am experiencing. I plan to keep learning because programming is such a innovative 
+regardless of all the negative thoughts and imposter syndrome I am experiencing. I plan to keep learning because programming is such a innovative
 way to improve one self upon. Thank you, everyone
