@@ -1,0 +1,19 @@
+{
+  "name": "workflow-helper",
+  "version": "1.0.0",
+  "description": "WORKFLOW HELPER",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon api/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.5.1",
+    "nodemon": "^3.1.4"
+  }
+}

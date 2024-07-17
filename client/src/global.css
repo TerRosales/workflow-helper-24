@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.headerItems {
+  @apply p-2 bg-blue-200 hover:bg-blue-900 hover:text-white rounded-md;
+}
