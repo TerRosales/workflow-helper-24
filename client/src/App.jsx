@@ -16,7 +16,6 @@ function App() {
       <BrowserRouter>
         {/* Navbar */}
         <Header />
-        <Button gradientDuoTone="pinkToOrange">Button</Button>
         {/* Router Routes */}
         <Routes>
           <Route path="/" element={<Home />} />

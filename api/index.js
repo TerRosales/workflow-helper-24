@@ -1,6 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose, { mongo } from "mongoose";
+import userRoutes from "./routes/user.routes.js";
+import lineRoutes from "./routes/line.routes.js";
+import productRoutes from "./routes/product.routes.js";
 dotenv.config();
 const app = express();
 
@@ -16,9 +19,18 @@ mongoose
     console.log("DB connection failed", err);
   });
 
-app.get("/", (req, res) => {
-  res.send("api connected");
-});
+  app.use(express.json());
+
+  app.use('/user', userRoutes);
+  // app.use('/auth', authRoutes);
+  app.use('/lines', lineRoutes);
+  app.use('/product', productRoutes);
+
+
+// GET - Read all Users
+// POST - Create a User
+// PUT - Update a User
+// DELETE - Delete a User
 
 // GET - Read all Lines
 // POST - Create a Line

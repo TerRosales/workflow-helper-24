@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { Dropdown } from "flowbite-react";
+
 
 function Header() {
   return (
@@ -10,12 +12,23 @@ function Header() {
           </h1>
         </Link>
         <ul className="flex gap-4 font-semibold text-sm">
-          <Link to="signin">
+          
+          <li>
+            <Dropdown color="blue" className="" label="Menu" dismissOnClick={false}>
+              <Dropdown.Item>Troubleshoot</Dropdown.Item>
+              <Dropdown.Item>Lines</Dropdown.Item>
+              <Dropdown.Item>Tips</Dropdown.Item>
+              <Dropdown.Item>Settings</Dropdown.Item>
+
+              <Dropdown.Item><Link to="signin">
             <li className="headerItems">Sign In</li>
-          </Link>
-          <Link to="/lines">
-            <li className="headerItems">Troubleshoot</li>
-          </Link>
+          </Link></Dropdown.Item>
+              <Dropdown.Item><Link to="signup">
+              
+          </Link></Dropdown.Item>
+              <Dropdown.Item>Sign out</Dropdown.Item>
+            </Dropdown>
+          </li>
         </ul>
       </div>
     </div>
