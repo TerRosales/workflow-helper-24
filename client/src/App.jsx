@@ -1,6 +1,5 @@
 import "./global.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Button } from "flowbite-react";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Signin from "./pages/Signin";
@@ -8,7 +7,7 @@ import Signup from "./pages/Signup";
 import Lines from "./pages/Lines";
 import ProductPage from "./pages/ProductPage";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
+import FooterComponent from "./components/FooterComponent";
 
 function App() {
   return (
@@ -26,7 +25,7 @@ function App() {
           <Route path="/productpage" element={<ProductPage />} />
         </Routes>
         {/* Footer */}
-        <Footer />
+        <FooterComponent />
       </BrowserRouter>
     </div>
   );

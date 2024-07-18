@@ -18,11 +18,9 @@ const userSchema = new mongoose.Schema(
     },
     department: {
       type: Number,
-      required: true,
     },
     employeeId: {
       type: Number,
-      required: true,
     },
     qualification: {
       type: Array,
