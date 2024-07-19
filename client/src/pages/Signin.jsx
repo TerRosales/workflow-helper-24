@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Signin() {
   return (
-    <div className="p-7 h-[75vh]">
+    <div className="p-7 h-[75vh] max-w-6xl mx-auto">
       <h1 className="text-4xl font-extralight text-white text-center my-10">
         Sign In
       </h1>
@@ -18,7 +18,7 @@ function Signin() {
           <Link to="/signup">
             <span className="text-blue-500">Sign Up</span>
           </Link>
-          </div>
+        </div>
       </form>
     </div>
   );

@@ -6,10 +6,12 @@ import authRoutes from "./routes/auth.routes.js";
 import lineRoutes from "./routes/line.routes.js";
 import productRoutes from "./routes/product.routes.js";
 dotenv.config();
+import cors from "cors";
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 mongoose
   .connect(process.env.MONGODB)
