@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.buttonUni {
+  @apply border-white border-2 focus:text-blue-400 focus:border-blue-400 focus:ring-blue-400 focus:ring-2 rounded-lg
+}
+
+.app{
+  @apply bg-neutral-900;
+
+}
 [data-testid="flowbite-dropdown-target"] {
   @apply border-white border-2 hover:border-blue-400 hover:text-blue-400 focus:ring-blue-400 focus:ring-2 !important;
 }
