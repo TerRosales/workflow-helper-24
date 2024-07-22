@@ -46,6 +46,34 @@ function Signup() {
     return errors.length === 0;
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (!validatePassword(formData.password, confirmPassword)) {
+  //     return;
+  //   }
+  //   try {
+  //     setLoading(true);
+  //     const res = await fetch("http://localhost:3000/api/auth/signup", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(formData),
+  //     });
+  //     const data = await res.json();
+  //     setLoading(false);
+  //     if (!data.success) {
+  //       setErrors([data.message || "Something went wrong, please try again"]);
+  //       return;
+  //     }
+  //     navigate("/signup/verify-email");
+  //     // navigate("/signin");
+  //   } catch (error) {
+  //     setLoading(false);
+  //     setErrors(["Something went wrong, please try again"]);
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validatePassword(formData.password, confirmPassword)) {
@@ -67,12 +95,12 @@ function Signup() {
         return;
       }
       navigate("/verify-email");
-      // navigate("/signin");
     } catch (error) {
       setLoading(false);
       setErrors(["Something went wrong, please try again"]);
     }
   };
+  
 
   return (
     <div className="p-7 h-auto max-w-6xl mx-auto">

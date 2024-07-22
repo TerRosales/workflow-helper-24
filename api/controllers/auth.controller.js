@@ -26,24 +26,20 @@ export const signup = async (req, res, next) => {
       },
     };
 
-    const sendMail = async (transporter, mailOptions) => {
-      try {
-        await transporter.sendMail(mailOptions);
-        console.log("Email sent");
-      } catch (error) {
-        console.error("Error: ", error);
-      }
-    };
-
-    sendMail(transporter, mailOptions);
-    res.status(201).json({ message: "Signup success" });
+    try {
+      await transporter.sendMail(mailOptions);
+      console.log("Email sent");
+    } catch (error) {
+      console.error("Error sending email: ", error);
+      // If email fails, don't stop the signup process, just log the error
+    }
+    
+    res.status(201).json({ success: true, message: "Signup success" });
   } catch (error) {
     next(errorHandler(300, `Signup failed - ${error.message} -`));
   }
 };
 
 export const signin = async (req, res) => {};
-
 export const signout = async (req, res) => {};
-
 export const verification = async (req, res) => {};

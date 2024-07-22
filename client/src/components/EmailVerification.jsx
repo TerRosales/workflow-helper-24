@@ -1,5 +1,5 @@
 function EmailVerification() {
-  return <div></div>;
+  return <div>Email</div>;
 }
 
 export default EmailVerification;
