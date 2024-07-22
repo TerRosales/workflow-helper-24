@@ -12,6 +12,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+console.log(process.env.EMAIL, process.env.PASSWORD);
 
 mongoose
   .connect(process.env.MONGODB)
@@ -56,3 +57,49 @@ app.use((err, req, res, next) => {
 // POST - Create a Product
 // PUT - Update a Product
 // DELETE - Delete a Product
+
+// Bottom snippet works for nodemailer
+
+// import nodemailer from "nodemailer";
+// import { fileURLToPath } from "url";
+// import path from "path";
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+
+// const transporter = nodemailer.createTransport({
+//   service: "gmail",
+//   host: "smtp.gmail.com",
+//   port: 465,
+//   secure: true,
+//   auth: {
+//     user: process.env.EMAIL,
+//     pass: process.env.PASSWORD,
+//   },
+// });
+
+// const mailOptions = {
+//   from: {
+//     name: "TR-DEV",
+//     address: process.env.EMAIL,
+//   }, // sender address
+//   to: "gummBOOM2@gmail.com", // list of receivers
+//   subject: "Email Verification", // Subject line
+//   text: "Hello world?", // plain text body
+//   html: `<b>Email from Workflow Helper</b><br/><a href="https://thai-rest.tr-dev.dev/" target="_blank">hi</a>`, // html body
+//   attachments: {
+//     filename: "test.jpg",
+//     path: path.join(__dirname, "./utils/test.jpg"),
+//     contentType: "image/jpeg",
+//   },
+// };
+
+// const sendMail = async (transporter, mailOptions) => {
+//   try {
+//     await transporter.sendMail(mailOptions);
+//     console.log("Email sent");
+//   } catch (error) {
+//     console.error("Error: ", error);
+//   }
+// };
+
+// sendMail(transporter, mailOptions);

@@ -5,10 +5,10 @@ import { Alert } from "flowbite-react";
 
 function Home() {
   return (
-    <section className="h-[75vh] text-white px-3 space-x-5 max-w-2xl mx-auto text-center">
-      <h1 className="text-5xl mt-10 mb-10">Welcome 🤗</h1>
+    <section className="h-[70vh] text-white px-3 space-x-5 max-w-2xl mx-auto text-center">
+      <h1 className="text-5xl mt-10 my-10">Welcome 🤗</h1>
       <section>
-        <p className="text-lg">
+        <p className="text-lg mb-10">
           Workflow
           <span className="bg-white rounded-lg p-1 font-bold text-[#556cef]">
             Helper

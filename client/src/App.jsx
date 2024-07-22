@@ -9,7 +9,7 @@ import ProductPage from "./pages/ProductPage";
 import Header from "./components/Header";
 import FooterComponent from "./components/FooterComponent";
 import Verified from "./components/Verified";
-import Verification from "./components/Verification";
+import EmailVerification from "./components/EmailVerification";
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />}>
-            <Route path="verify" element={<Verification />} />
+            <Route path="verify-email" element={<EmailVerification />} />
             <Route path="verified" element={<Verified />} />
           </Route>
           <Route path="/lines" element={<Lines />} />
