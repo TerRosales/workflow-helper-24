@@ -59,7 +59,6 @@ app.use((err, req, res, next) => {
 // DELETE - Delete a Product
 
 // Bottom snippet works for nodemailer
-
 // import nodemailer from "nodemailer";
 // import { fileURLToPath } from "url";
 // import path from "path";

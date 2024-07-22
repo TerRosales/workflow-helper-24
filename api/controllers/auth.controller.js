@@ -1,6 +1,11 @@
 import User from "../models/user.model.js";
 import bcryptjs from "bcryptjs";
 import { errorHandler } from "../utils/errorHandler.js";
+import { transporter } from "../utils/emailHandler.js";
+import { fileURLToPath } from "url";
+import path from "path";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export const signup = async (req, res, next) => {
   const { email, username, password } = req.body;
@@ -8,6 +13,29 @@ export const signup = async (req, res, next) => {
   const newUser = new User({ email, username, password: hashedPassword });
   try {
     await newUser.save();
+    const mailOptions = {
+      from: process.env.EMAIL,
+      to: email,
+      subject: "Email Verification",
+      text: `Verify Email from Workflow Helper`, // plain text body
+      html: `<b>Email from Workflow Helper</b><br/><a href="https://thai-rest.tr-dev.dev/" target="_blank">hi</a>`, // html body
+      attachments: {
+        filename: "test.jpg",
+        path: path.join(__dirname, "../utils/test.jpg"),
+        contentType: "image/jpeg",
+      },
+    };
+
+    const sendMail = async (transporter, mailOptions) => {
+      try {
+        await transporter.sendMail(mailOptions);
+        console.log("Email sent");
+      } catch (error) {
+        console.error("Error: ", error);
+      }
+    };
+
+    sendMail(transporter, mailOptions);
     res.status(201).json({ message: "Signup success" });
   } catch (error) {
     next(errorHandler(300, `Signup failed - ${error.message} -`));
