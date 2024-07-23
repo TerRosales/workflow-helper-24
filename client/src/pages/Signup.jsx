@@ -8,6 +8,7 @@ function Signup() {
   const [errors, setErrors] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState("");
   const navigate = useNavigate();
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -94,13 +95,15 @@ function Signup() {
         setErrors([data.message || "Something went wrong, please try again"]);
         return;
       }
-      navigate("/verify-email");
+      setSuccess("Signup Success, Redirecting to verification...");
+      setTimeout(() => {
+        navigate("/verify-email");
+      }, 2000);
     } catch (error) {
       setLoading(false);
       setErrors(["Something went wrong, please try again"]);
     }
   };
-  
 
   return (
     <div className="p-7 h-auto max-w-6xl mx-auto">
@@ -162,6 +165,11 @@ function Signup() {
               </Alert>
             ))}
           </div>
+        )}
+        {success && (
+          <Alert className="p-2" color="success">
+            {success}
+          </Alert>
         )}
         <Button
           type="submit"
