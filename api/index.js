@@ -12,7 +12,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-console.log(process.env.EMAIL, process.env.PASSWORD);
+
 
 mongoose
   .connect(process.env.MONGODB)
