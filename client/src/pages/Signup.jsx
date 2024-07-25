@@ -13,7 +13,6 @@ function Signup() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
-  
 
   console.log(formData);
   const handleConfirmPasswordChange = (e) => {
@@ -27,6 +26,9 @@ function Signup() {
     const regexNumber = /(?=.*\d)/;
     const regexSpecialChar = /(?=.*[!@#$%^&*])/;
 
+    if (password.length < 8) {
+      errors.push("Password must be at least 8 characters long.");
+    }
     if (!regexUppercase.test(password)) {
       errors.push("Password must contain at least 1 uppercase letter.");
     }
