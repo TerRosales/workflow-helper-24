@@ -1,5 +1,4 @@
-export const verificationCode = null; // Replace this with your actual code
-export const emailTemplate = `
+export const emailTemplate = (verificationCode) => `
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -77,7 +76,7 @@ export const emailTemplate = `
       <div class="content">
         <p>Hello,</p>
         <p>
-          Thank you for registering with us. Please use the following
+          Thank you for registering to my app. Please use the following
           verification code to complete your registration process:
         </p>
         <div>

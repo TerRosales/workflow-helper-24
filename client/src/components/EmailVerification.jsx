@@ -2,14 +2,14 @@ import React, { useState, useRef } from 'react';
 import { Button } from 'flowbite-react';
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
 
-
 function EmailVerification() {
   const [values, setValues] = useState(['', '', '', '', '', '']);
+  const [email, setEmail] = useState('');
   const inputRefs = useRef([]);
 
   const handleChange = (e, index) => {
     const value = e.target.value;
-    if (/^[0-9]$/.test(value)) {
+    if (/^[0-9a-z]$/.test(value)) {
       const newValues = [...values];
       newValues[index] = value;
       setValues(newValues);
@@ -31,27 +31,48 @@ function EmailVerification() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const code = values.join('');
-    console.log('Verification code:', code);
-    // Add your submit logic here
+    try {
+      const response = await fetch(`http://localhost:3000/api/auth/verify`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, code }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log(data.message);
+      } else {
+        console.error(data.message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
     <div className="h-[100vh] p-2 text-center bg-white">
-      <div className='flex justify-content-center items-center gap-2 my-5
-      '>
+      <div className='flex justify-content-center items-center gap-2 my-5'>
         <span className='w-full h-1 border-2 border-neutral-900' />
         <MdOutlineMarkEmailUnread className='text-[50px]'/>
         <span className='w-full h-1 border-2 border-neutral-900'/>
-
       </div>
       <p>We have sent you a <span className='font-semibold'>verification code</span> to your Email Address that you have provided.</p>
       <section className="lg:w-1/2 mx-auto rounded p-2 my-14 border-neutral-900 border-b-2 border-r-2 border-2 border-l-neutral-400 border-t-neutral-200">
         <form onSubmit={handleSubmit} className='flex flex-col justify-center'>
           <label className='font-semibold my-5' htmlFor="email">Confirm Email:</label>
-          <input type="text" id='email' placeholder='Email Address' />
+          <input
+            type="text"
+            id='email'
+            placeholder='Email Address'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
           <span className='mt-5 font-semibold'>Enter Verification code:</span>
           <section className="flex justify-center my-5">
             {values.map((value, index) => (
@@ -70,14 +91,11 @@ function EmailVerification() {
           </section>
           <Button type="submit" className="buttonUniLight mb-5 w-[100px] mx-auto">Verify</Button>
         </form>
-        
       </section>
-      <div className='flex justify-content-center items-center gap-2 my-5
-      '>
+      <div className='flex justify-content-center items-center gap-2 my-5'>
         <span className='w-full h-1 border-2 border-neutral-900' />
         <MdOutlineMarkEmailUnread className='text-[50px]'/>
         <span className='w-full h-1 border-2 border-neutral-900'/>
-
       </div>
     </div>
   );

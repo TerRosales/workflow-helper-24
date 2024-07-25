@@ -13,6 +13,7 @@ function Signup() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
+  
 
   console.log(formData);
   const handleConfirmPasswordChange = (e) => {
@@ -82,7 +83,7 @@ function Signup() {
     }
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:3000/api/auth/signup", {
+      const res = await fetch(`http://localhost:3000/api/auth/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -98,7 +99,7 @@ function Signup() {
       setSuccess("Signup Success, Redirecting to verification...");
       setTimeout(() => {
         navigate("/verify-email");
-      }, 2000);
+      }, 1200);
     } catch (error) {
       setLoading(false);
       setErrors(["Something went wrong, please try again"]);
