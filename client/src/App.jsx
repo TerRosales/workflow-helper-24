@@ -23,8 +23,8 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
-            <Route path="/verify-email" element={<EmailVerification />} />
-            <Route path="/verified" element={<Verified />} />
+          <Route path="/verify-email" element={<EmailVerification />} />
+          <Route path="/verified" element={<Verified />} />
           <Route path="/lines" element={<Lines />} />
           <Route path="/productpage" element={<ProductPage />} />
         </Routes>

@@ -1,16 +1,23 @@
-import React, { useState, useRef } from "react";
-import { Button } from "flowbite-react";
+import { useState, useRef } from "react";
+import { Button, Alert } from "flowbite-react";
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
-import useWindowSize from "react-use/lib/useWindowSize";
-import Confetti from "react-confetti";
+import ConfettiExplosion from "react-confetti-explosion";
+import { useNavigate } from "react-router-dom";
+
+const bigExplodeProps = {
+  force: 0.7,
+  duration: 4000,
+  particleCount: 120,
+};
 
 function EmailVerification() {
   const [values, setValues] = useState(["", "", "", "", "", ""]);
   const [email, setEmail] = useState("");
   const [verificationSuccess, setVerificationSuccess] = useState(false);
-
+  const [isExploding, setIsExploding] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const inputRefs = useRef([]);
-  const { width, height } = useWindowSize();
+  const navigate = useNavigate();
 
   const handleChange = (e, index) => {
     const value = e.target.value;
@@ -27,6 +34,12 @@ function EmailVerification() {
       const newValues = [...values];
       newValues[index] = "";
       setValues(newValues);
+    }
+  };
+
+  const handleVerificationClick = () => {
+    if (setVerificationSuccess) {
+      setIsExploding(!isExploding);
     }
   };
 
@@ -52,11 +65,17 @@ function EmailVerification() {
       if (response.ok) {
         console.log(data.message);
         setVerificationSuccess(true);
+        setErrorMessage("");
+        setTimeout(() => {
+          navigate("/verified");
+        }, 1200);
       } else {
         console.error(data.message);
+        setErrorMessage(data.message);
       }
     } catch (error) {
       console.error("Error:", error);
+      setErrorMessage("An unexpected error occurred. Please try again.");
     }
   };
 
@@ -72,7 +91,7 @@ function EmailVerification() {
         <span className="font-semibold">verification code</span> to your Email
         Address that you have provided.
       </p>
-      <section className="lg:w-1/2 mx-auto rounded p-2 my-14 border-neutral-900 border-2">
+      <section className="lg:w-1/2 mx-auto rounded-lg p-2 my-14 border-neutral-900 border-2">
         <form onSubmit={handleSubmit} className="flex flex-col justify-center">
           <label className="font-semibold my-5" htmlFor="email">
             Confirm Email:
@@ -100,34 +119,29 @@ function EmailVerification() {
               />
             ))}
           </section>
-          {verificationSuccess && (
-            <Confetti
-              width={width}
-              height={height}
-              colors={[
-                "#f44336",
-                "#2196f3",
-                "#ffeb3b",
-                "#4caf50",
-                "#ff9800",
-                "#808080",
-                "#d3d3d3",
-                "#ADD8E6",
-                "#00008B",
-              ]}
-              friction={0.87}
-              gravity={0.1}
-              numberOfPieces={100}
-              initialVelocityX={5}
-              initialVelocityY={5}
-            />
-          )}
           <Button
+            onClick={handleVerificationClick}
             type="submit"
             className="buttonUniLight mb-5 w-[100px] mx-auto"
+            disabled={verificationSuccess}
           >
+            {isExploding && (
+              <div>
+                <ConfettiExplosion {...bigExplodeProps} />
+              </div>
+            )}
             Verify
           </Button>
+          {errorMessage && (
+            <Alert color="failure" className="p-2 text-center">
+              {errorMessage}
+            </Alert>
+          )}
+          {verificationSuccess && (
+            <Alert color="success" className="p-2 text-center">
+              Email has been verified successfully! <b>Redirecting...</b>
+            </Alert>
+          )}
         </form>
       </section>
       <div className="flex justify-content-center items-center gap-2 my-5">
