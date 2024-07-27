@@ -133,12 +133,12 @@ function EmailVerification() {
             Verify
           </Button>
           {errorMessage && (
-            <Alert color="failure" className="p-2 text-center">
+            <Alert color="failure" className="p-2 text-center mb-5">
               {errorMessage}
             </Alert>
           )}
           {verificationSuccess && (
-            <Alert color="success" className="p-2 text-center">
+            <Alert color="success" className="p-2 text-center mb-5">
               Email has been verified successfully! <b>Redirecting...</b>
             </Alert>
           )}
