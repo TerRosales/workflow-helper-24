@@ -87,9 +87,7 @@ function Signup() {
 
   return (
     <div className="p-7 h-auto max-w-6xl mx-auto">
-      <h1 className="text-4xl font-extralight text-white text-center my-10">
-        Sign Up
-      </h1>
+      <h1 className="text-4xl text-center my-10">Sign Up</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <FloatingLabel
           variant="standard"
@@ -130,10 +128,7 @@ function Signup() {
             checked={showPassword}
             onChange={() => setShowPassword(!showPassword)}
           />
-          <label
-            htmlFor="showpassword"
-            className="px-2 text-white font-extralight text-sm"
-          >
+          <label htmlFor="showpassword" className="px-2 text-sm">
             Show Password
           </label>
         </section>
@@ -156,11 +151,11 @@ function Signup() {
             type="submit"
             className="buttonUni my-7  bg-neutral-950 self-center"
           >
-            {loading ? "Loading..." : "Sign In"}
+            {loading ? "Loading..." : "Sign Up"}
           </Button>
           <OAuth />
         </section>
-        <div className="text-white flex mx-auto">
+        <div className="flex mx-auto">
           <p>Already have an account?&nbsp;</p>
           <Link to="/signin">
             <span className="text-blue-500">Sign In</span>

@@ -19,25 +19,22 @@
 }
 
 .iconEmoji {
-  @apply text-[47px] text-center bg-gradient-to-b from-blue-500 to-neutral-800 w-[60%];
+  @apply text-[47px] text-center bg-gradient-to-b from-blue-500 to-neutral-800 w-[60%] mx-auto;
   clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
 }
 
 .buttonUni {
-  @apply border-white border-2 focus:text-blue-400 focus:border-blue-400 focus:ring-blue-400 focus:ring-2 rounded-lg  !important;
+  @apply w-[90px] border-white border-2 focus:text-blue-400 focus:border-blue-400 focus:ring-blue-400 focus:ring-2 rounded-lg  !important;
 }
 
 .OAuth {
-  @apply border-white border-2 bg-gradient-to-b from-blue-500 to-neutral-800;
+  @apply border-white border-2 bg-gradient-to-b from-blue-500 to-neutral-800 w-[90px];
 }
 
 .buttonUniLight {
   @apply border-black bg-white text-black border-2 focus:text-blue-400 focus:border-blue-400 focus:ring-blue-400 focus:ring-2 rounded-lg shadow-md shadow-neutral-300 hover:-translate-y-3  transition-all hover:bg-neutral-900 hover:text-white hover:border-white !important;
 }
 
-.app {
-  @apply bg-neutral-900;
-}
 [data-testid="flowbite-dropdown-target"] {
   @apply border-white border-2 hover:border-blue-400 hover:text-blue-400 focus:ring-blue-400 focus:ring-2 !important;
 }

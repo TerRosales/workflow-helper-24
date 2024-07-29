@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Verified() {
   return (
-    <div>
+    <div className="mt-10">
       <div className="bg-gradient-to-bl p-5 gap-7 from-white to bg-neutral-200 flex flex-col">
         <section className="mb-5 flex flex-col gap-12 w-[70%] lg:w-[50%] mx-auto">
           <p className="iconEmoji">🥳</p>
