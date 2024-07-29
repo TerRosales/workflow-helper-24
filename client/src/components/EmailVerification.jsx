@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { Button, Alert } from "flowbite-react";
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
 import ConfettiExplosion from "react-confetti-explosion";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const bigExplodeProps = {
   force: 0.7,
@@ -53,13 +53,16 @@ function EmailVerification() {
     e.preventDefault();
     const code = values.join("");
     try {
-      const response = await fetch(`http://localhost:3000/api/auth/verify`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, code }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/auth/verify`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, code }),
+        }
+      );
 
       const data = await response.json();
       if (response.ok) {
@@ -68,7 +71,7 @@ function EmailVerification() {
         setErrorMessage("");
         setTimeout(() => {
           navigate("/verified");
-        }, 1200);
+        }, 1500);
       } else {
         console.error(data.message);
         setErrorMessage(data.message);
@@ -80,7 +83,7 @@ function EmailVerification() {
   };
 
   return (
-    <div className="h-[100vh] p-2 text-center bg-white">
+    <div className="h-[78vh] p-2 text-center bg-white">
       <div className="flex justify-content-center items-center gap-2 my-5">
         <span className="w-full h-1 border-2 border-neutral-900" />
         <MdOutlineMarkEmailUnread className="text-[50px]" />
@@ -134,7 +137,18 @@ function EmailVerification() {
           </Button>
           {errorMessage && (
             <Alert color="failure" className="p-2 text-center mb-5">
-              {errorMessage}
+              <b>{errorMessage}</b>{" "}
+              <p>
+                In case of account credential lost please visit our{" "}
+                <b>
+                  <Link
+                    className="underline underline-offset-1]"
+                    to="/customer-service"
+                  >
+                    Account Retreaval Page
+                  </Link>
+                </b>{" "}
+              </p>
             </Alert>
           )}
           {verificationSuccess && (

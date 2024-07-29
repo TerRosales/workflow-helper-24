@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import FooterComponent from "./components/FooterComponent";
 import Verified from "./components/Verified";
 import EmailVerification from "./components/EmailVerification";
+import CustomerService from "./pages/CustomerService";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/verified" element={<Verified />} />
           <Route path="/lines" element={<Lines />} />
           <Route path="/productpage" element={<ProductPage />} />
+          <Route path="/customer-service" element={<CustomerService />} />
         </Routes>
         {/* Footer */}
         <FooterComponent />

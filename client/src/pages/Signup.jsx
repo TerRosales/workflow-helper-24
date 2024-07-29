@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FloatingLabel, Button, Alert } from "flowbite-react";
+import OAuth from "../components/OAuth";
 
 function Signup() {
   const [formData, setFormData] = useState({});
@@ -14,7 +15,7 @@ function Signup() {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-  console.log(formData);
+  // console.log(formData); // Uncomment this line to see the form data in the console
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
     validatePassword(formData.password, e.target.value);
@@ -57,13 +58,16 @@ function Signup() {
     }
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:3000/api/auth/signup`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/auth/signup`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       const data = await res.json();
       setLoading(false);
       if (!data.success) {
@@ -73,7 +77,7 @@ function Signup() {
       setSuccess("Signup Success, Redirecting to verification...");
       setTimeout(() => {
         navigate("/verify-email");
-      }, 1200);
+      }, 1500);
       setErrors([]);
     } catch (error) {
       setLoading(false);
@@ -147,12 +151,15 @@ function Signup() {
             {success}
           </Alert>
         )}
-        <Button
-          type="submit"
-          className="my-5 buttonUni bg-neutral-950 self-center"
-        >
-          {loading ? "Loading..." : "Sign Up"}
-        </Button>
+        <section className="flex mx-auto gap-10">
+          <Button
+            type="submit"
+            className="buttonUni my-7  bg-neutral-950 self-center"
+          >
+            {loading ? "Loading..." : "Sign In"}
+          </Button>
+          <OAuth />
+        </section>
         <div className="text-white flex mx-auto">
           <p>Already have an account?&nbsp;</p>
           <Link to="/signin">
