@@ -21,6 +21,14 @@ function Signin() {
     console.log(formData);
   };
 
+  const handleOAuthSuccess = () => {
+    setRedirecting(true);
+    setTimeout(() => {
+      navigate("/profile");
+      setRedirecting(false);
+    }, 1500);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -99,9 +107,9 @@ function Signin() {
           >
             {loading ? "Loading..." : "Sign In"}
           </Button>
-          <OAuth />
+          <OAuth onSuccess={handleOAuthSuccess} />
         </section>
-        <div className="text-white flex mx-auto">
+        <div className="flex mx-auto">
           <p>Don&apos;t have an account?&nbsp;</p>
           <Link to="/signup">
             <span className="text-blue-500">Sign Up</span>

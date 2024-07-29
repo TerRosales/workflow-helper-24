@@ -33,8 +33,7 @@ const userSchema = new mongoose.Schema(
     },
     employeeImg: {
       type: String,
-      default:
-        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fvectors%2Fblank-profile-picture-mystery-man-973460%2F&psig=AOvVaw23a8352W-Tsm26JEC4OYAZ&ust=1722314904820000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCIj3-ZS5y4cDFQAAAAAdAAAAABAE",
+      default: "https://static.thenounproject.com/png/354384-200.png",
     },
     employeeId: {
       type: Number,

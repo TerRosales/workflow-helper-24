@@ -122,16 +122,17 @@ export const googleAuth = async (req, res, next) => {
         Math.random().toString(36).slice(-8) +
         Math.random().toString(36).slice(-8);
       const hashedPassword = bcryptjs.hashSync(generatedPassword, 10);
+      const usernameBase = req.body.name.split(" ").join("").toLowerCase();
+      const randomString = Math.random().toString(36).slice(-8);
+      const username = (usernameBase + randomString).replace(/[^a-z0-9]/g, "");
       const newUser = new User({
-        username:
-          req.body.name.split(" ").join("").toLowerCase() +
-          Math.random().toString(36).slice(-8),
+        username,
         email: req.body.email,
         password: hashedPassword,
         profilePicture: req.body.photo,
       });
       await newUser.save();
-      const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
+      const token = jwt.sign({ id: newUser._id }, process.env.JWTSECRET);
       const { password: hashedPassword2, ...rest } = newUser._doc;
       res
         .cookie("access_token", token, {

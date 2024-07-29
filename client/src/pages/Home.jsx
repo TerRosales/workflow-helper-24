@@ -3,8 +3,8 @@
 
 function Home() {
   return (
-    <section className="flex flex-col lg:h-[80vh] md:h-[90vh] sm:h-[95vh] px-6 space-x-5 max-w-2xl mx-auto text-center">
-      <h1 className="text-5xl font-extralight mt-10 my-5 text-center pl-4">
+    <section className="flex flex-col lg:h-[80vh] md:h-[90vh] sm:h-[95vh] px-6 space-x-5 max-w-2xl mx-auto text-center mb-5">
+      <h1 className="text-5xl font-extralight mt-10 mb-10 text-center pl-4">
         Welcome
       </h1>
 

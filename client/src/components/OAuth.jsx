@@ -1,11 +1,10 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button } from "flowbite-react";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import { app } from "../firebase.js";
 import { signInSuccess } from "../redux/user/userSlice.js";
 
-function OAuth() {
+function OAuth({ onSuccess }) {
   const dispatch = useDispatch();
   const handleGoogleOAuth = async () => {
     try {
@@ -27,8 +26,8 @@ function OAuth() {
         }
       );
       const data = await res.json();
-      console.log(data);
       dispatch(signInSuccess(data));
+      if (onSuccess) onSuccess();
     } catch (error) {
       console.log("Failed to authenticate with Google", error);
     }

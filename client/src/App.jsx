@@ -11,6 +11,7 @@ import FooterComponent from "./components/FooterComponent";
 import Verified from "./components/Verified";
 import EmailVerification from "./components/EmailVerification";
 import CustomerService from "./pages/CustomerService";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -21,13 +22,15 @@ function App() {
         {/* Router Routes */}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/verify-email" element={<EmailVerification />} />
           <Route path="/verified" element={<Verified />} />
-          <Route path="/lines" element={<Lines />} />
-          <Route path="/productpage" element={<ProductPage />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/lines" element={<Lines />} />
+            <Route path="/productpage" element={<ProductPage />} />
+          </Route>
           <Route path="/customer-service" element={<CustomerService />} />
         </Routes>
         {/* Footer */}
