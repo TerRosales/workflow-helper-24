@@ -4,15 +4,13 @@
 function Home() {
   return (
     <section className="flex flex-col lg:h-[80vh] md:h-[90vh] sm:h-[95vh] px-6 space-x-5 max-w-2xl mx-auto text-center mb-5">
-      <h1 className="text-5xl font-extralight mt-10 mb-10 text-center pl-4">
-        Welcome
-      </h1>
+      <h1 className="text-5xl mt-10 mb-10 text-center pl-4">Welcome</h1>
 
       <section className="flex flex-col mx-auto justify-center text-center items-center">
         <span className="iconEmoji rounded-xl">🤗</span>
         <p className="text-[16px] my-10">
-          Workflow
-          <span className="border-1 bg-white rounded-lg p-1 font-bold text-[#556cef]">
+          Workflow&nbsp;
+          <span className="border-1 rounded-lg font-bold text-[#556cef]">
             Helper
           </span>{" "}
           is meant to help our associates need less dependance from our team

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Dropdown, DropdownDivider } from "flowbite-react";
+import { Dropdown } from "flowbite-react";
 import { useSelector } from "react-redux";
 import { FaClipboardUser } from "react-icons/fa6";
 import { FaNetworkWired, FaSignOutAlt } from "react-icons/fa";
@@ -8,7 +8,7 @@ function Header() {
   const { currentUser } = useSelector((state) => state.user);
 
   const truncateText = (username) => {
-    return username.length > 9 ? username.substring(0, 13) + "..." : username;
+    return username.length > 9 ? username.substring(0, 10) + "..." : username;
   };
 
   return (
@@ -22,20 +22,22 @@ function Header() {
         <ul className="flex gap-4 font-semibold text-sm text-white">
           <li className="">
             <Dropdown
-              size="lg"
+              size="md"
               color="grey" // Set the background color to white
-              className="gradientUni" // Set the text color to black
-              label="Menu"
+              className="gradientUni w-[50%]" // Set the text color to black
+              label={
+                currentUser ? `${truncateText(currentUser.username)}` : "Menu"
+              }
               dismissOnClick={false}
             >
               {currentUser ? (
                 <>
                   <Dropdown.Item>
-                    <section className="flex flex-col">
-                      <Link className="mx-auto my-2" to="/profile">
+                    <section className="flex flex-col justify-center items-center object-center mx-auto">
+                      <Link className="my-2" to="/profile">
                         <img
                           src={currentUser.employeeImg}
-                          className="border-black border-2 w-16 rounded-full h-16"
+                          className="border-black border-2 w-12 rounded-full h-12"
                         />
                       </Link>
                       <section className="flex flex-col text-xs font-semibold underline text-neutral-800-900">

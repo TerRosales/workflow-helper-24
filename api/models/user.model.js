@@ -30,6 +30,7 @@ const userSchema = new mongoose.Schema(
     },
     department: {
       type: Number,
+      enum: [1, 2, 3, 4, 5, 6, 7],
     },
     employeeImg: {
       type: String,
@@ -37,6 +38,8 @@ const userSchema = new mongoose.Schema(
     },
     employeeId: {
       type: Number,
+      required: true,
+      default: "0000",
     },
     qualification: {
       type: Array,

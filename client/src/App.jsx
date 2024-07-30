@@ -12,6 +12,7 @@ import Verified from "./components/Verified";
 import EmailVerification from "./components/EmailVerification";
 import CustomerService from "./pages/CustomerService";
 import PrivateRoute from "./components/PrivateRoute";
+import EditProfile from "./components/EditProfile";
 
 function App() {
   return (
@@ -28,8 +29,9 @@ function App() {
           <Route path="/verified" element={<Verified />} />
           <Route element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/edit-profile" element={<EditProfile />} />
             <Route path="/lines" element={<Lines />} />
-            <Route path="/productpage" element={<ProductPage />} />
+            <Route path="/product-page" element={<ProductPage />} />
           </Route>
           <Route path="/customer-service" element={<CustomerService />} />
         </Routes>
