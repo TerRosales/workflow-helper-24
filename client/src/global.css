@@ -58,8 +58,15 @@
   @apply px-2 w-7 !important;
 }
 
+[data-testid="floating-label"] {
+  @apply text-neutral-800;
+}
+
 .getStarted {
   animation: clickable 2s ease-in-out infinite;
+}
+.upload::before {
+  content: "Upload Image";
 }
 
 @keyframes clickable {

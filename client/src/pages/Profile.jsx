@@ -1,6 +1,9 @@
 import { Table, Button, Alert } from "flowbite-react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { AiFillEdit } from "react-icons/ai";
+import { HiWrenchScrewdriver } from "react-icons/hi2";
+import { HiAnnotation, HiBell } from "react-icons/hi";
 
 function Profile() {
   const { currentUser } = useSelector((state) => state.user);
@@ -12,14 +15,19 @@ function Profile() {
     <div className="flex flex-col max-w-2xl p-4 py-5 h-auto mx-auto justify-center">
       <h1 className="text-5xl text-center mt-10 mb-5">Profile</h1>
       <Table className="bg-neutral-50 shadow-md my-5 text-lg items-center">
+        <section className="flex">
+          <img
+            src={currentUser.employeeImg}
+            alt="profile"
+            className="h-24 w-24 self-center cursor-pointer rounded-xl bg-neutral-100 object-cover mt-2"
+          />
+          <section className="flex items-center justify-center text-center gap-2 text-2xl text-blue-500 px-[43px] rounded-lg">
+            <HiBell className="hover:scale-[1.3] hover:text-blue-700 hover:-translate-y-1" />
+            <HiAnnotation className="hover:scale-[1.3] hover:text-blue-700 hover:-translate-y-1" />
+            <HiWrenchScrewdriver className="hover:scale-[1.3] hover:text-blue-700 hover:-translate-y-1" />
+          </section>
+        </section>
         <Table.Body>
-          <Table.Head className="bg-neutral-100">
-            <img
-              src={currentUser.employeeImg}
-              alt="Account Picture"
-              className="mx-auto rounded-full w-32 h-32"
-            />
-          </Table.Head>
           <Table.Row>
             <Table.Cell>Username:</Table.Cell>
             <Table.Cell>{truncateText(currentUser.username)}</Table.Cell>

@@ -18,6 +18,8 @@ import {
   signOut,
 } from "../redux/user/userSlice";
 import { Button, Alert, FloatingLabel } from "flowbite-react";
+import { HiWrenchScrewdriver } from "react-icons/hi2";
+import { HiAnnotation, HiBell, HiCamera } from "react-icons/hi";
 
 function EditProfile() {
   const dispatch = useDispatch();
@@ -146,9 +148,12 @@ function EditProfile() {
   };
 
   return (
-    <div className="p-6 max-w-2xl mx-auto">
+    <div className="p-6 max-w-2xl mx-auto ">
       <h1 className="text-4xl text-center my-5">Profile</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 bg-neutral-100 p-6 rounded-lg shadow-lg shadow-neutral-300 border-b-2 border-neutral-400"
+      >
         <input
           type="file"
           ref={fileRef}
@@ -162,12 +167,17 @@ function EditProfile() {
     allow write: if
     request.resource.size < 2 * 1024 * 1024 &&
     request.resource.contentType.matches('image/.*') */}
-        <img
-          src={formData.employeeImg || currentUser.employeeImg}
-          alt="profile"
-          className="h-24 w-24 self-center cursor-pointer rounded-xl bg-neutral-100 object-cover mt-2"
-          onClick={() => fileRef.current.click()}
-        />
+        <section className="flex mx-auto">
+          <section className="flex flex-col text-blue-600">
+            <img
+              src={formData.employeeImg || currentUser.employeeImg}
+              alt="profile"
+              className="h-24 w-24 self-center cursor-pointer rounded-xl bg-neutral-100 object-cover mt-2 border-2 border-neutral-400"
+              onClick={() => fileRef.current.click()}
+            />
+            <HiCamera className="upload mx-auto text-6xl gap-2 opacity-30 hover:opacity-95 transition-all -translate-y-16" />
+          </section>
+        </section>
         <p className="text-sm self-center">
           {imageError ? (
             <span className="text-red-700">

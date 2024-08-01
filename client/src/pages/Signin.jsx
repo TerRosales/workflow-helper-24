@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FloatingLabel, Button, Alert } from "flowbite-react";
@@ -16,9 +16,14 @@ function Signin() {
   const [redirecting, setRedirecting] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(signInFailure(null)); // Reset error state
+  }, [dispatch]);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
-    console.log(formData);
+    dispatch(signInFailure(null));
   };
 
   const handleOAuthSuccess = () => {
