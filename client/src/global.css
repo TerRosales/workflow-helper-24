@@ -29,6 +29,16 @@
 .buttonUniLight {
   @apply border-black bg-white text-black border-2 focus:text-blue-400 focus:border-blue-400 focus:ring-blue-400 focus:ring-2 rounded-lg shadow-md shadow-neutral-300 hover:-translate-y-3  transition-all hover:bg-neutral-900 hover:text-white hover:border-white !important;
 }
+
+.buttonUni,
+.buttonUniLight {
+  @apply transition-all duration-100 ease-in-out text-neutral-100;
+}
+
+.buttonUni:hover,
+.buttonUniLight:hover {
+  @apply -translate-y-1 text-white shadow-neutral-200 shadow-lg;
+}
 .OAuth {
   @apply border-white border-2 bg-gradient-to-b from-blue-500 to-neutral-800 w-[90px];
 }
@@ -65,8 +75,9 @@
 .getStarted {
   animation: clickable 2s ease-in-out infinite;
 }
-.upload::before {
-  content: "Upload Image";
+.uploadImg {
+  transition: all 250ms ease-in-out;
+  @apply mx-auto text-6xl gap-2 opacity-0 group-hover:opacity-50 translate-y-10 absolute inset-0 flex justify-center items-center pointer-events-none;
 }
 
 @keyframes clickable {

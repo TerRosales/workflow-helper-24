@@ -5,25 +5,34 @@ import { AiFillEdit } from "react-icons/ai";
 import { HiWrenchScrewdriver } from "react-icons/hi2";
 import { HiAnnotation, HiBell } from "react-icons/hi";
 import { truncateText } from "../utils";
+import { signOut } from "../redux/user/userSlice";
+import { useDispatch } from "react-redux";
+import { ImExit } from "react-icons/im";
 
 function Profile() {
   const { currentUser } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
-  // const truncateText = (username, limiter) => {
-  //   return username.length > 9 ? username.substring(0, limiter) + "..." : username;
-  // };
+  const handleSignOut = async () => {
+    try {
+      await fetch("/api/auth/signout");
+      dispatch(signOut());
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="flex flex-col max-w-2xl p-4 py-5 h-auto mx-auto justify-center">
       <h1 className="text-5xl text-center mt-10 mb-5">Profile</h1>
       <section className="mx-auto">
         <img
-            src={currentUser.employeeImg}
-            alt="profile"
-            className="h-24 w-24 self-center cursor-pointer rounded-xl bg-neutral-100 object-cover mt-2"
-          />
-        </section>
+          src={currentUser.employeeImg}
+          alt="profile"
+          className="h-24 w-24 self-center rounded-xl bg-neutral-100 object-cover mt-2"
+        />
+      </section>
       <Table className="bg-neutral-50 shadow-md my-5 text-lg items-center">
-        
         <Table.Body>
           <Table.Row>
             <Table.Cell>Username:</Table.Cell>
@@ -51,8 +60,11 @@ function Profile() {
         <Button className="buttonUni my-5 bg-neutral-950">
           <Link to="edit-profile">Update Profile</Link>
         </Button>
-        <Button className="buttonUni my-5 bg-neutral-950">
-          Delete Profile
+        <Button
+          className="buttonUni my-5 bg-neutral-950"
+          onClick={handleSignOut}
+        >
+          <ImExit className="flex text-center translate-y-1 pl-2 text-3xl" />
         </Button>
       </section>
     </div>

@@ -34,6 +34,12 @@ function EditProfile() {
 
   const { currentUser, loading, error } = useSelector((state) => state.user);
 
+  useEffect(() => {
+    if (image) {
+      handleFileUpload(image);
+    }
+  }, [image]);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
@@ -114,15 +120,6 @@ function EditProfile() {
     }
   };
 
-  const handleSignOut = async () => {
-    try {
-      await fetch("/api/auth/signout");
-      dispatch(signOut());
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const handleFileUpload = async (image) => {
     const storage = getStorage(app);
     const fileName = new Date().getTime() + image.name;
@@ -166,15 +163,17 @@ function EditProfile() {
     allow write: if
     request.resource.size < 2 * 1024 * 1024 &&
     request.resource.contentType.matches('image/.*') */}
-        <section className="flex mx-auto">
-          <section className="flex flex-col text-blue-600">
+        <section className="flex mx-auto group relative">
+          <section
+            className="flex flex-col text-blue-600"
+            onClick={() => fileRef.current.click()}
+          >
             <img
               src={formData.employeeImg || currentUser.employeeImg}
               alt="profile"
               className="h-24 w-24 self-center cursor-pointer rounded-xl bg-neutral-100 object-cover mt-2 border-2 border-neutral-400"
-              onClick={() => fileRef.current.click()}
             />
-            <HiCamera className="upload mx-auto text-6xl gap-2 opacity-30 hover:opacity-95 transition-all -translate-y-16" />
+            <HiCamera className="uploadImg" />
           </section>
         </section>
         <p className="text-sm self-center">
@@ -237,11 +236,11 @@ function EditProfile() {
           </Alert>
         )}
         <Alert color="success" className="mt-2">
-          If you wish to keep your password as it is just simply leave the
-          fields blank.
+          If you wish to keep your password as it is just simply
+          <b> leave the fields blank</b>.
         </Alert>
-        <Alert color="success">
-          Please do not share your <b>password</b> with anyone
+        <Alert color="yellow">
+          Please <b>do not share</b> your password with anyone
         </Alert>
         <Button className="buttonUni mx-auto my-3 mb-6">
           {loading ? "Loading..." : "Update"}

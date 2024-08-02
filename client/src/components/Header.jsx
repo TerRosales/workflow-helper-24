@@ -8,7 +8,6 @@ import { truncateText } from "../utils";
 function Header() {
   const { currentUser } = useSelector((state) => state.user);
 
-
   return (
     <div className="bg-neutral-950">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3 px-6">
@@ -22,9 +21,11 @@ function Header() {
             <Dropdown
               size="md"
               color="grey" // Set the background color to white
-              className="gradientUni w-[50%]" // Set the text color to black
+              className="gradientUni w-[50%] lg:w-[12%]" // Set the text color to black
               label={
-                currentUser ? `${truncateText(currentUser.username, 7)}` : "Menu"
+                currentUser
+                  ? `${truncateText(currentUser.username, 7)}`
+                  : "Menu"
               }
               dismissOnClick={false}
             >
