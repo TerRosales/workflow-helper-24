@@ -18,8 +18,7 @@ import {
   signOut,
 } from "../redux/user/userSlice";
 import { Button, Alert, FloatingLabel } from "flowbite-react";
-import { HiWrenchScrewdriver } from "react-icons/hi2";
-import { HiAnnotation, HiBell, HiCamera } from "react-icons/hi";
+import { HiCamera } from "react-icons/hi";
 
 function EditProfile() {
   const dispatch = useDispatch();
@@ -152,7 +151,7 @@ function EditProfile() {
       <h1 className="text-4xl text-center my-5">Profile</h1>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-4 bg-neutral-100 p-6 rounded-lg shadow-lg shadow-neutral-300 border-b-2 border-neutral-400"
+        className="flex flex-col gap-4 bg-neutral-100 p-4 rounded-lg shadow-lg shadow-neutral-300 border-b-2 border-neutral-400"
       >
         <input
           type="file"
@@ -196,6 +195,7 @@ function EditProfile() {
           type="text"
           id="username"
           label="Username"
+          value={currentUser.username}
           onChange={handleChange}
         />
         <FloatingLabel
@@ -203,6 +203,7 @@ function EditProfile() {
           type="email"
           id="email"
           label="Email"
+          value={currentUser.email}
           onChange={handleChange}
         />
         <FloatingLabel
@@ -219,8 +220,8 @@ function EditProfile() {
           label="Confirm Password"
           onChange={handleConfirmPasswordChange}
         />
-        <section>
-          {errors.length > 0 && (
+        {errors.length > 0 && (
+          <section>
             <div className="flex flex-col gap-2">
               {errors.map((error, index) => (
                 <Alert className="p-2" key={index} color="failure">
@@ -228,14 +229,21 @@ function EditProfile() {
                 </Alert>
               ))}
             </div>
-          )}
-          {success && (
-            <Alert className="p-2" color="success">
-              {success}
-            </Alert>
-          )}
-        </section>
-        <Button className="buttonUni mx-auto my-4 mb-6">
+          </section>
+        )}
+        {success && (
+          <Alert className="p-2" color="success">
+            {success}
+          </Alert>
+        )}
+        <Alert color="success" className="mt-2">
+          If you wish to keep your password as it is just simply leave the
+          fields blank.
+        </Alert>
+        <Alert color="success">
+          Please do not share your <b>password</b> with anyone
+        </Alert>
+        <Button className="buttonUni mx-auto my-3 mb-6">
           {loading ? "Loading..." : "Update"}
         </Button>
       </form>
