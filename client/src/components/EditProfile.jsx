@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useRef, useState, useEffect } from "react";
 import {
   getDownloadURL,
@@ -7,7 +7,6 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../firebase";
-import { useDispatch } from "react-redux";
 import {
   updateUserStart,
   updateUserSuccess,
@@ -15,7 +14,6 @@ import {
   deleteUserStart,
   deleteUserSuccess,
   deleteUserFailure,
-  signOut,
 } from "../redux/user/userSlice";
 import { Button, Alert, FloatingLabel } from "flowbite-react";
 import { HiCamera } from "react-icons/hi";
@@ -26,13 +24,19 @@ function EditProfile() {
   const [image, setImage] = useState(undefined);
   const [imagePercent, setImagePercent] = useState(0);
   const [imageError, setImageError] = useState(false);
-  const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const [success, setSuccess] = useState("");
 
   const { currentUser, loading, error } = useSelector((state) => state.user);
+
+  // Initialize formData with current user details
+  const [formData, setFormData] = useState({
+    username: currentUser.username || "",
+    email: currentUser.email || "",
+    password: "",
+  });
 
   useEffect(() => {
     if (image) {
@@ -194,7 +198,7 @@ function EditProfile() {
           type="text"
           id="username"
           label="Username"
-          value={currentUser.username}
+          value={formData.username} // Use formData for value
           onChange={handleChange}
         />
         <FloatingLabel
@@ -202,7 +206,7 @@ function EditProfile() {
           type="email"
           id="email"
           label="Email"
-          value={currentUser.email}
+          value={formData.email} // Use formData for value
           onChange={handleChange}
         />
         <FloatingLabel
