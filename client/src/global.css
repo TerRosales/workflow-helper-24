@@ -18,11 +18,6 @@
   @apply shadow-lg shadow-neutral-500;
 }
 
-.iconEmoji {
-  @apply text-[47px] text-center bg-gradient-to-b from-blue-500 to-neutral-800 w-[60%] mx-auto;
-  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-}
-
 .buttonUni {
   @apply w-[90px] border-white border-2 focus:text-blue-400 focus:border-blue-400 focus:ring-blue-400 focus:ring-2 rounded-lg   bg-neutral-900 !important;
 }
@@ -46,25 +41,37 @@
 .gradientUni {
   @apply bg-gradient-to-b from-neutral-100 to-neutral-200 border-[0.5px];
 }
-.gradientCard {
-  @apply lg:w-[500px] w-[290px];
-  background: #0f0c29; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #24243e,
-    #302b63,
-    #0f0c29
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #24243e,
-    #302b63,
-    #0f0c29
+
+.iconEmoji {
+  @apply text-[47px] text-center w-[60%] mx-auto;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+.gradientCard,
+.iconEmoji {
+  background: radial-gradient(
+    circle at 1.8% 4.8%,
+    rgb(17, 23, 58) 0%,
+    rgb(58, 85, 148) 90%
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+
+.gradientCard {
+  @apply lg:w-[500px] w-[290px];
+}
+
+[data-testid="flowbite-dropdown"] {
+  @apply absolute;
+}
+
+.productImg {
+  box-shadow: 9px 7px 10px rgba(255, 255, 255, 0.5);
+}
+
 [data-testid="flowbite-dropdown-target"] {
   @apply bg-neutral-950;
 }
+
 [data-testid="flowbite-dropdown-target"] {
   @apply border-white border-2 hover:border-blue-400 hover:text-blue-400 focus:ring-blue-400 focus:ring-2 !important;
 }
