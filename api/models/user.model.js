@@ -30,8 +30,8 @@ const userSchema = new mongoose.Schema(
     },
     department: {
       type: Number,
-      default: ["N / A"],
-      enum: [1, 2, 3, 4, 5, 6, 7],
+      default: "0",
+      enum: [0, 1, 2, 3, 4, 5, 6, 7],
     },
     employeeImg: {
       type: String,

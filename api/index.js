@@ -1,17 +1,18 @@
 import express from "express";
 import dotenv from "dotenv";
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 import userRoutes from "./routes/user.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import lineRoutes from "./routes/line.routes.js";
 import productRoutes from "./routes/product.routes.js";
-dotenv.config();
+import cookieParser from "cookie-parser";
 import cors from "cors";
+dotenv.config();
 
 const app = express();
-
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
+app.use(cookieParser());
 
 mongoose
   .connect(process.env.MONGODB)
@@ -24,8 +25,6 @@ mongoose
   .catch((err) => {
     console.log("DB connection failed", err);
   });
-
-app.use(express.json());
 
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);

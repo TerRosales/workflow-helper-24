@@ -1,7 +1,36 @@
-export const getAllUsers = async (req, res) => {};
+import { errorHandler } from "../utils/errorHandler.js";
+import User from "../models/user.model.js";
 
-export const getUserById = async (req, res) => {};
+export const getAllUsers = async (req, res, next) => {};
 
-export const updateUser = async (req, res) => {};
+export const getUserById = async (req, res, next) => {};
 
-export const deleteUser = async (req, res) => {};
+export const updateUser = async (req, res, next) => {
+  if (req.user.id !== req.params.id) {
+    return next(errorHandler(401, "You can update only your account!"));
+  }
+  try {
+    if (req.body.password) {
+      req.body.password = bcryptjs.hashSync(req.body.password, 10);
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: {
+          username: req.body.username,
+          email: req.body.email,
+          password: req.body.password,
+          employeeImg: req.body.employeeImg,
+        },
+      },
+      { new: true }
+    );
+    const { password, ...rest } = updatedUser._doc;
+    res.status(200).json(rest);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteUser = async (req, res, next) => {};

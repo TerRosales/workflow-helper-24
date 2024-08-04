@@ -6,7 +6,7 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
-import { app } from "../firebase";
+import { app } from "../utility/firebase";
 import {
   updateUserStart,
   updateUserSuccess,
@@ -37,6 +37,8 @@ function EditProfile() {
     email: currentUser.email || "",
     password: "",
   });
+
+  console.log(formData);
 
   useEffect(() => {
     if (image) {
@@ -135,6 +137,7 @@ function EditProfile() {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setImagePercent(Math.round(progress));
+        console.log("Upload is " + progress + "% done");
       },
       (error) => {
         setImageError(true);
@@ -145,6 +148,13 @@ function EditProfile() {
         );
       }
     );
+  };
+
+  const handleFileChange = (e) => {
+    // Reset image state and errors
+    setImage(e.target.files[0]);
+    setImageError(false);
+    setImagePercent(0);
   };
 
   return (
@@ -159,7 +169,7 @@ function EditProfile() {
           ref={fileRef}
           hidden
           accept="image/*"
-          onChange={(e) => setImage(e.target.files[0])}
+          onChange={handleFileChange}
         />
         {/* 
     firebase storage rules:  
@@ -180,19 +190,24 @@ function EditProfile() {
             <HiCamera className="uploadImg" />
           </section>
         </section>
-        <p className="text-sm self-center">
-          {imageError ? (
-            <span className="text-red-700">
+        {imageError && (
+          <Alert color="failure" className="text-sm self-center mb-2">
+            <span>
               Error uploading image (file size must be less than 2 MB)
             </span>
-          ) : imagePercent > 0 && imagePercent < 100 ? (
+          </Alert>
+        )}
+        {imagePercent > 0 && imagePercent < 100 && (
+          <Alert color="info" className="text-sm self-center mb-2">
             <span className="text-slate-700">{`Uploading: ${imagePercent} %`}</span>
-          ) : imagePercent === 100 ? (
+          </Alert>
+        )}
+        {!imageError && imagePercent === 100 && (
+          <Alert color="success" className="text-sm self-center mb-2">
             <span className="text-green-700">Image uploaded successfully</span>
-          ) : (
-            ""
-          )}
-        </p>
+          </Alert>
+        )}
+
         <FloatingLabel
           variant="standard"
           type="text"
@@ -239,7 +254,12 @@ function EditProfile() {
             {success}
           </Alert>
         )}
-        <Alert color="success" className="mt-2">
+        {updateSuccess && (
+          <Alert className="p-2" color="success">
+            Profile updated successfully!
+          </Alert>
+        )}
+        <Alert color="yellow" className="mt-2">
           If you wish to keep your password as it is just simply
           <b> leave the fields blank</b>.
         </Alert>

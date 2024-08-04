@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { Button } from "flowbite-react";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
-import { app } from "../firebase.js";
+import { app } from "../utility/firebase.js";
 import { signInSuccess } from "../redux/user/userSlice.js";
 
 function OAuth({ onSuccess }) {

@@ -46,7 +46,25 @@
 .gradientUni {
   @apply bg-gradient-to-b from-neutral-100 to-neutral-200 border-[0.5px];
 }
-
+.gradientCard {
+  @apply lg:w-[500px] w-[290px];
+  background: #0f0c29; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #24243e,
+    #302b63,
+    #0f0c29
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #24243e,
+    #302b63,
+    #0f0c29
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+[data-testid="flowbite-dropdown-target"] {
+  @apply bg-neutral-950;
+}
 [data-testid="flowbite-dropdown-target"] {
   @apply border-white border-2 hover:border-blue-400 hover:text-blue-400 focus:ring-blue-400 focus:ring-2 !important;
 }

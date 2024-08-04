@@ -153,7 +153,6 @@ function Signup() {
           >
             {loading ? "Loading..." : "Sign Up"}
           </Button>
-          <OAuth />
         </section>
         <div className="flex mx-auto">
           <p>Already have an account?&nbsp;</p>

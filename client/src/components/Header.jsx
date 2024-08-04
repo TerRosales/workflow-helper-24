@@ -3,7 +3,7 @@ import { Dropdown } from "flowbite-react";
 import { useSelector } from "react-redux";
 import { FaClipboardUser } from "react-icons/fa6";
 import { FaNetworkWired, FaSignOutAlt } from "react-icons/fa";
-import { truncateText } from "../utils";
+import { truncateText } from "../utility/utils.js";
 
 function Header() {
   const { currentUser } = useSelector((state) => state.user);
@@ -24,7 +24,7 @@ function Header() {
               className="gradientUni w-[50%] lg:w-[12%]" // Set the text color to black
               label={
                 currentUser
-                  ? `${truncateText(currentUser.username, 7)}`
+                  ? `${truncateText(currentUser.username, 5)}`
                   : "Menu"
               }
               dismissOnClick={false}
@@ -40,8 +40,8 @@ function Header() {
                         />
                       </Link>
                       <section className="flex flex-col text-xs font-semibold underline text-neutral-800-900">
-                        <h3>{truncateText(currentUser.username, 10)}</h3>{" "}
-                        <h3>{truncateText(currentUser.email, 10)}</h3>
+                        <h3>{truncateText(currentUser.username, 5)}</h3>{" "}
+                        <h3>{truncateText(currentUser.email, 5)}</h3>
                       </section>
                     </section>
                   </Dropdown.Item>

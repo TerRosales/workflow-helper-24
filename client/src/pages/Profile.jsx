@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { AiFillEdit } from "react-icons/ai";
 import { HiWrenchScrewdriver } from "react-icons/hi2";
 import { HiAnnotation, HiBell } from "react-icons/hi";
-import { truncateText } from "../utils";
+import { truncateText } from "../utility/utils";
 import { signOut } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { ImExit } from "react-icons/im";
