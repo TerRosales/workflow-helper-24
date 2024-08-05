@@ -1,12 +1,20 @@
 // to make this app simpler this homepage will act as a about page also
 // basically only explaining the purpose of the app and who are allowed to use it.
+import { Button } from "flowbite-react";
+import { Link } from "react-router-dom";
+import { IoHomeOutline } from "react-icons/io5";
 
 function Home() {
   return (
-    <section className="flex flex-col lg:h-[80vh] md:h-[90vh] sm:h-[95vh] px-6 space-x-5 max-w-2xl mx-auto text-center mb-5">
-      <h1 className="text-5xl mt-10 mb-10 text-center pl-4">Welcome</h1>
+    <section className="flex flex-col lg:h-[80vh] md:h-[90vh] sm:h-[95vh] space-x-5 max-w-2xl mb-5 px-2 mx-auto">
+      <section className="flex justify-content-center items-center gap-2 mt-10 mb-5">
+        <span className="w-full h-1 border-2 border-neutral-900" />
+        <IoHomeOutline className="text-[52px]" />
+        <span className="w-full h-1 border-2 border-neutral-900" />
+      </section>
 
-      <section className="flex flex-col mx-auto justify-center text-center items-center">
+      <section className="-translate-x-2 flex flex-col mx-auto justify-center text-center items-center">
+        <h1 className="text-4xl mt-6 mb-10 text-center">Welcome</h1>
         <span className="iconEmoji rounded-xl">🤗</span>
         <p className="text-[16px] my-10">
           Workflow&nbsp;
@@ -23,6 +31,9 @@ function Home() {
           machinist to perform these fixes by following a step by step guide on
           each issue that they encounter.
         </p>
+        <Button className="buttonUni buttonLong mt-2 mb-10">
+          <Link>Start Troubleshooting</Link>
+        </Button>
       </section>
     </section>
   );

@@ -21,6 +21,10 @@
 .buttonUni {
   @apply w-[90px] border-white border-2 focus:text-blue-400 focus:border-blue-400 focus:ring-blue-400 focus:ring-2 rounded-lg   bg-neutral-900 !important;
 }
+
+.buttonLong {
+  @apply w-auto !important;
+}
 .buttonUniLight {
   @apply border-black bg-white text-black border-2 focus:text-blue-400 focus:border-blue-400 focus:ring-blue-400 focus:ring-2 rounded-lg shadow-md shadow-neutral-300 hover:-translate-y-3  transition-all hover:bg-neutral-900 hover:text-white hover:border-white !important;
 }
@@ -45,6 +49,14 @@
 .iconEmoji {
   @apply text-[47px] text-center w-[60%] mx-auto;
   clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+.hr {
+  @apply bg-blue-500 my-5;
+}
+
+.hr0 {
+  @apply bg-blue-500 my-1;
 }
 
 .gradientCard,

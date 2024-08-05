@@ -31,7 +31,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile/edit-profile" element={<EditProfile />} />
             <Route path="/lines" element={<Lines />} />
-            <Route path="/product-page" element={<ProductPage />} />
+            <Route path="/product-page/:id" element={<ProductPage />} />
           </Route>
           <Route path="/customer-service" element={<CustomerService />} />
         </Routes>

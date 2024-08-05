@@ -7,14 +7,15 @@ const lineSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    description: {
+    desc: {
       type: String,
       required: true,
     },
     status: {
-      type: Boolean,
+      type: String,
       required: true,
-      default: true,
+      default: "Active",
+      enum: ["Active", "Inactive", "Maintenance"],
     },
     products: [
       {
@@ -23,11 +24,29 @@ const lineSchema = new mongoose.Schema(
         default: [],
       },
     ],
+    tolerances: {
+      type: Object,
+      default: {
+        profillometer: {
+          navPad: [-0.13, 0.13],
+          nose: [-0.13, 0.13],
+          pinion: [200, 500],
+          gear: [200, 500],
+          trunnion: [200, 500],
+        },
+        diffBore: [-0.018, 0.018],
+        tubeBore: [-0.038, 0.038],
+        frontBore: [-0.018, 0.018],
+        rearBore: [-0.018, 0.018],
+        oilSeal: [-0.05, 0.05],
+        trunnion: [-0.023, 0.023, "None"],
+        bushing: [-0.038, 0.038, , "None"],
+      },
+    },
     jobs: {
-      type: String,
-      default: "training",
-      enum: [
-        "training",
+      type: [String],
+      default: [
+        "Training",
         "Jeno",
         "Capiter",
         "Jeno-S",
@@ -42,10 +61,48 @@ const lineSchema = new mongoose.Schema(
         "Manual Uplift",
       ],
     },
+    gauges: {
+      type: [String],
+      default: [
+        "Bushing Gauge",
+        "Differenctial Gauge",
+        "Tube Gauge",
+        "Front Gauge",
+        "Rear Gauge",
+        "Oil Seal Gauge",
+        "Bushing Go",
+        "Bushing No-Go",
+        "Profilometer",
+        "Face Go",
+        "Face No-Go",
+        "Torque Guage",
+      ],
+    },
+    toolsToAdjust: {
+      type: [String],
+      default: [],
+    },
+    toolsToChange: {
+      type: [String],
+      default: [],
+    },
     tools: {
-      type: String,
+      type: [String],
+      default: [
+        "Allen Wrech",
+        "Screwdriver",
+        "Wrench",
+        "Insert Screw",
+        "De-chipper",
+      ],
+    },
+    toolsImg: {
+      type: [String],
       default: "None",
-      enum: ["Allen Wrech", "Screwdriver", "Wrench", "None"],
+    },
+    partImg: {
+      type: [String],
+      default: "None",
     },
   },
   {

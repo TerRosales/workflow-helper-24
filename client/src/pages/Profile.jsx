@@ -1,13 +1,11 @@
-import { Table, Button, Alert } from "flowbite-react";
+import { Table, Button } from "flowbite-react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { AiFillEdit } from "react-icons/ai";
-import { HiWrenchScrewdriver } from "react-icons/hi2";
-import { HiAnnotation, HiBell } from "react-icons/hi";
 import { truncateText } from "../utility/utils";
 import { signOut } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { ImExit } from "react-icons/im";
+import { PiIdentificationBadgeLight } from "react-icons/pi";
 
 function Profile() {
   const { currentUser } = useSelector((state) => state.user);
@@ -23,9 +21,14 @@ function Profile() {
   };
 
   return (
-    <div className="flex flex-col max-w-2xl p-4 py-5 h-auto mx-auto justify-center">
-      <h1 className="text-5xl text-center mt-10 mb-5">Profile</h1>
-      <section className="mx-auto">
+    <div className="flex flex-col max-w-2xl p-2 py-5 h-auto mx-auto justify-center">
+      <section className="flex justify-content-center items-center gap-2 mb-4 mt-5">
+        <span className="w-full h-1 border-2 border-neutral-900" />
+        <PiIdentificationBadgeLight className="text-[52px]" />
+        <span className="w-full h-1 border-2 border-neutral-900" />
+      </section>
+      <h1 className="text-4xl text-center mt-5 mb-5">Profile</h1>
+      <section className="mx-auto mt-2">
         <img
           src={currentUser.employeeImg}
           alt="profile"
@@ -56,7 +59,7 @@ function Profile() {
           </Table.Row>
         </Table.Body>
       </Table>
-      <section className="flex justify-between my-5">
+      <section className="flex justify-between my-5 mx-2">
         <Button className="buttonUni my-5 bg-neutral-950">
           <Link to="edit-profile">Update Profile</Link>
         </Button>
