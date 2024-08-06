@@ -3,10 +3,22 @@ import { Dropdown } from "flowbite-react";
 import { useSelector } from "react-redux";
 import { FaClipboardUser } from "react-icons/fa6";
 import { FaNetworkWired, FaSignOutAlt } from "react-icons/fa";
+import { signOut } from "../redux/user/userSlice";
 import { truncateText } from "../utility/utils.js";
+import { useDispatch } from "react-redux";
 
 function Header() {
   const { currentUser } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const handleSignOut = async () => {
+    try {
+      await fetch("/api/auth/signout");
+      dispatch(signOut());
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="bg-neutral-950">
@@ -20,8 +32,8 @@ function Header() {
           <li className="">
             <Dropdown
               size="md"
-              color="grey" // Set the background color to white
-              className="gradientUni w-[50%] lg:w-[12%]" // Set the text color to black
+              color="grey"
+              className="gradientUni w-[50%] lg:w-[12%]"
               label={
                 currentUser
                   ? `${truncateText(currentUser.username, 5)}`
@@ -54,7 +66,7 @@ function Header() {
                     <FaNetworkWired className="text-lg mr-2" />
                     <Link to="/lines">Lines</Link>
                   </Dropdown.Item>
-                  <Dropdown.Item>
+                  <Dropdown.Item onClick={handleSignOut}>
                     <FaSignOutAlt className="text-lg mr-2" />
                     Sign Out
                   </Dropdown.Item>

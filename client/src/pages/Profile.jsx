@@ -22,12 +22,12 @@ function Profile() {
 
   return (
     <div className="flex flex-col max-w-2xl p-2 py-5 h-auto mx-auto justify-center">
-      <section className="flex justify-content-center items-center gap-2 mb-4 mt-5">
+      <section className="flex justify-content-center items-center gap-2 mt-5">
         <span className="w-full h-1 border-2 border-neutral-900" />
         <PiIdentificationBadgeLight className="text-[52px]" />
         <span className="w-full h-1 border-2 border-neutral-900" />
       </section>
-      <h1 className="text-4xl text-center mt-5 mb-5">Profile</h1>
+      <h1 className="text-4xl text-center my-5">Profile</h1>
       <section className="mx-auto mt-2">
         <img
           src={currentUser.employeeImg}

@@ -39,8 +39,8 @@ const lineSchema = new mongoose.Schema(
         frontBore: [-0.018, 0.018],
         rearBore: [-0.018, 0.018],
         oilSeal: [-0.05, 0.05],
-        trunnion: [-0.023, 0.023, "None"],
-        bushing: [-0.038, 0.038, , "None"],
+        trunnion: [-0.023, 0.023],
+        bushing: [-0.038, 0.038],
       },
     },
     jobs: {
@@ -77,6 +77,37 @@ const lineSchema = new mongoose.Schema(
         "Face No-Go",
         "Torque Guage",
       ],
+    },
+    troubleShootQualifications: {
+      type: Object,
+      default: {
+        robot: [
+          "Robot Fault Fix",
+          "Sensor Fault Fix",
+          "3D Etch Fault Fix",
+          "CNC Fault",
+        ],
+        jeno: [
+          "Jeno Fault Fix",
+          "Mastering Fault Fix",
+          "Gauge Collision Fault Fix",
+          "3D Etch Fault Fix",
+          "Tools Adjustment",
+        ],
+        capiter: [
+          "Capiter Fault Fix",
+          "Converyer Fault Fix",
+          "3D Etch Fault Fix",
+          "Tools Change",
+        ],
+        bushingPress: ["Bushing Press Fault Fix", "Tools Adjustment"],
+        uplift: [
+          "Uplift Fault Fix",
+          "Tools Change",
+          "Tool Adjustment",
+          "3D Etch Fault Fix",
+        ],
+      },
     },
     toolsToAdjust: {
       type: [String],

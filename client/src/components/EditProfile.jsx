@@ -165,7 +165,7 @@ function EditProfile() {
         <FaUserEdit className="text-[52px]" />
         <span className="w-full h-1 border-2 border-neutral-900" />
       </section>
-      <h1 className="text-4xl text-center my-10">Profile</h1>
+      <h1 className="text-4xl text-center my-7">Edit Profile</h1>
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-4 bg-neutral-100 p-4 rounded-lg shadow-lg shadow-neutral-300 border-b-2 border-neutral-400"

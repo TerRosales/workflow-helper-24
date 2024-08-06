@@ -3,13 +3,15 @@ import { useParams } from "react-router-dom";
 import { FailedLoad } from "../components/FailedLoad";
 import { Dropdown, Kbd, HR, Button, Modal } from "flowbite-react";
 import { VscPreview } from "react-icons/vsc";
-import { truncateText } from "../utility/utils";
-import { formatKey } from "../utility/utils";
+import { truncateText, formatKey } from "../utility/utils";
+import MultiStepForm from "../components/MultiStepForm.jsx"; // Import the new component
 
 function ProductPage() {
   const { id } = useParams();
   const [selectedLine, setSelectedLine] = useState(null);
+  const [allLines, setAllLines] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [highlightedSection, setHighlightedSection] = useState("");
 
   useEffect(() => {
     const fetchLineDetails = async () => {
@@ -22,11 +24,31 @@ function ProductPage() {
         console.error("Failed to fetch product details:", error);
       }
     };
+
+    const fetchAllLines = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/lines");
+        const result = await response.json();
+        const { data } = result;
+        setAllLines(data);
+      } catch (error) {
+        console.error("Failed to fetch all lines:", error);
+      }
+    };
+
     fetchLineDetails();
+    fetchAllLines();
   }, [id]);
 
   const handleModal = () => {
     setShowModal(!showModal);
+  };
+
+  const handleButtonClick = (sectionId) => {
+    setHighlightedSection(sectionId);
+    setTimeout(() => {
+      setHighlightedSection(""); // Reset after animation
+    }, 500);
   };
 
   if (!selectedLine) {
@@ -35,28 +57,38 @@ function ProductPage() {
 
   return (
     <section className="flex flex-col h-auto mx-auto p-1 max-w-2xl pr-4">
-      <section className="flex justify-content-center items-center gap-2 mb-4 mt-5">
+      <section className="flex justify-content-center items-center gap-2 mt-5">
         <span className="w-full h-1 border-2 border-neutral-900" />
         <VscPreview className="text-[52px]" />
         <span className="w-full h-1 border-2 border-neutral-900" />
       </section>
       <h2 className="text-4xl text-center pb-5 mt-5">Line Details</h2>
 
-      <Button.Group className="flex mt-7 z-5 mx-auto flex-wrap lg:p-0 px-14">
-        <Button className="buttonUni">
+      <Button.Group className="flex mt-7 z-5 mx-auto flex-wrap lg:p-0 px-14 translate-x-1">
+        <Button
+          className="buttonUni"
+          onClick={() => handleButtonClick("tools")}
+        >
           <a href="#tools">Tools</a>
         </Button>
-        <Button className="buttonUni">
-          <a href="#guages">Gauges</a>
+        <Button
+          className="buttonUni"
+          onClick={() => handleButtonClick("gauges")}
+        >
+          <a href="#gauges">Gauges</a>
         </Button>
-        <Button className="buttonUni">
+        <Button className="buttonUni" onClick={() => handleButtonClick("jobs")}>
           <a href="#jobs">Jobs</a>
         </Button>
-        <Button className="buttonUni">
+        <Button
+          className="buttonUni"
+          onClick={() => handleButtonClick("tolerances")}
+        >
           <a href="#tolerances">Tolerances</a>
         </Button>
       </Button.Group>
-      <section className="flex justify-around p-2 items-center mt-5 gradientCard translate-x-2 rounded-lg mx-auto">
+
+      <section className="flex justify-around p-2 items-center mt-5 gradientCard translate-x-2 rounded-lg mx-auto shadow-lg shadow-neutral-500">
         <section className="flex flex-col items-center my-5 text-white">
           <h2 className="text-xs text-center mb-5 flex flex-col">
             <span className="my-[5px]">Product: </span>
@@ -81,7 +113,12 @@ function ProductPage() {
         />
       </section>
 
-      <section className="p-2 my-2" id="tools">
+      <section
+        className={`p-2 my-2 ${
+          highlightedSection === "tools" ? "highlightedSection" : ""
+        }`}
+        id="tools"
+      >
         <h2 className="text-start my-2 font-semibold text-blue-700">Tools</h2>
         <section className="flex flex-wrap">
           {Array.isArray(selectedLine.tools) &&
@@ -93,8 +130,30 @@ function ProductPage() {
         </section>
       </section>
       <HR className="hr" />
-      <section className="p-2 my-2" id="gauges">
+      <section
+        className={`p-2 my-2 ${
+          highlightedSection === "gauges" ? "highlightedSection" : ""
+        }`}
+        id="gauges"
+      >
         <h2 className="text-start my-2 font-semibold text-blue-700">Gauges</h2>
+        <section className="flex flex-wrap">
+          {Array.isArray(selectedLine.gauges) &&
+            selectedLine.gauges.map((gauge) => (
+              <Kbd className="px-4" key={gauge}>
+                {gauge}
+              </Kbd>
+            ))}
+        </section>
+      </section>
+      <HR className="hr" />
+      <section
+        className={`p-2 mt-2 ${
+          highlightedSection === "jobs" ? "highlightedSection" : ""
+        }`}
+        id="jobs"
+      >
+        <h2 className="text-start my-2 font-semibold text-blue-700">Jobs</h2>
         <section className="flex flex-wrap">
           {Array.isArray(selectedLine.jobs) &&
             selectedLine.jobs.map((job) => (
@@ -104,24 +163,14 @@ function ProductPage() {
             ))}
         </section>
       </section>
-      <HR className="hr" />
-      <section className="p-2 mt-2" id="jobs">
-        <h2 className="text-start my-2 font-semibold text-blue-700">Jobs</h2>
-        <section className="flex flex-wrap">
-          {Array.isArray(selectedLine.gauges) &&
-            selectedLine.gauges.map((gauge) => (
-              <Kbd className="px-4" key={gauge}>
-                {gauge}
-              </Kbd>
-            ))}
-        </section>
-        <HR className="bg-blue-400" />
-      </section>
-      <section className="p-2 pt-1 mb-5">
-        <h2
-          className="text-start mb-2 font-semibold text-blue-700"
-          id="tolerances"
-        >
+      <HR className="bg-blue-400" />
+      <section
+        className={`p-2 pt-1 mb-5 ${
+          highlightedSection === "tolerances" ? "highlightedSection" : ""
+        }`}
+        id="tolerances"
+      >
+        <h2 className="text-start mb-2 font-semibold text-blue-700">
           Tolerances
         </h2>
         <section className="flex flex-col">
@@ -160,38 +209,16 @@ function ProductPage() {
         </section>
         <HR className="hr" />
       </section>
+
       <Modal show={showModal} onClose={() => setShowModal(false)}>
         <Modal.Header>Troubleshooting</Modal.Header>
         <Modal.Body>
-          <section className="flex">
-            <form className="mx-auto">
-              <label htmlFor="issue">Select Issue Area: </label>
-              <select className="rounded-lg" name="issue" id="issue">
-                {Array.isArray(selectedLine.jobs) &&
-                  selectedLine.jobs.map((job) => (
-                    <option key={job} value={job}>
-                      {job}
-                    </option>
-                  ))}
-              </select>{" "}
-            </form>
-          </section>
+          <MultiStepForm
+            allLines={allLines}
+            onClose={() => setShowModal(false)}
+            line={selectedLine}
+          />
         </Modal.Body>
-        <Modal.Footer className="mx-auto">
-          <Button
-            className="buttonUni buttonLong"
-            onClick={() => setShowModal(false)}
-          >
-            Accept
-          </Button>
-          <Button
-            className="buttonUniLight buttonLong"
-            color="gray"
-            onClick={() => setShowModal(false)}
-          >
-            Decline
-          </Button>
-        </Modal.Footer>
       </Modal>
     </section>
   );

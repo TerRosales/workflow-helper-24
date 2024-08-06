@@ -7,7 +7,7 @@ import { IoHomeOutline } from "react-icons/io5";
 function Home() {
   return (
     <section className="flex flex-col lg:h-[80vh] md:h-[90vh] sm:h-[95vh] space-x-5 max-w-2xl mb-5 px-2 mx-auto">
-      <section className="flex justify-content-center items-center gap-2 mt-10 mb-5">
+      <section className="flex justify-content-center items-center gap-2 mt-10">
         <span className="w-full h-1 border-2 border-neutral-900" />
         <IoHomeOutline className="text-[52px]" />
         <span className="w-full h-1 border-2 border-neutral-900" />
