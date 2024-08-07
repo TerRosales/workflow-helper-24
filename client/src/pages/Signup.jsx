@@ -10,15 +10,41 @@ function Signup() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
+    if (e.target.id === "username") {
+      validateUsername(e.target.value);
+    }
   };
 
-  // console.log(formData); // Uncomment this line to see the form data in the console
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
     validatePassword(formData.password, e.target.value);
   };
+
+  const validateUsername = (username) => {
+    const errors = [];
+    const regexNoSpaces = /^\S*$/;
+    const regexNoSpecialChars = /^[a-zA-Z0-9]*$/;
+    const regexLength = /^.{8,15}$/;
+
+    if (!regexNoSpaces.test(username)) {
+      errors.push("Username must not contain spaces.");
+    }
+    if (!regexNoSpecialChars.test(username)) {
+      errors.push("Username must not contain special characters.");
+    }
+    if (!regexLength.test(username)) {
+      errors.push("Username must be 8-15 characters long.");
+    }
+    setErrors((prevErrors) => [
+      ...prevErrors.filter((error) => !error.includes("Username")),
+      ...errors,
+    ]);
+    return errors.length === 0;
+  };
+
   const validatePassword = (password, confirmPassword) => {
     const errors = [];
     const regexUppercase = /(?=.*[A-Z])/;
@@ -46,13 +72,19 @@ function Signup() {
     if (password !== confirmPassword) {
       errors.push("Passwords do not match.");
     }
-    setErrors(errors);
+    setErrors((prevErrors) => [
+      ...prevErrors.filter((error) => !error.includes("Password")),
+      ...errors,
+    ]);
     return errors.length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validatePassword(formData.password, confirmPassword)) {
+    if (
+      !validateUsername(formData.username) ||
+      !validatePassword(formData.password, confirmPassword)
+    ) {
       return;
     }
     try {
@@ -111,7 +143,6 @@ function Signup() {
             handleChange(e);
             validatePassword(e.target.value, confirmPassword);
           }}
-          // onBlur={validatePassword} will be added a feature to smoothen the user experience, at the moment alerts show as soon as the user starts typing.
         />
         <FloatingLabel
           variant="standard"
