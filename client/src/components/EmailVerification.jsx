@@ -37,12 +37,6 @@ function EmailVerification() {
     }
   };
 
-  const handleVerificationClick = () => {
-    if (setVerificationSuccess) {
-      setIsExploding(!isExploding);
-    }
-  };
-
   const handleKeyDown = (e, index) => {
     if (e.key === "Backspace" && !values[index] && index > 0) {
       inputRefs.current[index - 1].focus();
@@ -69,21 +63,24 @@ function EmailVerification() {
         console.log(data.message);
         setVerificationSuccess(true);
         setErrorMessage("");
+        setIsExploding(true);
         setTimeout(() => {
           navigate("/verified");
         }, 1500);
       } else {
         console.error(data.message);
         setErrorMessage(data.message);
+        setIsExploding(false);
       }
     } catch (error) {
       console.error("Error:", error);
       setErrorMessage("An unexpected error occurred. Please try again.");
+      setIsExploding(false);
     }
   };
 
   return (
-    <div className="h-[78vh] p-2 text-center bg-white">
+    <div className="h-[auto] flex flex-col p-2 text-center bg-white">
       <div className="flex justify-content-center items-center gap-2 my-5">
         <span className="w-full h-1 border-2 border-neutral-900" />
         <MdOutlineMarkEmailUnread className="text-[50px]" />
@@ -123,22 +120,20 @@ function EmailVerification() {
             ))}
           </section>
           <Button
-            onClick={handleVerificationClick}
             type="submit"
             className="buttonUniLight mb-5 w-[100px] mx-auto"
             disabled={verificationSuccess}
           >
-            {isExploding && (
-              <div>
-                <ConfettiExplosion {...bigExplodeProps} />
-              </div>
-            )}
+             {isExploding && (
+              <ConfettiExplosion {...bigExplodeProps} />
+          )}
             Verify
           </Button>
+         
           {errorMessage && (
-            <Alert color="failure" className="p-2 text-center mb-5">
-              <b>{errorMessage}</b>{" "}
-              <p>
+            <Alert color="failure" className="p-2 text-center mb-5 mx-auto">
+              <span><b>{errorMessage}</b>, Please check your email`</span>{" "}
+              <p className="">
                 In case of account credential lost please visit our{" "}
                 <b>
                   <Link

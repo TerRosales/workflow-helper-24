@@ -107,13 +107,15 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
               </option>
             ))}
           </Select>
-          <Button
-            className="buttonUni buttongLong mx-2 my-5"
-            onClick={handleNext}
-            disabled={!isFirstStepComplete}
-          >
-            Next
-          </Button>
+          <section className="flex mx-auto">
+            <Button
+              className="buttonUni buttongLong mx-2 my-5"
+              onClick={handleNext}
+              disabled={!isFirstStepComplete}
+            >
+              Next
+            </Button>
+          </section>
         </section>
       )}
       {currentStep === 2 && (
@@ -122,7 +124,7 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
             className="font-semibold text-neutral-900"
             htmlFor="qualificationKey"
           >
-            Select Qualification Area:
+            Select Machine:
           </label>
           <Select
             id="qualificationKey"
@@ -130,7 +132,7 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
             value={formData.qualificationKey}
             onChange={handleChange}
           >
-            <option value="">Select Qualification Area</option>
+            <option value="">Select Machine</option>
             {qualificationKeys.map((key) => (
               <option key={key} value={key}>
                 {formatKeyLines(key)}
@@ -141,7 +143,7 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
             className="font-semibold text-neutral-900"
             htmlFor="qualification"
           >
-            Select Qualification:
+            Select Solution:
           </label>
           <Select
             id="qualification"
@@ -150,7 +152,7 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
             onChange={handleChange}
             disabled={!formData.qualificationKey}
           >
-            <option value="">Select Qualification</option>
+            <option value="">Select Solution</option>
             {qualificationOptions.map((qualification, index) => (
               <option key={index} value={qualification}>
                 {qualification}
@@ -178,6 +180,7 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
               isAnimating ? "fadeIn" : ""
             } ${isExiting ? "fadeOut" : ""}`}
           >
+<<<<<<< HEAD
             {isSubmitted ? (
               <LottieAnimation /> // Display Lottie animation upon successful submission
             ) : (
