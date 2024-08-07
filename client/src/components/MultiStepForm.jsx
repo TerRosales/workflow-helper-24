@@ -1,14 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Button, Select } from "flowbite-react";
+import { useNavigate } from "react-router-dom";
+import { updateFormData } from "../redux/user/formSlice.js";
+import { formatKeyLines } from "../utility/utils";
+import LottieAnimation from "./LottieAnimation"; // Import the LottieAnimation component
 
 const MultiStepForm = ({ line, onClose, allLines }) => {
+  const dispatch = useDispatch();
+  const formData = useSelector((state) => state.form);
   const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState({
+  const [isSubmitted, setIsSubmitted] = useState(false); // Track submission success
+  const [isAnimating, setIsAnimating] = useState(false); // Track animation state
+  const [isExiting, setIsExiting] = useState(false); // Track fade-out state
+  const navigate = useNavigate();
+
+  const initialFormState = {
     issueArea: "",
     job: "",
     qualificationKey: "",
     qualification: "",
-  });
+  };
+
+  const resetForm = () => {
+    dispatch(updateFormData(initialFormState));
+    setCurrentStep(1);
+  };
+
+  useEffect(() => {
+    if (isAnimating || isExiting) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+  }, [isAnimating, isExiting]);
 
   const handleNext = () => {
     setCurrentStep((prevStep) => prevStep + 1);
@@ -20,31 +45,30 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    console.log("handleChange - name:", name, "value:", value); // Debugging
+    dispatch(updateFormData({ [name]: value }));
   };
 
   const handleSubmit = () => {
-    console.log("Form Data Submitted:", formData);
-    onClose();
+    console.log("Form Data Submitted:", formData); // Debugging
+    setIsSubmitted(true); // Set submission success to true
+    setIsAnimating(true); // Start animation
+    setTimeout(() => {
+      setIsExiting(true); // Start fade-out animation
+    }, 2000); // Adjust delay as needed to allow the animation to play
+
+    setTimeout(() => {
+      onClose();
+      navigate("/troubleshooting-page");
+      resetForm(); // Reset the form after navigating to the next stage
+    }, 3000); // Adjust delay to account for fade-out animation duration
   };
 
-  // Utility function to format qualification keys
-  const formatKey = (key) => {
-    return key
-      .split(/(?=[A-Z])/)
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) //
-      .join(" ");
-  };
-
-  // Get keys for the first select input
   const qualificationKeys = Object.keys(line.troubleShootQualifications);
-
-  // Get values for the second select input based on the selected key
   const qualificationOptions = formData.qualificationKey
     ? line.troubleShootQualifications[formData.qualificationKey]
     : [];
 
-  // Check if both issueArea and job are selected
   const isFirstStepComplete = formData.issueArea && formData.job;
 
   return (
@@ -109,7 +133,7 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
             <option value="">Select Qualification Area</option>
             {qualificationKeys.map((key) => (
               <option key={key} value={key}>
-                {formatKey(key)}
+                {formatKeyLines(key)}
               </option>
             ))}
           </Select>
@@ -124,7 +148,7 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
             name="qualification"
             value={formData.qualification}
             onChange={handleChange}
-            disabled={!formData.qualificationKey} // Disable until a key is selected
+            disabled={!formData.qualificationKey}
           >
             <option value="">Select Qualification</option>
             {qualificationOptions.map((qualification, index) => (
@@ -148,19 +172,37 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
         </section>
       )}
       {currentStep === 3 && (
-        <section className="flex flex-col gap-3">
-          <label
-            className="font-semibold text-neutral-900"
-            htmlFor="otherField"
+        <section className="flex flex-col gap-3 items-center">
+          <div
+            className={`lottieAnimationContainer ${
+              isAnimating ? "fadeIn" : ""
+            } ${isExiting ? "fadeOut" : ""}`}
           >
-            3rd:
-          </label>
-          <Button className="buttonUni buttongLong" onClick={handlePrevious}>
-            Previous
-          </Button>
-          <Button className="buttonUni buttongLong" onClick={handleSubmit}>
-            Submit
-          </Button>
+            {isSubmitted ? (
+              <LottieAnimation /> // Display Lottie animation upon successful submission
+            ) : (
+              <>
+                <label
+                  className="font-semibold text-neutral-900"
+                  htmlFor="otherField"
+                >
+                  3rd:
+                </label>
+                <Button
+                  className="buttonUni buttongLong"
+                  onClick={handlePrevious}
+                >
+                  Previous
+                </Button>
+                <Button
+                  className="buttonUni buttongLong"
+                  onClick={handleSubmit}
+                >
+                  Submit
+                </Button>
+              </>
+            )}
+          </div>
         </section>
       )}
     </section>

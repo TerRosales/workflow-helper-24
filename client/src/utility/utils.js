@@ -11,3 +11,10 @@ export const formatKey = (key) => {
     .replace(/(bore|seal)/gi, " $1") // Add space before "bore" and "seal"
     .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize first letter of each word
 };
+
+export const formatKeyLines = (key) => {
+  return key
+    .split(/(?=[A-Z])/)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};

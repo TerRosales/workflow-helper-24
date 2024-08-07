@@ -13,6 +13,7 @@ import EmailVerification from "./components/EmailVerification";
 import CustomerService from "./pages/CustomerService";
 import PrivateRoute from "./components/PrivateRoute";
 import EditProfile from "./components/EditProfile";
+import TroubleshootingPage from "./pages/TroubleshootingPage";
 
 function App() {
   return (
@@ -32,6 +33,10 @@ function App() {
             <Route path="/profile/edit-profile" element={<EditProfile />} />
             <Route path="/lines" element={<Lines />} />
             <Route path="/product-page/:id" element={<ProductPage />} />
+            <Route
+              path="/troubleshooting-page"
+              element={<TroubleshootingPage />}
+            />
           </Route>
           <Route path="/customer-service" element={<CustomerService />} />
         </Routes>

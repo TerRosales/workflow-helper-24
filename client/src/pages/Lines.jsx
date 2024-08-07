@@ -58,22 +58,9 @@ function Lines() {
         <PiNetworkBold className="text-[52px]" />
         <span className="w-full h-1 border-2 border-neutral-900" />
       </section>
-      <h1 className="text-4xl text-center pb-5 mt-5">Lines</h1>
+      <h1 className="text-4xl text-center pb-5">Lines</h1>
 
-      <Button.Group className="mt-5 flex flex-wrap justify-center">
-        {lines.map((product) => (
-          <Button
-            key={product._id}
-            color={selectedProduct === product._id ? "blue" : "gray"}
-            onClick={() => setSelectedProduct(product._id)}
-            className="m-1 buttonUni"
-          >
-            {product.name}
-          </Button>
-        ))}
-      </Button.Group>
-
-      <section className="flex flex-col pt-4 gradientCard mt-10 mb-16 rounded-xl shadow-lg shadow-neutral-300 max-w-lg w-full justify-center mx-auto">
+      <section className="flex flex-col pt-4 gradientCard my-5 rounded-xl shadow-lg shadow-neutral-300 max-w-lg w-full justify-center mx-auto">
         <figure className="flex justify-between items-center p-6">
           <h2 className="font-bold text-2xl text-white">
             {currentProduct.name}
@@ -128,6 +115,18 @@ function Lines() {
           </section>
         </section>
       </section>
+      <Button.Group className="mt-1 mb-8 flex flex-wrap justify-center">
+        {lines.map((product) => (
+          <Button
+            key={product._id}
+            color={selectedProduct === product._id ? "blue" : "gray"}
+            onClick={() => setSelectedProduct(product._id)}
+            className="m-1 buttonUni"
+          >
+            {product.name}
+          </Button>
+        ))}
+      </Button.Group>
     </div>
   );
 }

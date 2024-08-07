@@ -141,6 +141,56 @@
   animation: glimmer 2.2s forwards;
 }
 
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+  height: 8px; /* Height of the scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: blue; /* Color of the scrollbar thumb */
+  border-radius: 4px; /* Rounded corners for the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: darkblue; /* Color when hovering over the thumb */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #2c2c2c; /* Color of the scrollbar track */
+  border-radius: 4px; /* Rounded corners for the track */
+}
+
+@keyframes fadeInSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOutSlideOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+.fadeIn {
+  animation: fadeInSlideIn 1s forwards;
+}
+
+.fadeOut {
+  animation: fadeOutSlideOut 1s forwards;
+}
+
 @keyframes clickable {
   0% {
     transform: scale(1);

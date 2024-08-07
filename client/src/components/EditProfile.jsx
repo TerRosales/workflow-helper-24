@@ -160,12 +160,12 @@ function EditProfile() {
 
   return (
     <div className="p-2 max-w-2xl mx-auto mb-14">
-      <section className="flex justify-content-center items-center gap-2 mb-4 mt-5">
+      <section className="flex justify-content-center items-center gap-2 my-3">
         <span className="w-full h-1 border-2 border-neutral-900" />
         <FaUserEdit className="text-[52px]" />
         <span className="w-full h-1 border-2 border-neutral-900" />
       </section>
-      <h1 className="text-4xl text-center my-7">Edit Profile</h1>
+      <h1 className="text-4xl text-center mb-7 mt-2">Edit Profile</h1>
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-4 bg-neutral-100 p-4 rounded-lg shadow-lg shadow-neutral-300 border-b-2 border-neutral-400"

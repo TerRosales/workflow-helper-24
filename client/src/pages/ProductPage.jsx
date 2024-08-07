@@ -62,7 +62,7 @@ function ProductPage() {
         <VscPreview className="text-[52px]" />
         <span className="w-full h-1 border-2 border-neutral-900" />
       </section>
-      <h2 className="text-4xl text-center pb-5 mt-5">Line Details</h2>
+      <h2 className="text-4xl text-center pb-3 mt-3">Line Details</h2>
 
       <Button.Group className="flex mt-7 z-5 mx-auto flex-wrap lg:p-0 px-14 translate-x-1">
         <Button
