@@ -180,7 +180,6 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
               isAnimating ? "fadeIn" : ""
             } ${isExiting ? "fadeOut" : ""}`}
           >
-<<<<<<< HEAD
             {isSubmitted ? (
               <LottieAnimation /> // Display Lottie animation upon successful submission
             ) : (
