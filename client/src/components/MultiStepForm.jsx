@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Select } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
-import { updateFormData } from "../redux/user/formSlice.js";
+import { updateFormData, resetFormData } from "../redux/user/formSlice.js";
 import { formatKeyLines } from "../utility/utils";
 import LottieAnimation from "./LottieAnimation"; // Import the LottieAnimation component
 
@@ -23,7 +23,7 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
   };
 
   const resetForm = () => {
-    dispatch(updateFormData(initialFormState));
+    dispatch(resetFormData());
     setCurrentStep(1);
   };
 
@@ -60,7 +60,6 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
     setTimeout(() => {
       onClose();
       navigate("/troubleshooting-page");
-      resetForm(); // Reset the form after navigating to the next stage
     }, 3000); // Adjust delay to account for fade-out animation duration
   };
 
