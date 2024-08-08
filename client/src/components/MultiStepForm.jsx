@@ -183,12 +183,14 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
               <LottieAnimation /> // Display Lottie animation upon successful submission
             ) : (
               <>
+                <section>
                 <label
                   className="font-semibold text-neutral-900"
                   htmlFor="otherField"
                 >
-                  3rd:
+                  lets try to implemete a email comfirmation process to secure the data and to make sure that we are logged in
                 </label>
+                </section>
                 <Button
                   className="buttonUni buttongLong"
                   onClick={handlePrevious}

@@ -12,6 +12,7 @@ function ProductPage() {
   const [allLines, setAllLines] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [highlightedSection, setHighlightedSection] = useState("");
+  const [isDropdownHovered, setIsDropdownHovered] = useState(false);
 
   useEffect(() => {
     const fetchLineDetails = async () => {
@@ -57,14 +58,48 @@ function ProductPage() {
 
   return (
     <section className="flex flex-col h-auto mx-auto p-1 max-w-2xl pr-4">
-      <section className="flex justify-content-center items-center gap-2 mt-5">
+      <section className="flex justify-content-center items-center gap-2 mt-5 mb-2">
         <span className="w-full h-1 border-2 border-neutral-900" />
         <VscPreview className="text-[52px]" />
         <span className="w-full h-1 border-2 border-neutral-900" />
       </section>
-      <h2 className="text-4xl text-center pb-3 mt-3">Line Details</h2>
+      <h2 className="text-4xl text-center pb-3 my-5">Line Details</h2>
 
-      <Button.Group className="flex mt-7 z-5 mx-auto flex-wrap lg:p-0 px-14 translate-x-1">
+      <section className="relative flex justify-around p-2 items-center mt-5 gradientCard translate-x-2 rounded-lg mx-auto shadow-lg shadow-neutral-500">
+        <section className="flex flex-col items-center my-5 text-white">
+          <h2 className="text-xs text-center mb-5 flex flex-col">
+            <span className="my-[5px]">Product: </span>
+            {truncateText(selectedLine.products[0], 12)}
+          </h2>
+          <Dropdown
+            size="xs"
+            label="Line Actions"
+            className="rounded-lg z-20"
+            onMouseEnter={() => setIsDropdownHovered(true)}
+            onMouseLeave={() => setIsDropdownHovered(false)}
+          >
+            <Dropdown.Item className="">Training Info</Dropdown.Item>
+            <Dropdown.Item className="">Tooling Guide</Dropdown.Item>
+            <Dropdown.Item className="" onClick={handleModal}>
+              Troubleshooting
+            </Dropdown.Item>
+            <Dropdown.Item className="text-blue-500 font-bold">
+              Ask for Help
+            </Dropdown.Item>
+          </Dropdown>
+        </section>
+
+        <img
+          className="w-[120px] h-[120px] rounded-lg productImg -translate-y-1"
+          src={selectedLine.partImg}
+          alt={`${selectedLine.name} image`}
+        />
+      </section>
+      <Button.Group
+        className={`flex mt-7 mx-auto flex-wrap lg:p-0 px-14 translate-x-1 ${
+          isDropdownHovered ? "-z-20" : "z-0"
+        }`}
+      >
         <Button
           className="buttonUni"
           onClick={() => handleButtonClick("tools")}
@@ -87,32 +122,6 @@ function ProductPage() {
           <a href="#tolerances">Tolerances</a>
         </Button>
       </Button.Group>
-
-      <section className="flex justify-around p-2 items-center mt-5 gradientCard translate-x-2 rounded-lg mx-auto shadow-lg shadow-neutral-500">
-        <section className="flex flex-col items-center my-5 text-white">
-          <h2 className="text-xs text-center mb-5 flex flex-col">
-            <span className="my-[5px]">Product: </span>
-            {truncateText(selectedLine.products[0], 12)}
-          </h2>
-          <Dropdown size="xs" label="Line Actions" className="rounded-lg z-10">
-            <Dropdown.Item className="">Training Info</Dropdown.Item>
-            <Dropdown.Item className="">Tooling Guide</Dropdown.Item>
-            <Dropdown.Item className="" onClick={handleModal}>
-              Troubleshooting
-            </Dropdown.Item>
-            <Dropdown.Item className="text-blue-500 font-bold">
-              Ask for Help
-            </Dropdown.Item>
-          </Dropdown>
-        </section>
-
-        <img
-          className="w-[120px] h-[120px] rounded-lg productImg -translate-y-1"
-          src={selectedLine.partImg}
-          alt={`${selectedLine.name} image`}
-        />
-      </section>
-
       <section
         className={`p-2 my-2 ${
           highlightedSection === "tools" ? "highlightedSection" : ""

@@ -17,7 +17,7 @@ const TroubleshootingPage = () => {
           <strong>Job:</strong> {formData.job}
         </p>
         <p>
-          <strong>Qualification Key:</strong>{" "}
+          <strong>Machine Faulting:</strong>{" "}
           {formatKeyLines(formData.qualificationKey)}
         </p>
         <p>

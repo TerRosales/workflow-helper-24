@@ -53,12 +53,12 @@ function Lines() {
 
   return (
     <div className="h-auto flex flex-col p-2 max-w-2xl overflow-auto mx-auto">
-      <section className="flex justify-content-center items-center gap-2 mt-5">
+      <section className="flex justify-content-center items-center gap-2 mt-5 mb-5">
         <span className="w-full h-1 border-2 border-neutral-900" />
         <PiNetworkBold className="text-[52px]" />
         <span className="w-full h-1 border-2 border-neutral-900" />
       </section>
-      <h1 className="text-4xl text-center pb-5">Lines</h1>
+      <h1 className="text-4xl text-center pb-5 mb-2">Lines</h1>
 
       <section className="flex flex-col pt-4 gradientCard my-5 rounded-xl shadow-lg shadow-neutral-300 max-w-lg w-full justify-center mx-auto">
         <figure className="flex justify-between items-center p-6">
