@@ -160,7 +160,7 @@ function EditProfile() {
 
   return (
     <div className="p-2 max-w-2xl mx-auto mb-14">
-      <section className="flex justify-content-center items-center gap-2">
+      <section className="flex items-center gap-2 mt-3">
         <span className="w-full h-1 border-2 border-neutral-900" />
         <FaUserEdit className="text-[52px]" />
         <span className="w-full h-1 border-2 border-neutral-900" />

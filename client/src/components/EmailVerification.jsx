@@ -81,7 +81,7 @@ function EmailVerification() {
 
   return (
     <div className="h-[auto] flex flex-col p-2 text-center bg-white">
-      <div className="flex justify-content-center items-center gap-2 my-5">
+      <div className="flex items-center gap-2 my-5">
         <span className="w-full h-1 border-2 border-neutral-900" />
         <MdOutlineMarkEmailUnread className="text-[50px]" />
         <span className="w-full h-1 border-2 border-neutral-900" />

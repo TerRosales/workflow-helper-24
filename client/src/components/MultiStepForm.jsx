@@ -4,15 +4,16 @@ import { Button, Select } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
 import { updateFormData, resetFormData } from "../redux/user/formSlice.js";
 import { formatKeyLines } from "../utility/utils";
-import LottieAnimation from "./LottieAnimation"; // Import the LottieAnimation component
+import LottieAnimation from "./LottieAnimation";
+import PropTypes from "prop-types";
 
 const MultiStepForm = ({ line, onClose, allLines }) => {
   const dispatch = useDispatch();
   const formData = useSelector((state) => state.form);
   const [currentStep, setCurrentStep] = useState(1);
-  const [isSubmitted, setIsSubmitted] = useState(false); // Track submission success
-  const [isAnimating, setIsAnimating] = useState(false); // Track animation state
-  const [isExiting, setIsExiting] = useState(false); // Track fade-out state
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
   const navigate = useNavigate();
 
   const initialFormState = {
@@ -51,21 +52,23 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
 
   const handleSubmit = () => {
     console.log("Form Data Submitted:", formData); // Debugging
-    setIsSubmitted(true); // Set submission success to true
-    setIsAnimating(true); // Start animation
+    setIsSubmitted(true);
+    setIsAnimating(true);
     setTimeout(() => {
-      setIsExiting(true); // Start fade-out animation
-    }, 2000); // Adjust delay as needed to allow the animation to play
+      setIsExiting(true);
+    }, 2000);
 
     setTimeout(() => {
       onClose();
       navigate("/troubleshooting-page");
-    }, 3000); // Adjust delay to account for fade-out animation duration
+    }, 3000);
   };
 
   const qualificationKeys = Object.keys(line.troubleShootQualifications);
   const qualificationOptions = formData.qualificationKey
-    ? line.troubleShootQualifications[formData.qualificationKey]
+    ? line.troubleShootQualifications[formData.qualificationKey].map(
+        (q) => q.solution
+      )
     : [];
 
   const isFirstStepComplete = formData.issueArea && formData.job;
@@ -180,16 +183,19 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
             } ${isExiting ? "fadeOut" : ""}`}
           >
             {isSubmitted ? (
-              <LottieAnimation /> // Display Lottie animation upon successful submission
+              <section className="flex mx-auto">
+                <LottieAnimation />
+              </section>
             ) : (
               <>
                 <section>
-                <label
-                  className="font-semibold text-neutral-900"
-                  htmlFor="otherField"
-                >
-                  lets try to implemete a email comfirmation process to secure the data and to make sure that we are logged in
-                </label>
+                  <label
+                    className="font-semibold text-neutral-900"
+                    htmlFor="otherField"
+                  >
+                    Let's try to implement an email confirmation process to
+                    secure the data and to make sure that we are logged in.
+                  </label>
                 </section>
                 <Button
                   className="buttonUni buttongLong"
@@ -212,13 +218,16 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
   );
 };
 
-export default MultiStepForm;
-
-import PropTypes from "prop-types";
-
 MultiStepForm.propTypes = {
   line: PropTypes.shape({
-    troubleShootQualifications: PropTypes.any,
+    troubleShootQualifications: PropTypes.objectOf(
+      PropTypes.arrayOf(
+        PropTypes.shape({
+          issue: PropTypes.string.isRequired,
+          solution: PropTypes.string.isRequired,
+        })
+      )
+    ).isRequired,
     id: PropTypes.string,
     name: PropTypes.string,
     jobs: PropTypes.array,
@@ -231,3 +240,5 @@ MultiStepForm.propTypes = {
     })
   ).isRequired,
 };
+
+export default MultiStepForm;

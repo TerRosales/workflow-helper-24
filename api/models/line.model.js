@@ -82,30 +82,90 @@ const lineSchema = new mongoose.Schema(
       type: Object,
       default: {
         robot: [
-          "Robot Fault Fix",
-          "Sensor Fault Fix",
-          "3D Etch Fault Fix",
-          "CNC Fault",
+          {
+            issue: "Robot Fault Fix",
+            solution: "Solution Robot Fault Fix",
+          },
+          {
+            issue: "Sensor Fault Fix",
+            solution: "Solution Sensor Fault Fix",
+          },
+          {
+            issue: "3D Etch Fault Fix",
+            solution: "Solution 3D Etch Fault Fix",
+          },
+          {
+            issue: "CNC Fault",
+            solution: "Solution CNC Fault",
+          },
         ],
         jeno: [
-          "Jeno Fault Fix",
-          "Mastering Fault Fix",
-          "Gauge Collision Fault Fix",
-          "3D Etch Fault Fix",
-          "Tools Adjustment",
+          {
+            issue: "Jeno Fault Fix",
+            solution: "Solution Jeno Fault Fix",
+          },
+          {
+            issue: "Mastering Fault Fix",
+            solution: "Solution Mastering Fault Fix",
+          },
+          {
+            issue: "Gauge Collision Fault Fix",
+            solution: "Solution Gauge Collision Fault Fix",
+          },
+          {
+            issue: "3D Etch Fault Fix",
+            solution: "Solution 3D Etch Fault Fix",
+          },
+          {
+            issue: "Tools Adjustment",
+            solution: "Solution Tools Adjustment",
+          },
         ],
         capiter: [
-          "Capiter Fault Fix",
-          "Converyer Fault Fix",
-          "3D Etch Fault Fix",
-          "Tools Change",
+          {
+            issue: "Capiter Fault Fix",
+            solution: "Solution Capiter Fault Fix",
+          },
+          {
+            issue: "Converyer Fault Fix",
+            solution: "Solution Converyer Fault Fix",
+          },
+          {
+            issue: "3D Etch Fault Fix",
+            solution: "Solution 3D Etch Fault Fix",
+          },
+          {
+            issue: "Tools Change",
+            solution: "Solution Tools Change",
+          },
         ],
-        bushingPress: ["Bushing Press Fault Fix", "Tools Adjustment"],
+        bushingPress: [
+          {
+            issue: "Bushing Press Fault Fix",
+            solution: "Solution Bushing Press Fault Fix",
+          },
+          {
+            issue: "Tools Adjustment",
+            solution: "Solution Tools Adjustment",
+          },
+        ],
         uplift: [
-          "Uplift Fault Fix",
-          "Tools Change",
-          "Tool Adjustment",
-          "3D Etch Fault Fix",
+          {
+            issue: "Uplift Fault Fix",
+            solution: "Solution Uplift Fault Fix",
+          },
+          {
+            issue: "Tools Change",
+            solution: "Solution Tools Change",
+          },
+          {
+            issue: "Tool Adjustment",
+            solution: "Solution Tool Adjustment",
+          },
+          {
+            issue: "3D Etch Fault Fix",
+            solution: "Solution 3D Etch Fault Fix",
+          },
         ],
       },
     },

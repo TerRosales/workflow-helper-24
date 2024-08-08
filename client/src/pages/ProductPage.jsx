@@ -57,15 +57,15 @@ function ProductPage() {
   }
 
   return (
-    <section className="flex flex-col h-auto mx-auto p-1 max-w-2xl pr-4">
-      <section className="flex justify-content-center items-center gap-2 mt-5 mb-2">
+    <section className="flex flex-col h-auto mx-auto p-2 max-w-2xl">
+      <section className="flex items-center gap-2 mt-5 mb-2">
         <span className="w-full h-1 border-2 border-neutral-900" />
         <VscPreview className="text-[52px]" />
         <span className="w-full h-1 border-2 border-neutral-900" />
       </section>
       <h2 className="text-4xl text-center pb-3 my-5">Line Details</h2>
 
-      <section className="relative flex justify-around p-2 items-center mt-5 gradientCard translate-x-2 rounded-lg mx-auto shadow-lg shadow-neutral-500">
+      <section className="relative flex justify-around p-2 items-center mt-5 gradientCard rounded-lg mx-auto shadow-lg shadow-neutral-500">
         <section className="flex flex-col items-center my-5 text-white">
           <h2 className="text-xs text-center mb-5 flex flex-col">
             <span className="my-[5px]">Product: </span>
