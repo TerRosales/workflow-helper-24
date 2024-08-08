@@ -63,7 +63,7 @@ function ProductPage() {
         <VscPreview className="text-[52px]" />
         <span className="w-full h-1 border-2 border-neutral-900" />
       </section>
-      <h2 className="text-4xl text-center pb-3 my-5">Line Details</h2>
+      <h2 className="text-4xl text-center pb-3 my-5">{selectedLine.name}</h2>
 
       <section className="relative flex justify-around p-2 items-center mt-5 gradientCard rounded-lg mx-auto shadow-lg shadow-neutral-500">
         <section className="flex flex-col items-center my-5 text-white">
@@ -96,27 +96,30 @@ function ProductPage() {
         />
       </section>
       <Button.Group
-        className={`flex mt-7 mx-auto flex-wrap lg:p-0 px-14 translate-x-1 ${
+        className={`flex mt-7 justify-center flex-wrap lg:p-0 px-14 translate-x-1 ${
           isDropdownHovered ? "-z-20" : "z-0"
         }`}
       >
         <Button
-          className="buttonUni"
+          className="buttonUniSm"
           onClick={() => handleButtonClick("tools")}
         >
           <a href="#tools">Tools</a>
         </Button>
         <Button
-          className="buttonUni"
+          className="buttonUniSm"
           onClick={() => handleButtonClick("gauges")}
         >
           <a href="#gauges">Gauges</a>
         </Button>
-        <Button className="buttonUni" onClick={() => handleButtonClick("jobs")}>
+        <Button
+          className="buttonUniSm"
+          onClick={() => handleButtonClick("jobs")}
+        >
           <a href="#jobs">Jobs</a>
         </Button>
         <Button
-          className="buttonUni"
+          className="buttonUniSm"
           onClick={() => handleButtonClick("tolerances")}
         >
           <a href="#tolerances">Tolerances</a>

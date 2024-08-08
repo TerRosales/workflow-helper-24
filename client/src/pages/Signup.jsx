@@ -118,7 +118,7 @@ function Signup() {
 
   return (
     <div className="p-7 h-auto max-w-6xl mx-auto">
-      <h1 className="text-4xl text-center my-10">Sign Up</h1>
+      <h1 className="text-4xl text-center my-5">Sign Up</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <FloatingLabel
           variant="standard"
@@ -184,8 +184,8 @@ function Signup() {
             {loading ? "Loading..." : "Sign Up"}
           </Button>
         </section>
-        <div className="flex mx-auto">
-          <p>Already have an account?&nbsp;</p>
+        <div className="flex mx-auto text-sm mb-5 justify-around">
+          <p>Have an account?&nbsp;</p>
           <Link to="/signin">
             <span className="text-blue-500">Sign In</span>
           </Link>

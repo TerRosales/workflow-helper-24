@@ -17,9 +17,9 @@ function Home() {
         <h1 className="text-4xl mt-6 mb-10 text-center">Welcome</h1>
         <span className="iconEmoji rounded-xl">🤗</span>
         <p className="text-[16px] my-10">
-          Workflow&nbsp;
+          The{" "}
           <span className="border-1 rounded-lg font-bold text-[#556cef]">
-            Helper
+            Workflow&nbsp;Helper
           </span>{" "}
           is meant to help our associates need less dependance from our team
           leads. In general team leads are in charge of low level maintenance

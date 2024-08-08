@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Noto+Sans+Mono:wght@100..900&family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,6 +9,11 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: "Noto Sans Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
 }
 
 .CTA {
@@ -19,12 +25,21 @@
 }
 
 .buttonUni {
-  @apply w-[90px] border-white border-2 focus:text-blue-400 focus:border-blue-400 focus:ring-blue-400 focus:ring-2 rounded-lg   bg-neutral-900 !important;
+  @apply w-[100px] border-white border-2 focus:text-blue-400 focus:border-blue-400 focus:ring-blue-400 focus:ring-2 rounded-lg   bg-neutral-900 !important;
 }
 
 .buttonLong {
   @apply w-auto !important;
 }
+
+.buttonUniSm {
+  @apply w-[90px] border-white border-2 focus:text-blue-400 focus:border-blue-400 focus:ring-blue-400 focus:ring-2 rounded-lg   bg-neutral-900 !important;
+}
+
+.buttonUniSm a {
+  font-size: 12px;
+}
+
 .buttonUniLight {
   @apply border-black bg-white text-black border-2 focus:text-blue-400 focus:border-blue-400 focus:ring-blue-400 focus:ring-2 rounded-lg shadow-md shadow-neutral-300 hover:-translate-y-3  transition-all hover:bg-neutral-900 hover:text-white hover:border-white !important;
 }
@@ -39,7 +54,7 @@
   @apply -translate-y-1 text-white shadow-neutral-200 shadow-lg;
 }
 .OAuth {
-  @apply border-white border-2 bg-gradient-to-b from-blue-500 to-neutral-800 w-[90px];
+  @apply border-white border-2 bg-gradient-to-b from-blue-500 to-neutral-800 w-[100px];
 }
 
 .gradientUni {
@@ -215,5 +230,26 @@
   }
   100% {
     left: 200%; /* Extend beyond the element's width */
+  }
+}
+
+.pulse {
+  animation: pulse 1s infinite;
+}
+
+.pulse2 {
+  animation: pulse 3s forwards;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+    color: rgb(211, 29, 29);
+  }
+  100% {
+    transform: scale(1);
   }
 }

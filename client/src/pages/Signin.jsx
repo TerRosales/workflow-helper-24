@@ -65,8 +65,8 @@ function Signin() {
     }
   };
   return (
-    <div className="p-7 h-[75vh] max-w-6xl mx-auto ">
-      <h1 className="text-4xl text-center my-10">Sign In</h1>
+    <div className="p-7 h-[75vh] max-w-6xl mx-auto">
+      <h1 className="text-4xl text-center my-20">Sign In</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <FloatingLabel
           onChange={handleChange}
@@ -114,7 +114,7 @@ function Signin() {
           </Button>
           <OAuth onSuccess={handleOAuthSuccess} />
         </section>
-        <div className="flex mx-auto">
+        <div className="flex mx-auto text-sm justify-around">
           <p>Don&apos;t have an account?&nbsp;</p>
           <Link to="/signup">
             <span className="text-blue-500">Sign Up</span>

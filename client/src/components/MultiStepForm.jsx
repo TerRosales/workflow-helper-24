@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Button, Select } from "flowbite-react";
+import { Button, Select, Tooltip } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
-import { updateFormData, resetFormData } from "../redux/user/formSlice.js";
+import { updateFormData } from "../redux/user/formSlice.js"; // import resetFormData if needed
+import { IoMdInformationCircleOutline } from "react-icons/io";
+
 import { formatKeyLines } from "../utility/utils";
 import LottieAnimation from "./LottieAnimation";
 import PropTypes from "prop-types";
@@ -14,19 +16,23 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
+
+  const [checkListState, setCheckListState] = useState(
+    Array(line.troubleShootingCheckList.length).fill(false)
+  );
   const navigate = useNavigate();
 
-  const initialFormState = {
-    issueArea: "",
-    job: "",
-    qualificationKey: "",
-    qualification: "",
-  };
+  // const initialFormState = {
+  //   issueArea: "",
+  //   job: "",
+  //   qualificationKey: "",
+  //   qualification: "",
+  // }; // will be use to initialize the form data 1/2
 
-  const resetForm = () => {
-    dispatch(resetFormData());
-    setCurrentStep(1);
-  };
+  // const resetForm = () => {
+  //   dispatch(resetFormData());
+  //   setCurrentStep(1);
+  // }; // will be use to initialize the form data 2/2
 
   useEffect(() => {
     if (isAnimating || isExiting) {
@@ -64,10 +70,18 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
     }, 3000);
   };
 
+  const handleCheckListChange = (index) => {
+    const newCheckListState = [...checkListState];
+    newCheckListState[index] = !newCheckListState[index];
+    setCheckListState(newCheckListState);
+  };
+
+  const allCheckListItemsChecked = checkListState.every((item) => item);
+
   const qualificationKeys = Object.keys(line.troubleShootQualifications);
   const qualificationOptions = formData.qualificationKey
     ? line.troubleShootQualifications[formData.qualificationKey].map(
-        (q) => q.solution
+        (q) => q.issue
       )
     : [];
 
@@ -145,7 +159,7 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
             className="font-semibold text-neutral-900"
             htmlFor="qualification"
           >
-            Select Solution:
+            Select Issue:
           </label>
           <Select
             id="qualification"
@@ -154,7 +168,7 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
             onChange={handleChange}
             disabled={!formData.qualificationKey}
           >
-            <option value="">Select Solution</option>
+            <option value="">Select Issue</option>
             {qualificationOptions.map((qualification, index) => (
               <option key={index} value={qualification}>
                 {qualification}
@@ -188,27 +202,66 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
               </section>
             ) : (
               <>
-                <section>
-                  <label
-                    className="font-semibold text-neutral-900"
-                    htmlFor="otherField"
-                  >
-                    Let's try to implement an email confirmation process to
-                    secure the data and to make sure that we are logged in.
+                <section className="flex text-center flex-col decoration-red-400">
+                  <label className="font-semibold" htmlFor="otherField">
+                    Let&apos;s prepare to Troubleshoot{" "}
                   </label>
+                  <section className="mx-auto">
+                    <Tooltip
+                      content="Tap/Click to checkout item"
+                      animation="duration-150"
+                    >
+                      <IoMdInformationCircleOutline className="pulse2 mt-4 text-2xl text-red-500 hover:text-neutral-900" />
+                    </Tooltip>
+                  </section>
                 </section>
-                <Button
-                  className="buttonUni buttongLong"
-                  onClick={handlePrevious}
-                >
-                  Previous
-                </Button>
-                <Button
-                  className="buttonUni buttongLong"
-                  onClick={handleSubmit}
-                >
-                  Submit
-                </Button>
+                <section className="flex flex-col gap-2 my-5 text-sm">
+                  {line.troubleShootingCheckList.map((item, index) => (
+                    <section
+                      key={index}
+                      className="flex px-4 text-left items-center gap-2"
+                    >
+                      <input
+                        type="checkbox"
+                        id={`checklist-${index}`}
+                        className="hidden" // Hiding the checkbox
+                        checked={checkListState[index]}
+                        onChange={() => handleCheckListChange(index)}
+                      />
+                      <label
+                        htmlFor={`checklist-${index}`}
+                        className={`cursor-pointer ${
+                          checkListState[index] ? "line-through" : "pulse"
+                        }`}
+                        style={{
+                          textDecoration: checkListState[index]
+                            ? "line-through"
+                            : "none",
+                          color: checkListState[index]
+                            ? "text-blue-600"
+                            : "inherit", // Tailwind's blue-600 color
+                        }}
+                      >
+                        {item}
+                      </label>
+                    </section>
+                  ))}
+                </section>
+                <section className="flex items-center justify-center mt-8 mb-5">
+                  <Button
+                    className="buttonUni buttongLong"
+                    onClick={handlePrevious}
+                  >
+                    Previous
+                  </Button>
+                  <Button
+                    className="buttonUni buttongLong"
+                    onClick={handleSubmit}
+                    disabled={!allCheckListItemsChecked}
+                  >
+                    Submit
+                  </Button>
+                </section>
               </>
             )}
           </div>
@@ -231,6 +284,7 @@ MultiStepForm.propTypes = {
     id: PropTypes.string,
     name: PropTypes.string,
     jobs: PropTypes.array,
+    troubleShootingCheckList: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
   onClose: PropTypes.func.isRequired,
   allLines: PropTypes.arrayOf(
