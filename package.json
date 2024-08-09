@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node api/index.js",
-    "build": "cd client && npm install && npm run build",
+    "build": "cd client && npm install && vite build",
     "serve": "npm run build && node api/index.js"
   },
   "dependencies": {
@@ -19,5 +19,8 @@
     "mongoose": "^8.5.1",
     "nodemailer": "^6.9.14",
     "nodemon": "^3.1.4"
+  },
+  "devDependencies": {
+    "vite": "^5.3.4"
   }
 }
