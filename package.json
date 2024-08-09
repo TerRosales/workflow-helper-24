@@ -5,9 +5,9 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "devStart": "nodemon api/index.js",
     "start": "node api/index.js",
-    "build": "cd client && npm install && vite build",
-    "serve": "npm run build && node api/index.js"
+    "build": "npm install --prefix ./client && npm run build --prefix ./client && npm install"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
