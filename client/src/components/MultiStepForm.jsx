@@ -22,18 +22,6 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
   );
   const navigate = useNavigate();
 
-  // const initialFormState = {
-  //   issueArea: "",
-  //   job: "",
-  //   qualificationKey: "",
-  //   qualification: "",
-  // }; // will be use to initialize the form data 1/2
-
-  // const resetForm = () => {
-  //   dispatch(resetFormData());
-  //   setCurrentStep(1);
-  // }; // will be use to initialize the form data 2/2
-
   useEffect(() => {
     if (isAnimating || isExiting) {
       document.body.classList.add("no-scroll");
@@ -118,7 +106,7 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
           >
             <option value="">Select the job</option>
             {line.jobs.map((job, index) => (
-              <option key={index} value={job}>
+              <option key={`${job}-${index}`} value={job}>
                 {job}
               </option>
             ))}
@@ -170,7 +158,7 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
           >
             <option value="">Select Issue</option>
             {qualificationOptions.map((qualification, index) => (
-              <option key={index} value={qualification}>
+              <option key={`${qualification}-${index}`} value={qualification}>
                 {qualification}
               </option>
             ))}
@@ -218,7 +206,7 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
                 <section className="flex flex-col gap-2 my-5 text-sm">
                   {line.troubleShootingCheckList.map((item, index) => (
                     <section
-                      key={index}
+                      key={`${item}-${index}`}
                       className="flex px-4 text-left items-center gap-2"
                     >
                       <input

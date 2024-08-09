@@ -96,7 +96,7 @@ const lineSchema = new mongoose.Schema(
         robot: [
           {
             issue: "Robot Fault Fix",
-            solution: "Solution Robot Fault Fix",
+            solution: "Robot Fault Fix",
             troubleShootSteps: [
               "Check and Read Fault Codes",
               "Check if the robot is powered on",
@@ -107,7 +107,7 @@ const lineSchema = new mongoose.Schema(
           },
           {
             issue: "Sensor Fault Fix",
-            solution: "Solution Sensor Fault Fix",
+            solution: "Sensor Fault Fix",
             troubleShootSteps: [
               "Check and Read Fault Codes",
               "Check if the sensor is clean and free of any debris",
@@ -118,7 +118,7 @@ const lineSchema = new mongoose.Schema(
           },
           {
             issue: "3D Etch Fault Fix",
-            solution: "Solution 3D Etch Fault Fix",
+            solution: "3D Etch Fault Fix",
             troubleShootSteps: [
               "Check and Read Fault Codes",
               "Clean the 3D Etch Sensor",
@@ -129,7 +129,7 @@ const lineSchema = new mongoose.Schema(
           },
           {
             issue: "CNC Fault",
-            solution: "Solution CNC Fault",
+            solution: "CNC Fault",
             troubleShootSteps: [
               "Check and Read Fault Codes",
               "Reset Door (Open and Close)",
@@ -141,7 +141,7 @@ const lineSchema = new mongoose.Schema(
         jeno: [
           {
             issue: "Jeno Fault Fix",
-            solution: "Solution Jeno Fault Fix",
+            solution: "Jeno Fault Fix",
             troubleShootSteps: [
               "Clean all the sensors",
               "Check if the Jeno is properly calibrated",
@@ -152,7 +152,7 @@ const lineSchema = new mongoose.Schema(
           },
           {
             issue: "Mastering Fault Fix",
-            solution: "Solution Mastering Fault Fix",
+            solution: "Mastering Fault Fix",
             troubleShootSteps: [
               "Check and Read Fault Codes",
               "Do not wear gloves when handling the Master part",
@@ -165,7 +165,7 @@ const lineSchema = new mongoose.Schema(
           },
           {
             issue: "Gauge Collision Fault Fix",
-            solution: "Solution Gauge Collision Fault Fix",
+            solution: "Gauge Collision Fault Fix",
             troubleShootSteps: [
               "Reset gauging sequence",
               "Check if the Part is loaded properly",
@@ -177,7 +177,7 @@ const lineSchema = new mongoose.Schema(
           },
           {
             issue: "3D Etch Fault Fix",
-            solution: "Solution 3D Etch Fault Fix",
+            solution: "3D Etch Fault Fix",
             troubleShootSteps: [
               "Check and Read Fault Codes",
               "Clean the 3D Etch Sensor",
@@ -191,7 +191,7 @@ const lineSchema = new mongoose.Schema(
           },
           {
             issue: "Tools Adjustment",
-            solution: "Solution Tools Adjustment",
+            solution: "Tools Adjustment",
             troubleShootSteps: [
               "Check and Read Fault Codes",
               "Double check part and blow it out",
@@ -206,7 +206,7 @@ const lineSchema = new mongoose.Schema(
         capiter: [
           {
             issue: "Capiter Fault Fix",
-            solution: "Solution Capiter Fault Fix",
+            solution: "Capiter Fault Fix",
             troubleShootSteps: [
               "Check and Read Fault Codes",
               "Check if the Capiter is properly calibrated",
@@ -217,7 +217,7 @@ const lineSchema = new mongoose.Schema(
           },
           {
             issue: "Converyer Fault Fix",
-            solution: "Solution Converyer Fault Fix",
+            solution: "Converyer Fault Fix",
             troubleShootSteps: [
               "Check and Read Fault Codes",
               "Check if the sensor is clean and free of any debris",
@@ -228,7 +228,7 @@ const lineSchema = new mongoose.Schema(
           },
           {
             issue: "3D Etch Fault Fix",
-            solution: "Solution 3D Etch Fault Fix",
+            solution: "3D Etch Fault Fix",
             troubleShootSteps: [
               "Check and Read Fault Codes",
               "Clean the 3D Etch Sensor",
@@ -239,7 +239,7 @@ const lineSchema = new mongoose.Schema(
           },
           {
             issue: "Tools Change",
-            solution: "Solution Tools Change",
+            solution: "Tools Change",
             troubleShootSteps: [
               "Check and Read Fault Codes",
               "Check screen for tool change alerts",
@@ -257,7 +257,7 @@ const lineSchema = new mongoose.Schema(
         bushingPress: [
           {
             issue: "Bushing Press Fault Fix",
-            solution: "Solution Bushing Press Fault Fix",
+            solution: "Bushing Press Fault Fix",
             troubleShootSteps: [
               "Check and Read Fault Codes",
               "Press Home button to reset the machine position",
@@ -271,7 +271,7 @@ const lineSchema = new mongoose.Schema(
         uplift: [
           {
             issue: "Uplift Fault Fix",
-            solution: "Solution Uplift Fault Fix",
+            solution: "Uplift Fault Fix",
             troubleShootSteps: [
               "Check and Read Fault Codes",
               "Check if the Uplift is properly calibrated",
@@ -282,7 +282,7 @@ const lineSchema = new mongoose.Schema(
           },
           {
             issue: "Tools Change",
-            solution: "Solution Tools Change",
+            solution: "Tools Change",
             trboueShootSteps: [
               "Check and Read Fault Codes",
               "Check screen for tool change alerts",
@@ -298,7 +298,7 @@ const lineSchema = new mongoose.Schema(
           },
           {
             issue: "Tool Adjustment",
-            solution: "Solution Tool Adjustment",
+            solution: "Tool Adjustment",
             troubleShootSteps: [
               "Check and Read Fault Codes",
               "Double check part and blow it out",
@@ -311,7 +311,7 @@ const lineSchema = new mongoose.Schema(
           },
           {
             issue: "3D Etch Fault Fix",
-            solution: "Solution 3D Etch Fault Fix",
+            solution: "3D Etch Fault Fix",
             troubleShootSteps: [
               "Check and Read Fault Codes",
               "Clean the 3D Etch Sensor",

@@ -35,7 +35,7 @@ function Profile() {
           className="h-24 w-24 self-center rounded-xl bg-neutral-100 object-cover mt-2"
         />
       </section>
-      <Table className="bg-neutral-50 shadow-md my-5 text-lg items-center">
+      <Table className="bg-neutral-50 shadow-md my-5 text-sm items-center">
         <Table.Body>
           <Table.Row>
             <Table.Cell>Username:</Table.Cell>

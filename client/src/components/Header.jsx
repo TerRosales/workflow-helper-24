@@ -90,17 +90,23 @@ function Header() {
                   <Dropdown.Divider className="bg-blue-300" />
                   <Dropdown.Item>
                     <FaClipboardUser className="text-lg mr-2" />
-                    <Link to="/profile">Profile</Link>
+                    <Link className="text-xs" to="/profile">
+                      Profile
+                    </Link>
                   </Dropdown.Item>
                   <Dropdown.Item>
                     <FaNetworkWired className="text-lg mr-2" />
-                    <Link to="/lines">Lines</Link>
+                    <Link className="text-xs" to="/lines">
+                      Lines
+                    </Link>
                   </Dropdown.Item>
                   <Dropdown.Item>
                     <FaNetworkWired className="text-lg mr-2" />
-                    <a onClick={handleOpenModal}>Troubleshoot</a>
+                    <a className="text-xs" onClick={handleOpenModal}>
+                      Troubleshoot
+                    </a>
                   </Dropdown.Item>
-                  <Dropdown.Item onClick={handleSignOut}>
+                  <Dropdown.Item className="text-xs" onClick={handleSignOut}>
                     <FaSignOutAlt className="text-lg mr-2" />
                     Sign Out
                   </Dropdown.Item>

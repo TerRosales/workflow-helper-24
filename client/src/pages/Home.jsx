@@ -16,7 +16,7 @@ function Home() {
       <section className="-translate-x-2 flex flex-col mx-auto justify-center text-center items-center">
         <h1 className="text-4xl mt-6 mb-10 text-center">Welcome</h1>
         <span className="iconEmoji rounded-xl">🤗</span>
-        <p className="text-[16px] my-10">
+        <p className="text-[16px] my-10  text-sm">
           The{" "}
           <span className="border-1 rounded-lg font-bold text-[#556cef]">
             Workflow&nbsp;Helper
