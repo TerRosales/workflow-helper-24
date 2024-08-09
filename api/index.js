@@ -9,6 +9,9 @@ import lineRoutes from "./routes/line.routes.js";
 import productRoutes from "./routes/product.routes.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import path from "path"; // Import path module
+import { fileURLToPath } from "url"; // Needed to resolve __dirname
+
 dotenv.config();
 
 const app = express();
@@ -28,11 +31,24 @@ mongoose
     console.log("DB connection failed", err);
   });
 
+// API routes
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/lines", lineRoutes);
 app.use("/api/product", productRoutes);
 
+// Serve static files from the React app
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname, "../client/dist")));
+
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+});
+
+// Error handling middleware
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal Server Error";
