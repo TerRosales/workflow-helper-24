@@ -6,11 +6,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node api/index.js",
-    "devStart": "nodemon api/index.js"
+    "build": "cd client && npm install && npm run build",
+    "serve": "npm run build && node api/index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
