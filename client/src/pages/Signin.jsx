@@ -114,7 +114,7 @@ function Signin() {
           </Button>
           <OAuth onSuccess={handleOAuthSuccess} />
         </section>
-        <div className="flex mx-auto text-sm justify-around">
+        <div className="flex mx-auto text-sm justify-around mb-10">
           <p>Don&apos;t have an account?&nbsp;</p>
           <Link to="/signup">
             <span className="text-blue-500">Sign Up</span>

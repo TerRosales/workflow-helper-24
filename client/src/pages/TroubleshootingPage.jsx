@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { formatKeyLines } from "../utility/utils";
+import { Button } from "flowbite-react";
 
 const TroubleshootingPage = () => {
   const formData = useSelector((state) => state.form);
@@ -7,24 +8,16 @@ const TroubleshootingPage = () => {
   console.log("TroubleshootingPage - formData:", formData); // Debugging
 
   return (
-    <div>
-      <div>
-        <h1>Next Step</h1>
-        <p>
-          <strong>Issue Area:</strong> {formData.issueArea}
-        </p>
-        <p>
-          <strong>Job:</strong> {formData.job}
-        </p>
-        <p>
-          <strong>Machine Faulting:</strong>{" "}
-          {formatKeyLines(formData.qualificationKey)}
-        </p>
-        <p>
-          <strong>Qualification:</strong> {formData.qualification}
-        </p>
-      </div>
-    </div>
+    <section>
+      <section>
+        <Button></Button>
+        <section>
+          <button></button>
+          <button></button>
+          <button></button>
+        </section>
+      </section>
+    </section>
   );
 };
 

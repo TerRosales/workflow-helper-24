@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import { Dropdown, Modal, Button } from "flowbite-react";
+import { Dropdown, Modal } from "flowbite-react";
 import { useSelector, useDispatch } from "react-redux";
 import { FaNetworkWired, FaSignOutAlt } from "react-icons/fa";
+import { MdOutlineAutoFixHigh } from "react-icons/md";
 import { FaClipboardUser } from "react-icons/fa6";
 import { signOut } from "../redux/user/userSlice";
 import { truncateText } from "../utility/utils.js";
@@ -101,7 +102,7 @@ function Header() {
                     </Link>
                   </Dropdown.Item>
                   <Dropdown.Item>
-                    <FaNetworkWired className="text-lg mr-2" />
+                    <MdOutlineAutoFixHigh className="text-lg mr-2" />
                     <a className="text-xs" onClick={handleOpenModal}>
                       Troubleshoot
                     </a>
