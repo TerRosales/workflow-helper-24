@@ -32,6 +32,10 @@
   @apply w-auto !important;
 }
 
+.buttonFull {
+  @apply w-full my-5 !important;
+}
+
 .buttonUniSm {
   @apply w-[90px] border-white border-2 focus:text-blue-400 focus:border-blue-400 focus:ring-blue-400 focus:ring-2 rounded-lg   bg-neutral-900 !important;
 }
@@ -83,6 +87,19 @@
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+.gradientUni2,
+[data-testid="timeline-point"] span {
+  background: radial-gradient(
+    circle at 1.8% 4.8%,
+    rgb(17, 23, 58) 0%,
+    rgb(58, 85, 148) 90%
+  );
+}
+
+[data-testid="timeline-point"] span svg {
+  color: white;
+}
+
 .gradientCard {
   @apply lg:w-[500px] w-[290px];
 }
@@ -114,6 +131,18 @@
 [data-testid="flowbite-footer"] {
   @apply bg-neutral-950;
   border-radius: 0;
+}
+
+.timeline ol {
+  font-size: 14px;
+}
+
+.timeline ol li {
+  font-size: 12px;
+}
+
+[data-testid="timeline-component"] {
+  @apply text-sm !important;
 }
 
 [data-testid="table-row-element"] td {
@@ -163,12 +192,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: blue; /* Color of the scrollbar thumb */
+  background-color: rgba(94, 94, 255, 0.9); /* Color of the scrollbar thumb */
   border-radius: 4px; /* Rounded corners for the thumb */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: darkblue; /* Color when hovering over the thumb */
+  background-color: rgb(94, 94, 249); /* Color when hovering over the thumb */
 }
 
 ::-webkit-scrollbar-track {
@@ -206,6 +235,78 @@
   animation: fadeOutSlideOut 1s forwards;
 }
 
+@keyframes fadeInSlideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInSlideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOutSlideOutToRight {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes fadeInSlideInFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(100%);
+  }
+}
+
+= @keyframes fadeOutSlideOutToLeft {
+  0% {
+    opacity: 1;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+/* Apply these animations */
+.stepTransitionNext {
+  animation: fadeInSlideInFromLeft 0.5s forwards;
+}
+
+.stepExitNext {
+  animation: fadeOutSlideOutToRight 0.5s forwards;
+}
+
+.stepTransitionPrevious {
+  animation: fadeInSlideInFromRight 0.5s forwards;
+}
+
+.stepExitPrevious {
+  animation: fadeOutSlideOutToLeft 0.5s forwards;
+}
+
 @keyframes clickable {
   0% {
     transform: scale(1);
@@ -239,7 +340,10 @@
 }
 
 .pulse2 {
-  animation: pulse 3s forwards;
+  animation: lift-shake 3s;
+  transition: all 0.5s;
+  animation-delay: 0.5s;
+  animation-iteration-count: infinite;
 }
 
 @keyframes pulse {
@@ -253,4 +357,55 @@
   100% {
     transform: translateY(2);
   }
+}
+
+@keyframes lift-shake {
+  0% {
+    transform: translateY(0) scale(1.2) rotate(0deg);
+  }
+  10% {
+    transform: translateY(-5px) scale(1.2) rotate(-10deg);
+    @apply text-blue-500;
+  }
+  20% {
+    transform: translateY(-5px) scale(1.2) rotate(10deg);
+  }
+  30% {
+    transform: translateY(-5px) scale(1.2) rotate(-10deg);
+    @apply text-blue-500;
+  }
+  40% {
+    transform: translateY(-5px) scale(1.2) rotate(10deg);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.2) rotate(0deg);
+  }
+  100% {
+    transform: translateY(0) scale(1.2) rotate(0deg);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(-7px); /* Go higher */
+    opacity: 1;
+  }
+  80% {
+    transform: translateY(5px); /* Snap back down */
+  }
+  100% {
+    transform: translateY(0); /* Settle at the final position */
+  }
+}
+
+.fadeInSlideIn {
+  animation: slideUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+.timelinePoint {
+  transition: all 0.3s ease-in-out;
 }

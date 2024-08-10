@@ -21,8 +21,8 @@ function Profile() {
   };
 
   return (
-    <div className="flex flex-col max-w-2xl p-2 py-5 h-auto mx-auto justify-center">
-      <section className="flex items-center gap-2">
+    <div className="h-[80vh] flex flex-col max-w-2xl p-2 py-5 mx-auto justify-center">
+      <section className="flex items-center gap-2m mt-10">
         <span className="w-full h-1 border-2 border-neutral-900" />
         <PiIdentificationBadgeLight className="text-[52px]" />
         <span className="w-full h-1 border-2 border-neutral-900" />

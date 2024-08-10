@@ -29,7 +29,7 @@ function Signin() {
   const handleOAuthSuccess = () => {
     setRedirecting(true);
     setTimeout(() => {
-      navigate("/profile");
+      navigate("/");
       setRedirecting(false);
     }, 1500);
   };

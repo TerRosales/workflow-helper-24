@@ -8,11 +8,13 @@ export function FailedLoad() {
         <Spinner className="w-20 h-20 my-2" />
         <h1 className="text-4xl mt-5 ">Loading Content...</h1>
         <p className="text-[16px] my-10">
-          Workflow&nbsp;
-          <span className="border-1 rounded-lg font-bold text-[#556cef]">
-            Helper
-          </span>{" "}
-          ,Apologies, I am deeply committed to providing the best possible
+          <span className="font-bold">
+            Workflow&nbsp;
+            <span className="border-1 rounded-lg font-bold text-[#556cef]">
+              Helper
+            </span>{" "}
+          </span>
+          , Apologies, I am deeply committed to providing the best possible
           solution to display the content you are looking for. Please wait a
           moment while we load the content for you.
         </p>

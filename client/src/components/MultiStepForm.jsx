@@ -16,6 +16,7 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
+  const [animationClass, setAnimationClass] = useState("stepTransitionNext");
 
   const [checkListState, setCheckListState] = useState(
     Array(line.troubleShootingCheckList.length).fill(false)
@@ -30,22 +31,32 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
     }
   }, [isAnimating, isExiting]);
 
+  useEffect(() => {
+    setAnimationClass("stepTransitionNext");
+  }, [currentStep]);
+
   const handleNext = () => {
-    setCurrentStep((prevStep) => prevStep + 1);
+    setAnimationClass("stepExitNext");
+    setTimeout(() => {
+      setCurrentStep((prevStep) => prevStep + 1);
+      setAnimationClass("stepTransitionNext");
+    }, 500); // Match the animation duration
   };
 
   const handlePrevious = () => {
-    setCurrentStep((prevStep) => prevStep - 1);
+    setAnimationClass("stepExitPrevious");
+    setTimeout(() => {
+      setCurrentStep((prevStep) => prevStep - 1);
+      setAnimationClass("stepTransitionPrevious");
+    }, 500); // Match the animation duration
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log("handleChange - name:", name, "value:", value); // Debugging
     dispatch(updateFormData({ [name]: value }));
   };
 
   const handleSubmit = () => {
-    console.log("Form Data Submitted:", formData); // Debugging
     setIsSubmitted(true);
     setIsAnimating(true);
     setTimeout(() => {
@@ -73,24 +84,24 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
       )
     : [];
 
-  const isFirstStepComplete = formData.issueArea && formData.job;
+  const isFirstStepComplete = formData.line && formData.job;
 
   return (
-    <section className="">
+    <section className={`transition-container ${animationClass}`}>
       {currentStep === 1 && (
         <section className="flex flex-col gap-3">
-          <label className="font-semibold text-neutral-900" htmlFor="issueArea">
-            Select Issue Area:
+          <label className="font-semibold text-neutral-900" htmlFor="line">
+            Select Line:
           </label>
           <Select
-            id="issueArea"
-            name="issueArea"
-            value={formData.issueArea}
+            id="line"
+            name="line"
+            value={formData.line}
             onChange={handleChange}
           >
             <option value="">Select Line</option>
             {allLines.map((line) => (
-              <option key={line.id} value={line.name}>
+              <option key={line.id} value={line.id}>
                 {line.name}
               </option>
             ))}
@@ -191,15 +202,16 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
             ) : (
               <>
                 <section className="flex text-center flex-col decoration-red-400">
-                  <label className="font-semibold" htmlFor="otherField">
+                  <label className="p-4 font-semibold" htmlFor="otherField">
                     Let&apos;s prepare to Troubleshoot{" "}
                   </label>
                   <section className="mx-auto">
                     <Tooltip
-                      content="Tap/Click to checkout item"
+                      className="bg-blue-300 text-neutral-900 m-4 -translate-y-5 -translate-x-4"
+                      content="Tap/Click to uncheck item, Please check all items before submitting"
                       animation="duration-150"
                     >
-                      <IoMdInformationCircleOutline className="pulse2 mt-4 text-2xl text-red-500 hover:text-neutral-900" />
+                      <IoMdInformationCircleOutline className="pulse2 mt-2  mb-1 text-3xl" />
                     </Tooltip>
                   </section>
                 </section>

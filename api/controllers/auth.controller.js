@@ -104,49 +104,6 @@ export const verification = async (req, res, next) => {
   }
 };
 
-// export const googleAuth = async (req, res, next) => {
-//   try {
-//     const user = await User.findOne({ email: req.body.email });
-//     if (user) {
-//       const token = jwt.sign({ id: user._id }, process.env.JWTSECRET);
-//       const { password: hashedPassword, ...rest } = user._doc;
-//       res
-//         .cookie("access_token", token, {
-//           httpOnly: true,
-//           expires: expiryDate,
-//         })
-//         .status(200)
-//         .json(rest);
-//     } else {
-//       const generatedPassword =
-//         Math.random().toString(36).slice(-8) +
-//         Math.random().toString(36).slice(-8);
-//       const hashedPassword = bcryptjs.hashSync(generatedPassword, 10);
-//       const usernameBase = req.body.name.split(" ").join("").toLowerCase();
-//       const randomString = Math.random().toString(36).slice(-8);
-//       const username = (usernameBase + randomString).replace(/[^a-z0-9]/g, "");
-//       const newUser = new User({
-//         username,
-//         email: req.body.email,
-//         password: hashedPassword,
-//         profilePicture: req.body.photo,
-//       });
-//       await newUser.save();
-//       const token = jwt.sign({ id: newUser._id }, process.env.JWTSECRET);
-//       const { password: hashedPassword2, ...rest } = newUser._doc;
-//       res
-//         .cookie("access_token", token, {
-//           httpOnly: true,
-//           expires: expiryDate,
-//         })
-//         .status(200)
-//         .json(rest);
-//     }
-//   } catch (error) {
-//     next(error);
-//   }
-// };
-
 export const googleAuth = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });

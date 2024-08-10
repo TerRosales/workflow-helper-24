@@ -80,18 +80,18 @@ function EmailVerification() {
   };
 
   return (
-    <div className="h-[auto] flex flex-col p-2 text-center bg-white">
-      <div className="flex items-center gap-2 my-5">
+    <div className="h-[75vh] max-w-2xl flex flex-col p-4 text-center bg-white">
+      <div className="flex items-center gap-2 my-5 p-2">
         <span className="w-full h-1 border-2 border-neutral-900" />
         <MdOutlineMarkEmailUnread className="text-[50px]" />
         <span className="w-full h-1 border-2 border-neutral-900" />
       </div>
-      <p>
+      <p className="p-2">
         We have sent you a{" "}
         <span className="font-semibold">verification code</span> to your Email
         Address that you have provided.
       </p>
-      <section className="lg:w-1/2 mx-auto rounded-lg p-2 my-14 border-neutral-900 border-2">
+      <section className="lg:w-1/2 w-[95%] mx-auto rounded-lg p-2 my-14 border-neutral-900 border-2">
         <form onSubmit={handleSubmit} className="flex flex-col justify-center">
           <label className="font-semibold my-5" htmlFor="email">
             Confirm Email:
@@ -124,15 +124,18 @@ function EmailVerification() {
             className="buttonUniLight mb-5 w-[100px] mx-auto"
             disabled={verificationSuccess}
           >
-             {isExploding && (
-              <ConfettiExplosion {...bigExplodeProps} />
-          )}
+            {isExploding && <ConfettiExplosion {...bigExplodeProps} />}
             Verify
           </Button>
-         
+
           {errorMessage && (
-            <Alert color="failure" className="p-2 text-center mb-5 mx-auto">
-              <span><b>{errorMessage}</b>, Please check your email`</span>{" "}
+            <Alert
+              color="failure"
+              className="p-2 mx-auto text-center mb-5 w-[90%]"
+            >
+              <span>
+                <b>{errorMessage}</b>, Please check your email`
+              </span>{" "}
               <p className="">
                 In case of account credential lost please visit our{" "}
                 <b>
@@ -147,17 +150,15 @@ function EmailVerification() {
             </Alert>
           )}
           {verificationSuccess && (
-            <Alert color="success" className="p-2 text-center mb-5">
+            <Alert
+              color="success"
+              className="p-2 mx-auto text-center mb-5 w-[90%]"
+            >
               Email has been verified successfully! <b>Redirecting...</b>
             </Alert>
           )}
         </form>
       </section>
-      <div className="flex justify-content-center items-center gap-2 my-5">
-        <span className="w-full h-1 border-2 border-neutral-900" />
-        <MdOutlineMarkEmailUnread className="text-[50px]" />
-        <span className="w-full h-1 border-2 border-neutral-900" />
-      </div>
     </div>
   );
 }

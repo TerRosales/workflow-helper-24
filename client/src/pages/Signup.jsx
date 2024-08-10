@@ -117,8 +117,8 @@ function Signup() {
   };
 
   return (
-    <div className="p-7 h-auto max-w-6xl mx-auto">
-      <h1 className="text-4xl text-center my-5">Sign Up</h1>
+    <div className="p-7 h-[80vh] overflow-y-scroll max-w-6xl mx-auto items-center justify-center">
+      <h1 className="text-4xl text-center my-20">Sign Up</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <FloatingLabel
           variant="standard"

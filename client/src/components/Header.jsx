@@ -55,7 +55,7 @@ function Header() {
     <div className="bg-neutral-950">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3 px-6">
         <Link to="/">
-          <h1 className="text-2xl font-bold text-white">
+          <h1 className="text-xl font-bold text-white">
             Workflow <span className="text-[#324de7]">Helper</span>
           </h1>
         </Link>
