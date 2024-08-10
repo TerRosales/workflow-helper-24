@@ -65,7 +65,7 @@ function Signin() {
     }
   };
   return (
-    <div className="p-7 h-[75vh] max-w-6xl mx-auto">
+    <div className="p-7 h-[75vh] max-h-[80vh] overflow-y-scroll max-w-6xl mx-auto">
       <h1 className="text-4xl text-center my-20">Sign In</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <FloatingLabel
