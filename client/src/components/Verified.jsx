@@ -16,7 +16,7 @@ function Verified() {
             <Button className="buttonUniLight font-bold w-[200px] mx-auto getStarted">
               <Link to="/profile">
                 Get
-                <span className="bg-white rounded-lg p-1 font-extraboldbold text-[#556cef]">
+                <span className="rounded-lg p-1 font-extraboldbold text-[#556cef]">
                   Started
                 </span>{" "}
               </Link>

@@ -59,18 +59,18 @@ function Lines() {
 
   // Render the lines page with the selected product's details and options
   return (
-    <div className="h-auto flex flex-col p-2 max-w-2xl overflow-auto mx-auto">
+    <div className="h-auto flex flex-col p-2 max-w-2xl overflow-auto mx-auto fadeInSlideIn">
       {/* Page header with an icon and title */}
-      <section className="flex items-center gap-2 mt-4 mb-5">
+      <section className="flex items-center gap-2 mt-4 mb-5 fadeInSlideIn">
         <span className="w-full h-1 border-2 border-neutral-900" />
         <PiNetworkBold className="text-[52px]" />
         <span className="w-full h-1 border-2 border-neutral-900" />
       </section>
-      <h1 className="text-4xl text-center pb-5 mb-2">Lines</h1>
+      <h1 className="text-4xl text-center pb-5 mb-2 fadeInSlideIn">Lines</h1>
 
       {/* Main product section with image, description, and action buttons */}
-      <section className="flex flex-col pt-4 gradientCard my-5 rounded-xl shadow-lg shadow-neutral-300 max-w-lg w-full justify-center mx-auto">
-        <figure className="flex justify-between items-center p-6">
+      <section className="flex flex-col pt-4 gradientCard my-5 rounded-xl shadow-lg shadow-neutral-300 max-w-lg w-full justify-center mx-auto fadeInSlideIn">
+        <figure className="flex justify-between items-center p-6 fadeInSlideIn">
           <h2 className="font-bold text-2xl text-white">
             {currentProduct.name}
           </h2>
@@ -80,7 +80,7 @@ function Lines() {
             alt={currentProduct.name}
           />
         </figure>
-        <section className="flex flex-col bg-white text-white gap-5 p-6 rounded-b-xl mb-[1px]">
+        <section className="flex flex-col bg-white text-white gap-5 p-6 rounded-b-xl mb-[1px] fadeInSlideIn">
           <p className="text-sm md:text-base text-neutral-900">
             {description}
             {currentProduct.desc.split(" ").length > 15 && (
@@ -94,8 +94,8 @@ function Lines() {
           </p>
 
           {/* Dropdowns for tools and jobs, and a button to navigate to the product page */}
-          <section className="flex buttonGroup gap-2 px-1 justify-between">
-            <section className="flex gap-2">
+          <section className="flex buttonGroup gap-2 px-1 justify-between fadeInSlideIn">
+            <section className="flex gap-2 fadeInSlideIn">
               <Dropdown
                 size="sm"
                 color="grey"
@@ -117,7 +117,7 @@ function Lines() {
                 ))}
               </Dropdown>
             </section>
-            <Button className="buttonUni">
+            <Button className="buttonUni fadeInSlideIn">
               <Link to={`/product-page/${currentProduct._id}`}>
                 <MdOutlineTroubleshoot className="text-[18px]" />
               </Link>
@@ -127,7 +127,7 @@ function Lines() {
       </section>
 
       {/* Buttons for switching between different products */}
-      <Button.Group className="mt-1 mb-8 flex flex-wrap justify-center">
+      <Button.Group className="mt-1 mb-8 flex flex-wrap justify-center fadeInSlideIn">
         {lines.map((product) => (
           <Button
             key={product._id}

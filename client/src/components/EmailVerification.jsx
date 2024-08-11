@@ -15,6 +15,7 @@ function EmailVerification() {
   const [email, setEmail] = useState("");
   const [verificationSuccess, setVerificationSuccess] = useState(false);
   const [isExploding, setIsExploding] = useState(false);
+  const [isGuestExploding, setIsGuestExploding] = useState(false); // New state for guest verification confetti
   const [errorMessage, setErrorMessage] = useState("");
   const inputRefs = useRef([]);
   const navigate = useNavigate();
@@ -81,7 +82,7 @@ function EmailVerification() {
   const simulateVerificationSuccess = () => {
     setVerificationSuccess(true);
     setErrorMessage("");
-    setIsExploding(true);
+    setIsGuestExploding(true); // Trigger guest explosion
     setTimeout(() => {
       navigate("/verified");
     }, 1500);
@@ -127,21 +128,24 @@ function EmailVerification() {
               />
             ))}
           </section>
-          <Button
-            type="submit"
-            className="buttonUniLight mb-5 w-[100px] mx-auto"
-            disabled={verificationSuccess}
-          >
-            {isExploding && <ConfettiExplosion {...bigExplodeProps} />}
-            Verify
-          </Button>
+          <section className="flex">
+            <Button
+              type="submit"
+              className="buttonUniLight mb-5 w-[100px] mx-auto"
+              disabled={verificationSuccess}
+            >
+              {isExploding && <ConfettiExplosion {...bigExplodeProps} />}
+              Verify
+            </Button>
 
-          <Button
-            onClick={simulateVerificationSuccess}
-            className="buttonUniLight mb-5 w-[100px] mx-auto"
-          >
-            Verify Guest
-          </Button>
+            <Button
+              onClick={simulateVerificationSuccess}
+              className="buttonUniLight buttonLong mb-5 w-[100px] mx-auto"
+            >
+              {isGuestExploding && <ConfettiExplosion {...bigExplodeProps} />} {/* Separate explosion for guest */}
+              Verify Guest
+            </Button>
+          </section>
 
           {errorMessage && (
             <Alert
@@ -158,7 +162,7 @@ function EmailVerification() {
                     className="underline underline-offset-1]"
                     to="/customer-service"
                   >
-                    Account Retreaval Page
+                    Account Retrieval Page
                   </Link>
                 </b>{" "}
               </p>
