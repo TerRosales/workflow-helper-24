@@ -16,7 +16,7 @@ const app = express();
 
 // CORS configuration
 const corsOptions = {
-  origin: "http://localhost:5173", // Your frontend's origin
+  origin: ["http://localhost:5173", "https://workflow-helper-24.onrender.com"], // Your frontend's origin
   credentials: true, // Allow credentials (cookies, authorization headers, etc.)
 };
 
