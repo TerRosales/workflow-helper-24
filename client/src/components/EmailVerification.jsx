@@ -88,7 +88,7 @@ function EmailVerification() {
   };
 
   return (
-    <div className="h-[75vh] mx-auto overflow-auto max-w-2xl flex flex-col p-4 text-center bg-white">
+    <div className="h-[85vh] mx-auto overflow-auto max-w-2xl flex flex-col p-4 text-center bg-white">
       <div className="flex items-center gap-2 my-5 p-2">
         <span className="w-full h-1 border-2 border-neutral-900" />
         <MdOutlineMarkEmailUnread className="text-[50px]" />
@@ -99,7 +99,7 @@ function EmailVerification() {
         <span className="font-semibold">verification code</span> to your Email
         Address that you have provided.
       </p>
-      <section className="lg:w-1/2 w-[95%] mx-auto rounded-lg p-2 my-14 border-neutral-900 border-2">
+      <section className="lg:w-3/4 w-full mx-auto rounded-lg p-2 my-14 border-neutral-900 border-2">
         <form onSubmit={handleSubmit} className="flex flex-col justify-center">
           <label className="font-semibold my-5" htmlFor="email">
             Confirm Email:
@@ -122,8 +122,8 @@ function EmailVerification() {
                 onChange={(e) => handleChange(e, index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 ref={(el) => (inputRefs.current[index] = el)}
-                className="w-10 h-10 text-center border-2 border-gray-300 mx-1"
-                style={{ fontSize: "20px" }}
+                className="lg:w-10 w-9 h-10 text-center border-2 border-gray-300 mx-1"
+                style={{ fontSize: "14px" }}
               />
             ))}
           </section>

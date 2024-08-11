@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 function Verified() {
   return (
     <div className="bg-gradient-to-bl from-white to bg-neutral-200 h-[80vh] mt-10">
-      <div className=" flex flex-col  p-5 gap-7">
-        <section className="mb-5 flex flex-col gap-12 w-[70%] lg:w-[50%] mx-auto">
+      <div className=" flex flex-col  p-2 gap-7">
+        <section className="mb-5 flex flex-col gap-12 w-[85%] lg:w-[50%] mx-auto">
           <p className="iconEmoji">🥳</p>
           <p className="">
             <b>Congratulations</b>, you have successfully verified your account,

@@ -24,9 +24,9 @@ function Profile() {
 
   // Render the profile page layout
   return (
-    <div className="h-[90vh] overflow-auto flex flex-col max-w-2xl p-2 py-5 mx-auto justify-center mt-7 mb-15">
+    <div className="h-auto overflow-auto flex flex-col max-w-2xl p-2 py-5 mx-auto justify-center mb-15">
       {/* Profile Header with Icon */}
-      <section className="flex items-center gap-2m mt-10">
+      <section className="flex items-center gap-2m">
         <span className="w-full h-1 border-2 border-neutral-900" />
         <PiIdentificationBadgeLight className="text-[52px]" />
         <span className="w-full h-1 border-2 border-neutral-900" />

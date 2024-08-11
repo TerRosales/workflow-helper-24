@@ -91,7 +91,7 @@ const TroubleshootingPage = () => {
       </section>
 
       <div
-        className={`w-60 mx-auto mb-12 transition-all duration-700 ease-in-out transform origin-bottom ${
+        className={`w-80 mx-auto mb-12 transition-all duration-700 ease-in-out transform origin-bottom ${
           focusMode
             ? "opacity-0 max-h-0 -translate-y-[20px]"
             : "opacity-100 max-h-[240px] translate-y-0"

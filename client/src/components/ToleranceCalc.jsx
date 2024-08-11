@@ -139,7 +139,7 @@ const ToleranceCalc = ({ tolerances, onFocusChange }) => {
       {/* Tolerances Section */}
       <article>
         <header className="flex justify-between items-center">
-          <h3 className="font-bold text-xs text-white">Tolerances</h3>
+          <h3 className="font-bold text-xs text-white mb-6">Tolerances</h3>
           <button
             onClick={toggleSection}
             className="text-xs font-bold text-blue-400 hover:text-white"
