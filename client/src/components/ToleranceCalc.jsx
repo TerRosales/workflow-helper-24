@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { formatKey } from "../utility/utils.js";
+import { Button } from "flowbite-react";
+import LottieAnimation3 from "../components/LottieAnimationCalc.jsx";
 import { defaultTolerances, defaultTools } from "../utility/troubleShoot.js"; // Ensure correct import path
 
 const ToleranceCalc = ({ tolerances, onFocusChange }) => {
@@ -9,8 +11,12 @@ const ToleranceCalc = ({ tolerances, onFocusChange }) => {
 
   const [selectedTolerance, setSelectedTolerance] = useState("");
   const [selectedTool, setSelectedTool] = useState("");
-  const [measurement, setMeasurement] = useState("");
+  const [measurements, setMeasurements] = useState([""]); // Array to handle multiple measurements
   const [result, setResult] = useState(null);
+  const [isCalculating, setIsCalculating] = useState(false); // State for calculation animation
+  const [calculationDone, setCalculationDone] = useState(false); // State to show OK text
+  const [buttonClicked, setButtonClicked] = useState(false); // State for shrinking animation
+  const [svgExit, setSvgExit] = useState(false); // State for SVG exit animation
 
   const toggleProfillometer = () => {
     setIsProfillometerOpen(!isProfillometerOpen);
@@ -27,10 +33,95 @@ const ToleranceCalc = ({ tolerances, onFocusChange }) => {
 
   const handleCalculation = (e) => {
     e.preventDefault();
-    // Placeholder for future calculation logic
-    setResult(
-      `You selected ${selectedTolerance} and ${selectedTool} with a measurement of ${measurement}`
-    );
+    setButtonClicked(true); // Start the shrinking animation
+
+    setTimeout(() => {
+      setIsCalculating(true);
+      setButtonClicked(false); // Reset the button clicked state
+
+      // Small delay to allow for smooth SVG entry
+      setTimeout(() => {
+        document
+          .querySelector(".scale-animation")
+          .classList.add("scale-animation-active");
+
+        // Simulate calculation time (4 seconds now to extend the SVG animation)
+        setTimeout(() => {
+          setSvgExit(true); // Trigger the SVG exit animation
+
+          setTimeout(() => {
+            // Perform calculations
+
+            // Convert user input into micron units (0.0 + user entry)
+            const measurementsInMicrons = measurements.map((measurement) =>
+              parseFloat(`0.0${measurement}`)
+            );
+
+            const averagedMeasurement =
+              measurementsInMicrons.reduce(
+                (acc, val) => acc + parseFloat(val || 0),
+                0
+              ) / measurementsInMicrons.length;
+
+            // Get tolerance range and tool micron
+            const toleranceRange = defaultTolerances[selectedTolerance];
+            const toolMicron = defaultTools.find(
+              (tool) => tool.tool === selectedTool
+            ).micron;
+
+            let adjustedMeasurement = averagedMeasurement;
+
+            // Define the target range (40% to 50% of the tolerance range)
+            const targetLowerBound =
+              toleranceRange[0] + 0.4 * (toleranceRange[1] - toleranceRange[0]);
+            const targetUpperBound =
+              toleranceRange[0] + 0.5 * (toleranceRange[1] - toleranceRange[0]);
+
+            // Check if the measurement is outside the target range
+            if (averagedMeasurement < targetLowerBound) {
+              // Adjust upwards towards the target lower bound
+              while (adjustedMeasurement < targetLowerBound) {
+                adjustedMeasurement += toolMicron;
+                if (adjustedMeasurement > targetUpperBound) break; // Prevent overshooting
+              }
+            } else if (averagedMeasurement > targetUpperBound) {
+              // Adjust downwards towards the target upper bound
+              while (adjustedMeasurement > targetUpperBound) {
+                adjustedMeasurement -= toolMicron;
+                if (adjustedMeasurement < targetLowerBound) break; // Prevent overshooting
+              }
+            }
+
+            // Set the result
+            setResult(
+              `You selected ${selectedTolerance} and ${selectedTool} with an initial measurement of ${averagedMeasurement.toFixed(
+                3
+              )}. After adjustment, the final measurement is ${adjustedMeasurement.toFixed(
+                3
+              )}, which is within the 40-50% range of the tolerance.`
+            );
+
+            setIsCalculating(false);
+            setCalculationDone(true);
+          }, 500); // Time for the SVG exit animation
+        }, 3500); // Time to keep the SVG displayed before exit animation starts
+      }, 100); // Adjust delay to smoothen transition
+    }, 500); // Duration of the shrinking animation
+  };
+
+  const handleMeasurementChange = (index, value) => {
+    const newMeasurements = [...measurements];
+    newMeasurements[index] = value;
+    setMeasurements(newMeasurements);
+  };
+
+  const addMeasurementField = () => {
+    setMeasurements([...measurements, ""]);
+  };
+
+  const removeMeasurementField = (index) => {
+    const newMeasurements = measurements.filter((_, i) => i !== index);
+    setMeasurements(newMeasurements);
   };
 
   return (
@@ -69,7 +160,11 @@ const ToleranceCalc = ({ tolerances, onFocusChange }) => {
                   id="toleranceSelect"
                   className="text-xs mt-1 block w-full p-1 border border-gray-300 rounded-md bg-white text-black"
                   value={selectedTolerance}
-                  onChange={(e) => setSelectedTolerance(e.target.value)}
+                  onChange={(e) => {
+                    setSelectedTolerance(e.target.value);
+                    setMeasurements([""]); // Reset measurements when tolerance changes
+                    setSelectedTool(""); // Reset tool selection when tolerance changes
+                  }}
                 >
                   <option value="" disabled>
                     Select an option
@@ -99,36 +194,89 @@ const ToleranceCalc = ({ tolerances, onFocusChange }) => {
                     Select a tool
                   </option>
                   {defaultTools.map((toolObj) => (
-                    <option key={toolObj.tool} value={toolObj.tool}>
+                    <option
+                      key={toolObj.tool}
+                      value={toolObj.tool}
+                      disabled={
+                        selectedTolerance === "tubeBore" &&
+                        (toolObj.tool === "Large Wrench" ||
+                          toolObj.tool === "Small Wrench")
+                      }
+                    >
                       {toolObj.tool} (Micron: {toolObj.micron})
                     </option>
                   ))}
                 </select>
               </div>
 
-              <div className="mb-4">
-                <label
-                  htmlFor="measurementInput"
-                  className="block text-xs font-medium text-gray-700"
+              {measurements.map((measurement, index) => (
+                <div key={index} className="mb-2">
+                  <label
+                    htmlFor={`measurementInput-${index}`}
+                    className="block text-xs font-medium text-gray-700"
+                  >
+                    Enter Key {index + 1}:
+                  </label>
+                  <input
+                    id={`measurementInput-${index}`}
+                    type="number"
+                    step="0.001"
+                    className="text-xs mt-1 block w-full p-1 border border-gray-300 rounded-md bg-white text-black"
+                    value={measurement}
+                    onChange={(e) =>
+                      handleMeasurementChange(index, e.target.value)
+                    }
+                  />
+                  {index > 0 && (
+                    <button
+                      type="button"
+                      className="text-xs text-red-500 mt-2"
+                      onClick={() => removeMeasurementField(index)}
+                    >
+                      Remove
+                    </button>
+                  )}
+                </div>
+              ))}
+              {selectedTolerance === "tubeBore" && (
+                <button
+                  type="button"
+                  className="text-xs text-blue-500 mb-2"
+                  onClick={addMeasurementField}
                 >
-                  Enter Measurement:
-                </label>
-                <input
-                  id="measurementInput"
-                  type="number"
-                  step="0.001"
-                  className="text-xs mt-1 block w-full p-1 border border-gray-300 rounded-md bg-white text-black"
-                  value={measurement}
-                  onChange={(e) => setMeasurement(e.target.value)}
-                />
+                  Add Key
+                </button>
+              )}
+
+              {/* Button with shrinking animation */}
+              <div
+                className={`transition-all duration-500 transform ${
+                  buttonClicked ? "shrink-button" : ""
+                }`}
+              >
+                {!isCalculating && !calculationDone && (
+                  <Button
+                    type="submit"
+                    className="buttonUni text-white mt-4 p-2 rounded-md transition-transform transform hover:scale-105 mx-auto"
+                  >
+                    Calculate
+                  </Button>
+                )}
               </div>
 
-              <button
-                type="submit"
-                className="bg-blue-500 text-white p-2 rounded-md"
-              >
-                Calculate
-              </button>
+              {/* SVG animation with scaling animation */}
+              {isCalculating && (
+                <div
+                  className={`flex justify-center items-center h-20 ${
+                    svgExit ? "shrink-button" : "scale-animation"
+                  }`}
+                >
+                  <LottieAnimation3 />
+                </div>
+              )}
+              {calculationDone && (
+                <div className="text-center text-white font-bold mt-4">OK</div>
+              )}
 
               {result && <p className="mt-4 text-xs text-gray-700">{result}</p>}
             </form>

@@ -409,3 +409,21 @@
 .timelinePoint {
   transition: all 0.3s ease-in-out;
 }
+
+.shrink-button {
+  transform: scale(0.5);
+  opacity: 0;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+.scale-animation {
+  transform: scale(0.5);
+  opacity: 0;
+  transition: transform 0.5s ease-in, opacity 0.5s ease-in;
+}
+
+.scale-animation-active {
+  transform: scale(1.2);
+  opacity: 1;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}

@@ -220,6 +220,7 @@ export const troubleShootQualifications = [
 ];
 
 // Reusable tolerances variable
+// prettier-ignore
 export const defaultTolerances = {
   profillometer: {
     navPad: [-0.13, 0.13],
@@ -228,11 +229,12 @@ export const defaultTolerances = {
     gear: [200, 500],
     trunnion: [200, 500],
   },
+  
   diffBore: [-0.018, 0.018],
   tubeBore: [-0.038, 0.038],
   frontBore: [-0.018, 0.018],
   rearBore: [-0.018, 0.018],
-  oilSeal: [-0.05, 0.05],
+  oilSeal: [-0.050, 0.050],
   trunnion: [-0.023, 0.023],
   bushing: [-0.038, 0.038],
 };

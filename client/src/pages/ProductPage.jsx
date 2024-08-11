@@ -71,7 +71,9 @@ function ProductPage() {
         <VscPreview className="text-[52px]" />
         <span className="w-full h-1 border-2 border-neutral-900" />
       </section>
-      <h2 className="text-4xl text-center pb-3 my-5 fadeInSlideIn">{selectedLine.name}</h2>
+      <h2 className="text-4xl text-center pb-3 my-5 fadeInSlideIn">
+        {selectedLine.name}
+      </h2>
 
       {/* Main product section with image and dropdown */}
       <section className="relative flex justify-around p-2 items-center mt-5 gradientCard rounded-lg mx-auto shadow-lg shadow-neutral-500 fadeInSlideIn">
@@ -87,8 +89,12 @@ function ProductPage() {
             onMouseEnter={() => setIsDropdownHovered(true)}
             onMouseLeave={() => setIsDropdownHovered(false)}
           >
-            <Dropdown.Item className="fadeInSlideIn">Training Info</Dropdown.Item>
-            <Dropdown.Item className="fadeInSlideIn">Tooling Guide</Dropdown.Item>
+            <Dropdown.Item className="fadeInSlideIn">
+              Training Info
+            </Dropdown.Item>
+            <Dropdown.Item className="fadeInSlideIn">
+              Tooling Guide
+            </Dropdown.Item>
             <Dropdown.Item className="fadeInSlideIn" onClick={handleModal}>
               Troubleshooting
             </Dropdown.Item>
@@ -99,7 +105,7 @@ function ProductPage() {
         </section>
 
         <img
-          className="w-[120px] h-[120px] rounded-lg productImg -translate-y-1 fadeInSlideIn"
+          className="w-[100px] -z-[1] h-[100px] rounded-lg productImg -translate-y-1 fadeInSlideIn"
           src={selectedLine.partImg}
           alt={`${selectedLine.name} image`}
         />
@@ -144,7 +150,9 @@ function ProductPage() {
         }`}
         id="tools"
       >
-        <h2 className="text-start my-2 font-semibold text-blue-700 fadeInSlideIn">Tools</h2>
+        <h2 className="text-start my-2 font-semibold text-blue-700 fadeInSlideIn">
+          Tools
+        </h2>
         <section className="flex flex-wrap fadeInSlideIn">
           {Array.isArray(selectedLine.tools) &&
             selectedLine.tools.map((tool) => (
@@ -163,7 +171,9 @@ function ProductPage() {
         }`}
         id="gauges"
       >
-        <h2 className="text-start my-2 font-semibold text-blue-700 fadeInSlideIn">Gauges</h2>
+        <h2 className="text-start my-2 font-semibold text-blue-700 fadeInSlideIn">
+          Gauges
+        </h2>
         <section className="flex flex-wrap fadeInSlideIn">
           {Array.isArray(selectedLine.gauges) &&
             selectedLine.gauges.map((gauge) => (
@@ -182,7 +192,9 @@ function ProductPage() {
         }`}
         id="jobs"
       >
-        <h2 className="text-start my-2 font-semibold text-blue-700 fadeInSlideIn">Jobs</h2>
+        <h2 className="text-start my-2 font-semibold text-blue-700 fadeInSlideIn">
+          Jobs
+        </h2>
         <section className="flex flex-wrap fadeInSlideIn">
           {Array.isArray(selectedLine.jobs) &&
             selectedLine.jobs.map((job) => (
@@ -215,8 +227,13 @@ function ProductPage() {
                 <section className="flex flex-col p-2 fadeInSlideIn">
                   {typeof value === "object" && !Array.isArray(value) ? (
                     Object.entries(value).map(([subKey, subValue]) => (
-                      <section key={subKey} className="flex flex-col my-1 fadeInSlideIn">
-                        <span className="text-xs fadeInSlideIn">{formatKey(subKey)}:</span>
+                      <section
+                        key={subKey}
+                        className="flex flex-col my-1 fadeInSlideIn"
+                      >
+                        <span className="text-xs fadeInSlideIn">
+                          {formatKey(subKey)}:
+                        </span>
                         <section className="flex justify-center fadeInSlideIn">
                           <Kbd className="fadeInSlideIn">
                             Higher than {subValue.join(", but less than ")}

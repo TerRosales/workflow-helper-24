@@ -117,7 +117,7 @@ const TroubleshootingPage = () => {
 
       {/* This div controls the Lottie animation, hiding it when focusMode is active. */}
       <div
-        className={`w-80 mx-auto mb-12 transition-all duration-700 ease-in-out transform origin-bottom ${
+        className={`lg:w-80 w-50 mx-auto mb-20 transition-all duration-700 ease-in-out transform origin-bottom ${
           focusMode
             ? "opacity-0 max-h-0 -translate-y-[20px]"
             : "opacity-100 max-h-[240px] translate-y-0"
@@ -163,7 +163,7 @@ const TroubleshootingPage = () => {
                   >
                     <p ref={(el) => (elementsRef.current[index * 3 + 3] = el)}>
                       {formData.line}{" "}
-                      <span className="text-neutral-900 p-1 bg-blue-100">
+                      <span className="text-neutral-900 px-3 bg-blue-100 rounded-lg font-bold text-sm">
                         {formData.qualificationKey.toUpperCase()}
                       </span>
                     </p>

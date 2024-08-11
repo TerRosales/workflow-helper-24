@@ -185,7 +185,7 @@ function Signin() {
       </form>
 
       {/* Floating Guest Login Button */}
-      <div className="fixed w-[120px] h-[40px] bottom-10 right-10 rounded-lg -translate-y-[10vh]">
+      <div className="fixed w-[90px] h-[30px] bottom-10 right-10 rounded-lg -translate-y-[10vh]">
         <Button onClick={handleGuestLogin} className="buttonUni text-white">
           Guest Login
         </Button>
