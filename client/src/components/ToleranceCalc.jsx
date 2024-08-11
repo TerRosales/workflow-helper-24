@@ -155,7 +155,7 @@ const ToleranceCalc = ({ tolerances, onFocusChange }) => {
           }`}
         >
           {isSectionOpen && (
-            <ul className="list-none text-lg text-left bg-gray-100 px-4 rounded-lg">
+            <ul className="list-none text-lg text-left bg-gray-100 p-4 rounded-lg text-neutral-900">
               {Object.entries(tolerances).map(([key, value]) => {
                 const formattedKey = formatKey(key);
                 if (key === "profillometer") {

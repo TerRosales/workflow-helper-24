@@ -24,7 +24,7 @@ function Profile() {
 
   // Render the profile page layout
   return (
-    <div className="h-[80vh] flex flex-col max-w-2xl p-2 py-5 mx-auto justify-center mb-10">
+    <div className="h-[90vh] overflow-auto flex flex-col max-w-2xl p-2 py-5 mx-auto justify-center mt-7 mb-15">
       {/* Profile Header with Icon */}
       <section className="flex items-center gap-2m mt-10">
         <span className="w-full h-1 border-2 border-neutral-900" />
