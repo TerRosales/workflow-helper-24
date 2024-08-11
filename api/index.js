@@ -9,10 +9,18 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import path from "path"; // Import path module
 import { fileURLToPath } from "url"; // Needed to resolve __dirname
+
 dotenv.config();
 
 const app = express();
-app.use(cors());
+
+// CORS configuration
+const corsOptions = {
+  origin: "http://localhost:5173", // Your frontend's origin
+  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+};
+
+app.use(cors(corsOptions)); // Use CORS with the defined options
 app.use(express.json());
 app.use(cookieParser());
 

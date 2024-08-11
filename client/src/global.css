@@ -29,7 +29,7 @@
 }
 
 .buttonLong {
-  @apply w-auto !important;
+  @apply lg:w-[200px] w-auto !important;
 }
 
 .buttonFull {

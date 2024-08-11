@@ -26,7 +26,6 @@ function EmailVerification() {
       newValues[index] = value;
       setValues(newValues);
 
-      // Move to the next input field
       if (index < 5) {
         inputRefs.current[index + 1].focus();
       }
@@ -79,8 +78,17 @@ function EmailVerification() {
     }
   };
 
+  const simulateVerificationSuccess = () => {
+    setVerificationSuccess(true);
+    setErrorMessage("");
+    setIsExploding(true);
+    setTimeout(() => {
+      navigate("/verified");
+    }, 1500);
+  };
+
   return (
-    <div className="h-[75vh] max-w-2xl flex flex-col p-4 text-center bg-white">
+    <div className="h-[75vh] mx-auto overflow-auto max-w-2xl flex flex-col p-4 text-center bg-white">
       <div className="flex items-center gap-2 my-5 p-2">
         <span className="w-full h-1 border-2 border-neutral-900" />
         <MdOutlineMarkEmailUnread className="text-[50px]" />
@@ -126,6 +134,13 @@ function EmailVerification() {
           >
             {isExploding && <ConfettiExplosion {...bigExplodeProps} />}
             Verify
+          </Button>
+
+          <Button
+            onClick={simulateVerificationSuccess}
+            className="buttonUniLight mb-5 w-[100px] mx-auto"
+          >
+            Verify Guest
           </Button>
 
           {errorMessage && (

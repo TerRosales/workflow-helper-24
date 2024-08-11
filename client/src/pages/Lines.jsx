@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+// Import necessary components and icons
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Dropdown, Button } from "flowbite-react";
 import { useSelector } from "react-redux";
@@ -9,30 +10,33 @@ import { MdOutlineTroubleshoot } from "react-icons/md";
 import { FailedLoad } from "../components/FailedLoad";
 
 function Lines() {
+  // Get the current user from the Redux store and set up local state for lines and selected product
   const { currentUser } = useSelector((state) => state.user);
   const [lines, setLines] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [expandedProduct, setExpandedProduct] = useState(null);
-  console.log(currentUser);
 
+  // Fetch the lines data when the component mounts
   useEffect(() => {
     const fetchLines = async () => {
       try {
         const response = await fetch("http://localhost:3000/api/lines");
         const result = await response.json();
-        setLines(result.data);
-        setSelectedProduct(result.data[0]?._id || null); // Set the first line as selected by default
+        setLines(result.data); // Store the fetched lines in state
+        setSelectedProduct(result.data[0]?._id || null); // Set the first line as the selected product by default
       } catch (error) {
-        console.error("Failed to fetch lines:", error);
+        console.error("Failed to fetch lines:", error); // Handle any errors during fetch
       }
     };
     fetchLines();
   }, []);
 
+  // Toggle the expanded state for product description
   const toggleDescription = (productKey) => {
     setExpandedProduct(expandedProduct === productKey ? null : productKey);
   };
 
+  // Truncate the product description if it's too long
   const getShortDescription = (desc) => {
     const words = desc.split(" ");
     if (words.length > 15) {
@@ -41,18 +45,22 @@ function Lines() {
     return desc;
   };
 
+  // Find the current selected product and set up the description
   const currentProduct = lines.find((line) => line._id === selectedProduct);
   const isExpanded = expandedProduct === selectedProduct;
   const description = isExpanded
     ? currentProduct?.desc
     : getShortDescription(currentProduct?.desc || "");
 
+  // Handle the case where no current product is found (e.g., loading or error state)
   if (!currentProduct) {
-    return <FailedLoad />; // Or some other loading indicator
+    return <FailedLoad />;
   }
 
+  // Render the lines page with the selected product's details and options
   return (
     <div className="h-auto flex flex-col p-2 max-w-2xl overflow-auto mx-auto">
+      {/* Page header with an icon and title */}
       <section className="flex items-center gap-2 mt-4 mb-5">
         <span className="w-full h-1 border-2 border-neutral-900" />
         <PiNetworkBold className="text-[52px]" />
@@ -60,6 +68,7 @@ function Lines() {
       </section>
       <h1 className="text-4xl text-center pb-5 mb-2">Lines</h1>
 
+      {/* Main product section with image, description, and action buttons */}
       <section className="flex flex-col pt-4 gradientCard my-5 rounded-xl shadow-lg shadow-neutral-300 max-w-lg w-full justify-center mx-auto">
         <figure className="flex justify-between items-center p-6">
           <h2 className="font-bold text-2xl text-white">
@@ -84,6 +93,7 @@ function Lines() {
             )}
           </p>
 
+          {/* Dropdowns for tools and jobs, and a button to navigate to the product page */}
           <section className="flex buttonGroup gap-2 px-1 justify-between">
             <section className="flex gap-2">
               <Dropdown
@@ -115,6 +125,8 @@ function Lines() {
           </section>
         </section>
       </section>
+
+      {/* Buttons for switching between different products */}
       <Button.Group className="mt-1 mb-8 flex flex-wrap justify-center">
         {lines.map((product) => (
           <Button

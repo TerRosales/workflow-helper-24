@@ -7,11 +7,13 @@ import { emailTemplate } from "../utils/emailTemplate.js";
 import path from "path";
 import { generateVerificationCode } from "../utils/codeGenerator.js";
 import jwt from "jsonwebtoken";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const expiryDate = new Date(Date.now() + 3600000);
 
+// Signup
 export const signup = async (req, res, next) => {
   const { email, username, password } = req.body;
   const hashedPassword = bcryptjs.hashSync(password, 10);
@@ -22,7 +24,7 @@ export const signup = async (req, res, next) => {
 
   try {
     const code = verificationCode;
-    newUser.verificationCode = code; // Save the code to the user model (add this field in your model)
+    newUser.verificationCode = code; // Save the code to the user model
     await newUser.save();
     const mailOptions = {
       from: process.env.EMAIL,
@@ -45,6 +47,7 @@ export const signup = async (req, res, next) => {
   }
 };
 
+// Signin
 export const signin = async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -60,7 +63,7 @@ export const signin = async (req, res, next) => {
       .cookie("access_token", token, {
         httpOnly: true,
         secure: true, // Ensures the cookie is only sent over HTTPS
-        expires: expiryDate, // 1 day in milliseconds
+        expires: expiryDate, // 1 hour in milliseconds
       })
       .status(200)
       .json(rest);
@@ -69,6 +72,7 @@ export const signin = async (req, res, next) => {
   }
 };
 
+// Verification
 export const verification = async (req, res, next) => {
   const { email, code } = req.body;
   try {
@@ -88,7 +92,7 @@ export const verification = async (req, res, next) => {
     if (user.verificationCode === code) {
       // Code is correct
       user.verificationCode = null; // Clear the code
-      user.isVerified = true; // Add an isVerified field to your model
+      user.isVerified = true; // Mark the user as verified
       await user.save();
       return res
         .status(200)
@@ -104,14 +108,13 @@ export const verification = async (req, res, next) => {
   }
 };
 
+// Google Authentication
 export const googleAuth = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
 
     if (user) {
       if (!user.isVerified) {
-        // If the user is found but not verified, you might want to handle this case.
-        // For example, you could prompt the user to complete the verification process.
         return res.status(400).json({
           success: false,
           message: "Please verify your email before logging in with Google.",
@@ -157,4 +160,50 @@ export const googleAuth = async (req, res, next) => {
   }
 };
 
-export const signout = async (req, res) => {};
+// Guest Login
+const dummyAccounts = [
+  { email: "guest1@example.com", password: "guest123" },
+  { email: "guest2@example.com", password: "guest123" },
+  { email: "guest3@example.com", password: "guest123" },
+];
+
+export const guestLogin = async (req, res, next) => {
+  try {
+    // Select a random dummy account
+    const randomAccount =
+      dummyAccounts[Math.floor(Math.random() * dummyAccounts.length)];
+
+    // Find the user in the database
+    const user = await User.findOne({ email: randomAccount.email });
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+
+    // Generate a JWT token
+    const token = jwt.sign({ id: user._id }, process.env.JWTSECRET, {
+      expiresIn: "1h",
+    });
+
+    // Send the token as a cookie and the user data as a response
+    res
+      .cookie("access_token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        expires: new Date(Date.now() + 3600000),
+      })
+      .status(200)
+      .json({ ...user._doc, password: undefined });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Signout
+export const signout = async (req, res) => {
+  res.clearCookie("access_token").status(200).json({
+    success: true,
+    message: "Signout success",
+  });
+};

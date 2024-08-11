@@ -1,3 +1,4 @@
+// Import necessary components and icons
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { FailedLoad } from "../components/FailedLoad";
@@ -7,6 +8,7 @@ import { truncateText, formatKey } from "../utility/utils";
 import MultiStepForm from "../components/MultiStepForm.jsx"; // Import the new component
 
 function ProductPage() {
+  // Get the product ID from the URL parameters and initialize state variables
   const { id } = useParams();
   const [selectedLine, setSelectedLine] = useState(null);
   const [allLines, setAllLines] = useState([]);
@@ -14,13 +16,14 @@ function ProductPage() {
   const [highlightedSection, setHighlightedSection] = useState("");
   const [isDropdownHovered, setIsDropdownHovered] = useState(false);
 
+  // Fetch the selected line's details and all available lines when the component mounts
   useEffect(() => {
     const fetchLineDetails = async () => {
       try {
         const response = await fetch(`http://localhost:3000/api/lines/${id}`);
         const result = await response.json();
         const { data } = result;
-        setSelectedLine(data);
+        setSelectedLine(data); // Set the selected line's data
       } catch (error) {
         console.error("Failed to fetch product details:", error);
       }
@@ -31,7 +34,7 @@ function ProductPage() {
         const response = await fetch("http://localhost:3000/api/lines");
         const result = await response.json();
         const { data } = result;
-        setAllLines(data);
+        setAllLines(data); // Set the data for all available lines
       } catch (error) {
         console.error("Failed to fetch all lines:", error);
       }
@@ -41,23 +44,28 @@ function ProductPage() {
     fetchAllLines();
   }, [id]);
 
+  // Toggle the modal visibility
   const handleModal = () => {
     setShowModal(!showModal);
   };
 
+  // Handle button clicks for highlighting sections
   const handleButtonClick = (sectionId) => {
     setHighlightedSection(sectionId);
     setTimeout(() => {
-      setHighlightedSection(""); // Reset after animation
+      setHighlightedSection(""); // Reset the highlighted section after the animation
     }, 500);
   };
 
+  // Display an error component if the selected line's data is not available
   if (!selectedLine) {
     return <FailedLoad />;
   }
 
+  // Render the product page layout with various sections and components
   return (
     <section className="flex flex-col h-auto mx-auto p-2 max-w-2xl">
+      {/* Page header with an icon and title */}
       <section className="flex items-center gap-2 mt-5 mb-2">
         <span className="w-full h-1 border-2 border-neutral-900" />
         <VscPreview className="text-[52px]" />
@@ -65,6 +73,7 @@ function ProductPage() {
       </section>
       <h2 className="text-4xl text-center pb-3 my-5">{selectedLine.name}</h2>
 
+      {/* Main product section with image and dropdown */}
       <section className="relative flex justify-around p-2 items-center mt-5 gradientCard rounded-lg mx-auto shadow-lg shadow-neutral-500">
         <section className="flex flex-col items-center my-5 text-white">
           <h2 className="text-xs text-center mb-5 flex flex-col">
@@ -95,6 +104,8 @@ function ProductPage() {
           alt={`${selectedLine.name} image`}
         />
       </section>
+
+      {/* Buttons to navigate to different sections on the page */}
       <Button.Group
         className={`flex mt-7 justify-center flex-wrap lg:p-0 px-14 translate-x-1 ${
           isDropdownHovered ? "-z-20" : "z-0"
@@ -125,6 +136,8 @@ function ProductPage() {
           <a href="#tolerances">Tolerances</a>
         </Button>
       </Button.Group>
+
+      {/* Section for Tools */}
       <section
         className={`p-2 my-2 ${
           highlightedSection === "tools" ? "highlightedSection" : ""
@@ -142,6 +155,8 @@ function ProductPage() {
         </section>
       </section>
       <HR className="hr" />
+
+      {/* Section for Gauges */}
       <section
         className={`p-2 my-2 ${
           highlightedSection === "gauges" ? "highlightedSection" : ""
@@ -159,6 +174,8 @@ function ProductPage() {
         </section>
       </section>
       <HR className="hr" />
+
+      {/* Section for Jobs */}
       <section
         className={`p-2 mt-2 ${
           highlightedSection === "jobs" ? "highlightedSection" : ""
@@ -176,6 +193,8 @@ function ProductPage() {
         </section>
       </section>
       <HR className="bg-blue-400" />
+
+      {/* Section for Tolerances */}
       <section
         className={`p-2 pt-1 mb-5 ${
           highlightedSection === "tolerances" ? "highlightedSection" : ""
@@ -222,6 +241,7 @@ function ProductPage() {
         <HR className="hr" />
       </section>
 
+      {/* Modal for Troubleshooting */}
       <Modal show={showModal} onClose={() => setShowModal(false)}>
         <Modal.Header>Troubleshooting</Modal.Header>
         <Modal.Body>

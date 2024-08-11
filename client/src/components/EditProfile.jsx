@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
 import {
   getDownloadURL,
@@ -272,9 +273,14 @@ function EditProfile() {
         <Alert color="yellow">
           Please <b>do not share</b> your password with anyone
         </Alert>
-        <Button className="buttonUni mx-auto my-3 mb-6">
-          {loading ? "Loading..." : "Update"}
-        </Button>
+        <section className="flex">
+          <Button className="buttonUni mx-auto my-3 mb-6">
+            {loading ? "Loading..." : "Update"}
+          </Button>
+          <Button className="buttonUni mx-auto my-3 mb-6">
+            <Link to="/profile">Cancel</Link>
+          </Button>
+        </section>
       </form>
     </div>
   );

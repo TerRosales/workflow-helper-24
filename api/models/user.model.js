@@ -9,12 +9,17 @@ const userSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: true,
+      required: function () {
+        return !this.isGuest; // Email is required only if the user is not a guest
+      },
       unique: true,
+      sparse: true, // Allows null values in unique index
     },
     password: {
       type: String,
-      required: true,
+      required: function () {
+        return !this.isGuest; // Password is required only if the user is not a guest
+      },
     },
     isAdmin: {
       type: Boolean,
@@ -45,6 +50,10 @@ const userSchema = new mongoose.Schema(
     qualification: {
       type: Array,
       default: ["N / A"],
+    },
+    isGuest: {
+      type: Boolean,
+      default: false, // New field to distinguish guest users
     },
   },
   {

@@ -34,11 +34,11 @@ const ToleranceCalc = ({ tolerances, onFocusChange }) => {
   };
 
   return (
-    <section className="flex flex-col p-4 my-4 gradientUni2 rounded-md mx-auto lg:w-[90%] gap-5 transition-all duration-500">
+    <section className="flex flex-col p-4 my-4 gradientUni2 rounded-md mx-auto lg:w-[90%] gap-5 transition-all duration-500 max-w-2xl">
       {/* Adjustment Calculator Section */}
       <article className="mb-6">
         <header className="flex justify-between items-center mb-4">
-          <h3 className="font-bold text-md text-white">Calculator</h3>
+          <h3 className="font-bold text-sm text-white">Calculator</h3>
           <button
             onClick={toggleCalculator}
             className="text-xs font-bold text-blue-400 hover:text-white"

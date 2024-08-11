@@ -1,3 +1,4 @@
+// A page that is shown whenever the user sucuessfully verifies their email address. It contains a congratulatory message and a button that redirects the user to the homepage.
 import { Button } from "flowbite-react";
 import { Link } from "react-router-dom";
 

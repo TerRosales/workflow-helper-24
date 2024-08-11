@@ -69,11 +69,11 @@ const TroubleshootingPage = () => {
 
   return (
     <section
-      className={`min-h-[75vh] h-auto overflow-y-scroll px-6 transition-all duration-500 ${
+      className={`mx-auto max-w-2xl min-h-[75vh] h-auto overflow-auto px-8 transition-all duration-500 ${
         focusMode ? "bg-gray-900" : ""
       }`}
     >
-      <section className="px-4 flex justify-around my-10">
+      <section className="px-4 flex justify-center my-10">
         <Button
           ref={(el) => (elementsRef.current[0] = el)}
           className="buttonUni buttonLong py-4"
@@ -178,13 +178,15 @@ const TroubleshootingPage = () => {
         )}
         <section
           ref={(el) => (elementsRef.current[elementsRef.current.length] = el)}
-          className="rounded-lg mb-10 p-6 flex flex-col gradientCard text-neutral-100 mx-auto -translate-x-3 w-3/5"
+          className="rounded-lg mb-10 p-6 flex flex-col gradientUni2 text-white mx-auto lg:w-full"
         >
-          <p>
+          <p className="my-5 text-sm font-base">
             If issues continue to persist, please contact your manager{" "}
             <b>immediately</b>.
           </p>
-          <Button className="buttonUni buttonFull">Ask for help</Button>
+          <Button className="buttonUni buttonLong self-center my-2">
+            Ask for help
+          </Button>
         </section>
       </section>
     </section>

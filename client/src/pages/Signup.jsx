@@ -1,8 +1,10 @@
+// Import necessary components and icons
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FloatingLabel, Button, Alert } from "flowbite-react";
 
 function Signup() {
+  // State management for form data, confirmation password, errors, password visibility, loading status, and success message
   const [formData, setFormData] = useState({});
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
@@ -11,6 +13,7 @@ function Signup() {
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
 
+  // Handle input changes and perform validation for the username
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
     if (e.target.id === "username") {
@@ -18,11 +21,13 @@ function Signup() {
     }
   };
 
+  // Handle changes in the confirm password field and validate the password
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
     validatePassword(formData.password, e.target.value);
   };
 
+  // Function to validate the username based on specific rules
   const validateUsername = (username) => {
     const errors = [];
     const regexNoSpaces = /^\S*$/;
@@ -45,6 +50,7 @@ function Signup() {
     return errors.length === 0;
   };
 
+  // Function to validate the password and check if it matches the confirm password
   const validatePassword = (password, confirmPassword) => {
     const errors = [];
     const regexUppercase = /(?=.*[A-Z])/;
@@ -79,16 +85,17 @@ function Signup() {
     return errors.length === 0;
   };
 
+  // Handle form submission for the signup process
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission
     if (
       !validateUsername(formData.username) ||
       !validatePassword(formData.password, confirmPassword)
     ) {
-      return;
+      return; // If validation fails, stop the submission
     }
     try {
-      setLoading(true);
+      setLoading(true); // Show loading state
       const res = await fetch(
         `${import.meta.env.VITE_API_BASE_URL}/api/auth/signup`,
         {
@@ -96,30 +103,67 @@ function Signup() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(formData), // Send form data to the server
         }
       );
       const data = await res.json();
-      setLoading(false);
+      setLoading(false); // Hide loading state
       if (!data.success) {
-        setErrors([data.message || "Something went wrong, please try again"]);
+        setErrors([data.message || "Something went wrong, please try again"]); // Show error message if signup fails
         return;
       }
-      setSuccess("Signup Success, Redirecting to verification...");
+      setSuccess("Signup Success, Redirecting to verification..."); // Show success message
       setTimeout(() => {
-        navigate("/verify-email");
+        navigate("/verify-email"); // Redirect to email verification page
       }, 1500);
-      setErrors([]);
+      setErrors([]); // Clear errors
     } catch (error) {
-      setLoading(false);
-      setErrors(["Something went wrong, please try again"]);
+      setLoading(false); // Hide loading state
+      setErrors(["Something went wrong, please try again"]); // Show error message on failure
     }
   };
 
+  // Handle guest signup process
+  const handleGuestSignup = async () => {
+    try {
+      setLoading(true); // Show loading state
+
+      // Simulate a delay to mimic network latency (optional)
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      // Simulate a successful guest signup
+      const simulatedGuestData = {
+        _id: "simulatedGuestId123", // Example ID, can be customized
+        username: "guest_123",
+      };
+
+      // console.log("Guest signup success:", simulatedGuestData); // Commented out for production
+
+      setLoading(false); // Hide loading state
+
+      if (!simulatedGuestData._id) {
+        setErrors(["Guest signup failed, please try again"]); // Show error if signup fails
+        return;
+      }
+
+      setSuccess("Guest Signup Successful, Redirecting..."); // Show success message
+      setTimeout(() => {
+        navigate("/verify-email"); // Redirect to the desired page
+      }, 1500);
+      setErrors([]); // Clear errors
+    } catch (error) {
+      // console.error("Guest signup error:", error); // Commented out for production
+      setLoading(false); // Hide loading state
+      setErrors([error.message || "Something went wrong, please try again"]); // Show error message on failure
+    }
+  };
+
+  // Render the signup form and related elements
   return (
-    <div className="p-7 h-[80vh] overflow-y-scroll max-w-6xl mx-auto items-center justify-center">
-      <h1 className="text-4xl text-center my-20">Sign Up</h1>
+    <div className="p-7 h-[100vh] max-w-6xl mx-auto items-center justify-center lg:mb-[10%] overflow-auto">
+      <h1 className="text-4xl text-center mt-10 mb-12">Sign Up</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        {/* Username, Email, Password, and Confirm Password input fields with floating labels */}
         <FloatingLabel
           variant="standard"
           id="username"
@@ -151,6 +195,7 @@ function Signup() {
           label="Confirm Password"
           onChange={handleConfirmPasswordChange}
         />
+        {/* Checkbox to toggle password visibility */}
         <section className="">
           <input
             type="checkbox"
@@ -162,6 +207,7 @@ function Signup() {
             Show Password
           </label>
         </section>
+        {/* Display error messages if any */}
         {errors.length > 0 && (
           <div className="flex flex-col gap-2">
             {errors.map((error, index) => (
@@ -171,11 +217,13 @@ function Signup() {
             ))}
           </div>
         )}
+        {/* Display success message */}
         {success && (
           <Alert className="p-2" color="success">
             {success}
           </Alert>
         )}
+        {/* Sign up and guest signup buttons */}
         <section className="flex mx-auto gap-10">
           <Button
             type="submit"
@@ -183,7 +231,15 @@ function Signup() {
           >
             {loading ? "Loading..." : "Sign Up"}
           </Button>
+          <Button
+            onClick={handleGuestSignup}
+            className="buttonUni my-7  bg-neutral-950 self-center"
+            disabled={loading}
+          >
+            {loading ? "Loading..." : "Guest"}
+          </Button>
         </section>
+        {/* Link to sign-in page */}
         <div className="flex mx-auto text-sm mb-5 justify-around">
           <p>Have an account?&nbsp;</p>
           <Link to="/signin">

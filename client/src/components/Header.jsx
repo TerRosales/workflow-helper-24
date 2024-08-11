@@ -62,7 +62,7 @@ function Header() {
         <ul className="flex gap-4 font-semibold text-sm text-white">
           <li className="">
             <Dropdown
-              size="sm"
+              size="xs"
               color="grey"
               className="gradientUni w-[50%] lg:w-[12%]"
               label={
