@@ -5,33 +5,41 @@ import LottieAnimation3 from "../components/LottieAnimationCalc.jsx";
 import { defaultTolerances, defaultTools } from "../utility/troubleShoot.js"; // Ensure correct import path
 
 const ToleranceCalc = ({ tolerances, onFocusChange }) => {
+  // Using state to track whether certain sections are open or closed
   const [isProfillometerOpen, setIsProfillometerOpen] = useState(false);
   const [isSectionOpen, setIsSectionOpen] = useState(false);
   const [isCalculatorOpen, setIsCalculatorOpen] = useState(false);
 
+  // State for selected tolerance, tool, and measurements (which can be multiple)
   const [selectedTolerance, setSelectedTolerance] = useState("");
   const [selectedTool, setSelectedTool] = useState("");
   const [measurements, setMeasurements] = useState([""]); // Array to handle multiple measurements
   const [result, setResult] = useState(null);
+
+  // State for animations and tracking the calculation process
   const [isCalculating, setIsCalculating] = useState(false); // State for calculation animation
   const [calculationDone, setCalculationDone] = useState(false); // State to show OK text
   const [buttonClicked, setButtonClicked] = useState(false); // State for shrinking animation
   const [svgExit, setSvgExit] = useState(false); // State for SVG exit animation
   const [isPositive, setIsPositive] = useState(true); // State to track if the number is positive or negative
 
+  // Toggle the visibility of the Profillometer section
   const toggleProfillometer = () => {
     setIsProfillometerOpen(!isProfillometerOpen);
   };
 
+  // Toggle the visibility of the Tolerances section
   const toggleSection = () => {
     setIsSectionOpen(!isSectionOpen);
   };
 
+  // Toggle the calculator section and notify the parent component about the focus change
   const toggleCalculator = () => {
     setIsCalculatorOpen(!isCalculatorOpen);
     onFocusChange(!isCalculatorOpen); // Notify parent about the focus change
   };
 
+  // Handle the calculation process
   const handleCalculation = (e) => {
     e.preventDefault();
     setButtonClicked(true); // Start the shrinking animation
@@ -58,6 +66,7 @@ const ToleranceCalc = ({ tolerances, onFocusChange }) => {
               parseFloat(`0.0${measurement}`)
             );
 
+            // Calculate the average of the measurements
             const averagedMeasurement =
               measurementsInMicrons.reduce(
                 (acc, val) => acc + parseFloat(val || 0),
@@ -98,21 +107,25 @@ const ToleranceCalc = ({ tolerances, onFocusChange }) => {
     }, 500); // Duration of the shrinking animation
   };
 
+  // Handle changes in measurement input
   const handleMeasurementChange = (index, value) => {
     const newMeasurements = [...measurements];
     newMeasurements[index] = value;
     setMeasurements(newMeasurements);
   };
 
+  // Add a new input field for additional measurements
   const addMeasurementField = () => {
     setMeasurements([...measurements, ""]);
   };
 
+  // Remove an input field for measurements
   const removeMeasurementField = (index) => {
     const newMeasurements = measurements.filter((_, i) => i !== index);
     setMeasurements(newMeasurements);
   };
 
+  // Toggle the sign of the measurement input (positive or negative)
   const toggleSign = (isPositiveSign) => {
     setIsPositive(isPositiveSign);
   };
@@ -208,7 +221,10 @@ const ToleranceCalc = ({ tolerances, onFocusChange }) => {
               </div>
 
               {measurements.map((measurement, index) => (
-                <div key={index} className="mb-2 flex items-center">
+                <div
+                  key={index}
+                  className="mb-2 flex items-center justify-center lg:-translate-x-2"
+                >
                   <button
                     type="button"
                     className={`text-base p-2 rounded-l-md ${
@@ -305,7 +321,7 @@ const ToleranceCalc = ({ tolerances, onFocusChange }) => {
                 </div>
               )}
 
-              <section className="text-center p-2 rounded-lg">
+              <section className="flex text-center p-2 rounded-lg">
                 {calculationDone && result && (
                   <section className="flex flex-col">
                     <span className="text-neutral-950 text-xs font-bold">
