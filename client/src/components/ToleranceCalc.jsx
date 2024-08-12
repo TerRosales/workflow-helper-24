@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { formatKey } from "../utility/utils.js";
-import { Button } from "flowbite-react";
+import { Button, Tooltip } from "flowbite-react"; // Import Tooltip from Flowbite
 import LottieAnimation3 from "../components/LottieAnimationCalc.jsx";
 import { defaultTolerances, defaultTools } from "../utility/troubleShoot.js"; // Ensure correct import path
 
@@ -17,6 +17,7 @@ const ToleranceCalc = ({ tolerances, onFocusChange }) => {
   const [calculationDone, setCalculationDone] = useState(false); // State to show OK text
   const [buttonClicked, setButtonClicked] = useState(false); // State for shrinking animation
   const [svgExit, setSvgExit] = useState(false); // State for SVG exit animation
+  const [isPositive, setIsPositive] = useState(true); // State to track if the number is positive or negative
 
   const toggleProfillometer = () => {
     setIsProfillometerOpen(!isProfillometerOpen);
@@ -71,35 +72,23 @@ const ToleranceCalc = ({ tolerances, onFocusChange }) => {
 
             let adjustedMeasurement = averagedMeasurement;
 
-            // Define the target range (40% to 50% of the tolerance range)
-            const targetLowerBound =
-              toleranceRange[0] + 0.4 * (toleranceRange[1] - toleranceRange[0]);
-            const targetUpperBound =
-              toleranceRange[0] + 0.5 * (toleranceRange[1] - toleranceRange[0]);
-
-            // Check if the measurement is outside the target range
-            if (averagedMeasurement < targetLowerBound) {
-              // Adjust upwards towards the target lower bound
-              while (adjustedMeasurement < targetLowerBound) {
+            // Adjust measurement within the tolerance range using tool micron increments
+            if (adjustedMeasurement < toleranceRange[0]) {
+              // Adjust upwards towards the target range using tool micron increments
+              while (adjustedMeasurement + toolMicron <= toleranceRange[1]) {
                 adjustedMeasurement += toolMicron;
-                if (adjustedMeasurement > targetUpperBound) break; // Prevent overshooting
+                if (adjustedMeasurement >= toleranceRange[0]) break;
               }
-            } else if (averagedMeasurement > targetUpperBound) {
-              // Adjust downwards towards the target upper bound
-              while (adjustedMeasurement > targetUpperBound) {
+            } else if (adjustedMeasurement > toleranceRange[1]) {
+              // Adjust downwards towards the target range using tool micron increments
+              while (adjustedMeasurement - toolMicron >= toleranceRange[0]) {
                 adjustedMeasurement -= toolMicron;
-                if (adjustedMeasurement < targetLowerBound) break; // Prevent overshooting
+                if (adjustedMeasurement <= toleranceRange[1]) break;
               }
             }
 
-            // Set the result
-            setResult(
-              `You selected ${selectedTolerance} and ${selectedTool} with an initial measurement of ${averagedMeasurement.toFixed(
-                3
-              )}. After adjustment, the final measurement is ${adjustedMeasurement.toFixed(
-                3
-              )}, which is within the 40-50% range of the tolerance.`
-            );
+            // Set the result with the final adjusted measurement
+            setResult(adjustedMeasurement.toFixed(3));
 
             setIsCalculating(false);
             setCalculationDone(true);
@@ -124,10 +113,19 @@ const ToleranceCalc = ({ tolerances, onFocusChange }) => {
     setMeasurements(newMeasurements);
   };
 
+  const toggleSign = (isPositiveSign) => {
+    setIsPositive(isPositiveSign);
+  };
+
   return (
     <section className="flex flex-col p-4 my-4 gradientUni2 rounded-md mx-auto lg:w-[90%] gap-5 transition-all duration-500 max-w-2xl">
+      {/* Dark overlay when Lottie animation is playing */}
+      {isCalculating && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+      )}
+
       {/* Adjustment Calculator Section */}
-      <article className="mb-6">
+      <article className="mb-6 relative z-50">
         <header className="flex justify-between items-center mb-4">
           <h3 className="font-bold text-sm text-white">Calculator</h3>
           <button
@@ -210,27 +208,59 @@ const ToleranceCalc = ({ tolerances, onFocusChange }) => {
               </div>
 
               {measurements.map((measurement, index) => (
-                <div key={index} className="mb-2">
-                  <label
-                    htmlFor={`measurementInput-${index}`}
-                    className="block text-xs font-medium text-gray-700"
+                <div key={index} className="mb-2 flex items-center">
+                  <button
+                    type="button"
+                    className={`text-base p-2 rounded-l-md ${
+                      isPositive
+                        ? "shadow-lg shadow-neutral-400 -translate-y-1 transition-all scale-[1.05] font-extrabold text-2xl bg-neutral-900 text-white"
+                        : "bg-white border-[1px] border-blue-900 text-blue-600"
+                    }`}
+                    onClick={() => toggleSign(true)}
                   >
-                    Enter Key {index + 1}:
-                  </label>
-                  <input
-                    id={`measurementInput-${index}`}
-                    type="number"
-                    step="0.001"
-                    className="text-xs mt-1 block w-full p-1 border border-gray-300 rounded-md bg-white text-black"
-                    value={measurement}
-                    onChange={(e) =>
-                      handleMeasurementChange(index, e.target.value)
-                    }
-                  />
+                    +
+                  </button>
+
+                  {/* Tooltip wrapping the input field */}
+                  <Tooltip
+                    className="text-xs w-[70%]"
+                    content='Add a "0" before the actual value for microns'
+                  >
+                    <input
+                      id={`measurementInput-${index}`}
+                      type="number"
+                      step="0.001"
+                      className="text-base mt-1 block w-full p-1 border-t border-b border-gray-300 rounded-none bg-white text-black"
+                      value={isPositive ? measurement : -measurement}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        if (value.replace("-", "").length <= 4) {
+                          handleMeasurementChange(index, Math.abs(value));
+                        }
+                      }}
+                      onInput={(e) => {
+                        if (e.target.value.replace("-", "").length > 4) {
+                          e.target.value = e.target.value.slice(0, 4);
+                        }
+                      }}
+                    />
+                  </Tooltip>
+
+                  <button
+                    type="button"
+                    className={`text-base p-2 rounded-r-md ${
+                      !isPositive
+                        ? "shadow-lg shadow-neutral-400 -translate-y-1 transition-all scale-[1.05] font-extrabold text-2xl bg-neutral-900 text-white"
+                        : "bg-white border-[1px] border-blue-900 text-blue-600"
+                    }`}
+                    onClick={() => toggleSign(false)}
+                  >
+                    -
+                  </button>
                   {index > 0 && (
                     <button
                       type="button"
-                      className="text-xs text-red-500 mt-2"
+                      className="text-xs text-red-500 mt-2 ml-2"
                       onClick={() => removeMeasurementField(index)}
                     >
                       Remove
@@ -274,11 +304,25 @@ const ToleranceCalc = ({ tolerances, onFocusChange }) => {
                   <LottieAnimation3 />
                 </div>
               )}
-              {calculationDone && (
-                <div className="text-center text-white font-bold mt-4">OK</div>
-              )}
 
-              {result && <p className="mt-4 text-xs text-gray-700">{result}</p>}
+              <section className="text-center p-2 rounded-lg">
+                {calculationDone && result && (
+                  <section className="flex flex-col">
+                    <span className="text-neutral-950 text-xs font-bold">
+                      Final adjustments:&nbsp;
+                    </span>
+                    <span className="rounded-lg px-2 p-1 text-3xl font-bold text-gradient gradientUni2 inline-block mt-4">
+                      {result}
+                    </span>
+                  </section>
+                )}
+
+                {result && (
+                  <p className="mt-4 text-xs text-neutral-950 font-bold">
+                    Please go ahead and adjust it.
+                  </p>
+                )}
+              </section>
             </form>
           )}
         </div>

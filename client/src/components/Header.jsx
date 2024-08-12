@@ -54,11 +54,12 @@ function Header() {
   }, []);
 
   return (
-    <div className="bg-neutral-950">
-      <div className="flex justify-between items-center max-w-6xl mx-auto p-3 px-6">
+    <nav className="gradientUni2">
+      <section className="flex justify-between items-center max-w-6xl mx-auto p-3 px-6">
         <Link to="/">
-          <h1 className="text-xl font-bold text-white">
-            Workflow <span className="text-[#324de7]">Helper</span>
+          <h1 className="text-lg lg:text-xl font-bold text-white">
+            Workflow
+            <span className="text-blue-600 text-xl m-1 helper">Helper</span>
           </h1>
         </Link>
         <ul className="flex gap-4 font-semibold text-sm text-white">
@@ -129,7 +130,7 @@ function Header() {
             </Dropdown>
           </li>
         </ul>
-      </div>
+      </section>
 
       <Modal
         show={isModalOpen}
@@ -148,7 +149,7 @@ function Header() {
           )}
         </Modal.Body>
       </Modal>
-    </div>
+    </nav>
   );
 }
 

@@ -19,12 +19,12 @@ function Home() {
 
       {/* Main content section */}
       <section className="-translate-x-2 flex flex-col mx-auto justify-center items-center">
-        <h1 className="text-4xl mt-6 mb-10 text-center">Welcome</h1>{" "}
-        {/* Welcome heading */}
-        <span className="iconEmoji rounded-xl fadeInSlideIn">🤗</span>{" "}
-        {/* Emoji with fadeInSlideIn animation */}
+        <h1 className="text-4xl mt-10 mb-12 text-center">Welcome</h1>{" "}
+        {/* Welcome heading with increased top and bottom margin */}
+        <span className="iconEmoji rounded-xl fadeInSlideIn mb-8">🤗</span>{" "}
+        {/* Emoji with fadeInSlideIn animation and bottom margin */}
         {/* Paragraph explaining the purpose of the app */}
-        <p className="text-[16px] my-10 text-left text-sm">
+        <p className="text-[16px] my-12 text-left text-sm leading-relaxed">
           The{" "}
           <span className="border-1 rounded-lg font-bold text-[#556cef]">
             Workflow&nbsp;Helper
@@ -40,7 +40,7 @@ function Home() {
           each issue that they encounter.
         </p>
         {/* Button to start the troubleshooting process, linking to another page */}
-        <Button className="buttonUni buttonLong mt-2 mb-10 fadeInSlideIn">
+        <Button className="buttonUni buttonLong mt-4 mb-16 fadeInSlideIn">
           <Link to="/lines">Start Troubleshooting</Link>{" "}
           {/* Link to the troubleshooting page */}
         </Button>

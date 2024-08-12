@@ -117,7 +117,7 @@ const TroubleshootingPage = () => {
 
       {/* This div controls the Lottie animation, hiding it when focusMode is active. */}
       <div
-        className={`lg:w-80 w-50 mx-auto mb-20 transition-all duration-700 ease-in-out transform origin-bottom ${
+        className={`w-[250px] lg:w-[420px] mx-auto mb-20 transition-all duration-700 ease-in-out transform origin-bottom ${
           focusMode
             ? "opacity-0 max-h-0 -translate-y-[20px]"
             : "opacity-100 max-h-[240px] translate-y-0"

@@ -187,22 +187,22 @@
 
 /* Custom Scrollbar Styles */
 ::-webkit-scrollbar {
-  width: 8px; /* Width of the scrollbar */
-  height: 8px; /* Height of the scrollbar */
+  width: 2px; /* Width of the scrollbar */
+  height: 2px; /* Height of the scrollbar */
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(94, 94, 255, 0.9); /* Color of the scrollbar thumb */
+  background-color: rgba(46, 46, 218, 0.615); /* Color of the scrollbar thumb */
   border-radius: 4px; /* Rounded corners for the thumb */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(94, 94, 249); /* Color when hovering over the thumb */
+  background-color: rgb(79, 79, 92); /* Color when hovering over the thumb */
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #2c2c2c; /* Color of the scrollbar track */
-  border-radius: 4px; /* Rounded corners for the track */
+  background-color: #2b2b2b; /* Color of the scrollbar track */
+  border-radius: 4px;
 }
 
 @keyframes fadeInSlideIn {
