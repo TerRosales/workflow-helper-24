@@ -20,7 +20,9 @@ function ProductPage() {
   useEffect(() => {
     const fetchLineDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/lines/${id}`);
+        const response = await fetch(
+          `${import.meta.env.VITE_API_BASE_URL}/api/lines/${id}`
+        );
         const result = await response.json();
         const { data } = result;
         setSelectedLine(data); // Set the selected line's data

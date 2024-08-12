@@ -99,20 +99,20 @@ function Lines() {
           <section className="flex buttonGroup gap-2 px-1 justify-between fadeInSlideIn">
             <section className="flex gap-2 fadeInSlideIn">
               <Dropdown
-                size="xl"
+                size="xs"
                 color="grey"
-                className="gradientUni w-full md:w-[50%] overflow-hidden"
-                label={<GoTools className="text-lg" />}
+                className="gradientUni w-full"
+                label={<GoTools className="text-lg mt-1" />}
               >
                 {currentProduct.tools.map((tool) => (
                   <Dropdown.Item key={tool}>{tool}</Dropdown.Item>
                 ))}
               </Dropdown>
               <Dropdown
-                size="xl"
+                size="xs"
                 color="grey"
-                className="gradientUni w-full md:w-[50%]"
-                label={<LuClipboardPaste className="text-lg" />}
+                className="gradientUni w-full"
+                label={<LuClipboardPaste className="text-lg mt-1" />}
               >
                 {currentProduct.jobs.map((job) => (
                   <Dropdown.Item key={job}>{job}</Dropdown.Item>
