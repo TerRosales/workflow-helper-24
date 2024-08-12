@@ -142,7 +142,8 @@ function EmailVerification() {
               onClick={simulateVerificationSuccess}
               className="buttonUniLight buttonLong mb-5 w-[100px] mx-auto"
             >
-              {isGuestExploding && <ConfettiExplosion {...bigExplodeProps} />} {/* Separate explosion for guest */}
+              {isGuestExploding && <ConfettiExplosion {...bigExplodeProps} />}{" "}
+              {/* Separate explosion for guest */}
               Verify Guest
             </Button>
           </section>

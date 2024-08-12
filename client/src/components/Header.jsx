@@ -38,7 +38,9 @@ function Header() {
   // Fetch all lines data
   const fetchAllLines = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/lines");
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/lines`
+      );
       const result = await response.json();
       const { data } = result;
       setAllLines(data);

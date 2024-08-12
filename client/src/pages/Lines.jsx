@@ -20,7 +20,9 @@ function Lines() {
   useEffect(() => {
     const fetchLines = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/lines");
+        const response = await fetch(
+          `${import.meta.env.VITE_API_BASE_URL}/api/lines`
+        );
         const result = await response.json();
         setLines(result.data); // Store the fetched lines in state
         setSelectedProduct(result.data[0]?._id || null); // Set the first line as the selected product by default
