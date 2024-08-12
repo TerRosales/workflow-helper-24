@@ -321,7 +321,7 @@ const ToleranceCalc = ({ tolerances, onFocusChange }) => {
                 </div>
               )}
 
-              <section className="flex text-center p-2 rounded-lg">
+              <section className="text-center p-2 rounded-lg">
                 {calculationDone && result && (
                   <section className="flex flex-col">
                     <span className="text-neutral-950 text-xs font-bold">
