@@ -74,7 +74,7 @@ function Signin() {
       dispatch(signInSuccess(data));
       setRedirecting(true);
       setTimeout(() => {
-        navigate("/profile");
+        navigate("/lines");
         setRedirecting(false);
       }, 1500);
     } catch (error) {

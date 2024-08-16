@@ -92,18 +92,18 @@ function Header() {
                     </section>
                   </Dropdown.Item>
                   <Dropdown.Divider className="bg-blue-300" />
-                  <Dropdown.Item>
-                    <FaClipboardUser className="text-lg mr-2" />
-                    <Link className="text-xs" to="/profile">
+                  <Link className="text-xs" to="/profile">
+                    <Dropdown.Item>
+                      <FaClipboardUser className="text-lg mr-2" />
                       Profile
-                    </Link>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <FaNetworkWired className="text-lg mr-2" />
-                    <Link className="text-xs" to="/lines">
+                    </Dropdown.Item>
+                  </Link>
+                  <Link className="text-xs" to="/lines">
+                    <Dropdown.Item>
+                      <FaNetworkWired className="text-lg mr-2" />
                       Lines
-                    </Link>
-                  </Dropdown.Item>
+                    </Dropdown.Item>
+                  </Link>
                   <Dropdown.Item>
                     <MdOutlineAutoFixHigh className="text-lg mr-2" />
                     <a className="text-xs" onClick={handleOpenModal}>
@@ -117,14 +117,16 @@ function Header() {
                 </>
               ) : (
                 <>
-                  <Dropdown.Item>
-                    <Link to="/signin">
+                  <Link to="/signin">
+                    <Dropdown.Item>
                       <li className="">Sign In</li>
-                    </Link>
-                  </Dropdown.Item>
+                    </Dropdown.Item>
+                  </Link>
+                    <Link to="/signup">
                   <Dropdown.Item>
-                    <Link to="/signup">Sign Up</Link>
+                      <li>Sign Up</li>
                   </Dropdown.Item>
+                    </Link>
                 </>
               )}
             </Dropdown>

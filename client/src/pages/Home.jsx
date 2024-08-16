@@ -7,7 +7,7 @@ import { IoHomeOutline } from "react-icons/io5"; // Import the home icon from Re
 function Home() {
   return (
     // Main container section with flexible layout and height settings
-    <section className="flex flex-col lg:h-[80vh] md:h-[90vh] sm:h-[95vh] space-x-5 max-w-2xl mb-5 px-2 mx-auto">
+    <section className="flex flex-col lg:h-full md:h-[90vh] sm:h-[95vh] space-x-5 max-w-2xl mb-5 px-2 mx-auto">
       {/* Top section with horizontal lines and a home icon */}
       <section className="flex items-center gap-2 mt-4">
         <span className="w-full h-1 border-2 border-neutral-900" />{" "}

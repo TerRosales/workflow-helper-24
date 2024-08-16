@@ -3,10 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Dropdown, Button } from "flowbite-react";
 import { useSelector } from "react-redux";
-import { GoTools } from "react-icons/go";
 import { PiNetworkBold } from "react-icons/pi";
-import { LuClipboardPaste } from "react-icons/lu";
-import { MdOutlineTroubleshoot } from "react-icons/md";
 import { FailedLoad } from "../components/FailedLoad";
 
 function Lines() {
@@ -97,31 +94,9 @@ function Lines() {
 
           {/* Dropdowns for tools and jobs, and a button to navigate to the product page */}
           <section className="flex buttonGroup gap-2 px-1 justify-between fadeInSlideIn">
-            <section className="flex gap-2 fadeInSlideIn">
-              <Dropdown
-                size="xs"
-                color="grey"
-                className="gradientUni w-full"
-                label={<GoTools className="text-lg mt-1" />}
-              >
-                {currentProduct.tools.map((tool) => (
-                  <Dropdown.Item key={tool}>{tool}</Dropdown.Item>
-                ))}
-              </Dropdown>
-              <Dropdown
-                size="xs"
-                color="grey"
-                className="gradientUni w-full"
-                label={<LuClipboardPaste className="text-lg mt-1" />}
-              >
-                {currentProduct.jobs.map((job) => (
-                  <Dropdown.Item key={job}>{job}</Dropdown.Item>
-                ))}
-              </Dropdown>
-            </section>
-            <Button className="buttonUni fadeInSlideIn">
+            <Button className="buttonUni buttonLong fadeInSlideIn ml-auto">
               <Link to={`/product-page/${currentProduct._id}`}>
-                <MdOutlineTroubleshoot className="text-[18px]" />
+                  See More
               </Link>
             </Button>
           </section>

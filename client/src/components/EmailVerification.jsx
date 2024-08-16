@@ -89,7 +89,7 @@ function EmailVerification() {
   };
 
   return (
-    <div className="h-[85vh] mx-auto overflow-auto max-w-2xl flex flex-col p-4 text-center bg-white">
+    <div className="h-full mx-auto overflow-auto max-w-2xl flex flex-col p-4 text-center bg-white">
       <div className="flex items-center gap-2 my-5 p-2">
         <span className="w-full h-1 border-2 border-neutral-900" />
         <MdOutlineMarkEmailUnread className="text-[50px]" />
