@@ -162,7 +162,10 @@ function Signup() {
   return (
     <div className="p-7 h-[100vh] max-w-6xl mx-auto items-center justify-center lg:mb-[10%] overflow-auto">
       <h1 className="text-4xl text-center mt-10 mb-12">Sign Up</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 mx-auto lg:w-[35%]"
+      >
         {/* Username, Email, Password, and Confirm Password input fields with floating labels */}
         <FloatingLabel
           variant="standard"

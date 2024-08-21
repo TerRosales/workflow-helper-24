@@ -44,7 +44,7 @@ function Signin() {
   const handleOAuthSuccess = () => {
     setRedirecting(true); // Show redirecting message
     setTimeout(() => {
-      navigate("/"); // Navigate to the homepage after a short delay
+      navigate("/lines"); // Navigate to the homepage after a short delay
       setRedirecting(false);
     }, 1500);
   };
@@ -109,7 +109,7 @@ function Signin() {
       dispatch(signInSuccess(data));
       setRedirecting(true);
       setTimeout(() => {
-        navigate("/profile");
+        navigate("/lines");
         setRedirecting(false);
       }, 1500);
     } catch (error) {
@@ -124,7 +124,10 @@ function Signin() {
   return (
     <div className="p-7 h-[75vh] overflow-auto max-h-[80vh] max-w-6xl mx-auto mb-10 relative">
       <h1 className="text-4xl text-center mt-10 mb-12">Sign In</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 mx-auto lg:w-[35%]"
+      >
         {/* Email and Password input fields with floating labels */}
         <FloatingLabel
           onChange={handleChange}

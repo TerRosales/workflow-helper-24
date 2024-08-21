@@ -98,13 +98,13 @@ const TroubleshootingPage = () => {
       }`}
     >
       {/* This section displays the job and qualification from the form data, with some simple animation logic. */}
-      <section className="px-4 flex justify-center my-10">
-        <Button
+      <section className="px-4 flex justify-center my-5 text-center">
+        <span
           ref={(el) => (elementsRef.current[0] = el)}
-          className="buttonUni buttonLong py-4"
+          className="buttonUni buttonLong p-4 pt-7 lg:pt-5"
         >
           {formData.job}
-        </Button>
+        </span>
         <section className="flex mx-2">
           <span
             ref={(el) => (elementsRef.current[1] = el)}
@@ -116,15 +116,15 @@ const TroubleshootingPage = () => {
       </section>
 
       {/* This div controls the Lottie animation, hiding it when focusMode is active. */}
-      <div
-        className={`w-[250px] lg:w-[420px] mx-auto mb-20 transition-all duration-700 ease-in-out transform origin-bottom ${
+      <figure
+        className={`w-[250px] lg:w-[420px] mx-auto mb-7 lg:mb-28 transition-all duration-700 ease-in-out transform origin-bottom ${
           focusMode
             ? "opacity-0 max-h-0 -translate-y-[20px]"
             : "opacity-100 max-h-[240px] translate-y-0"
         }`}
       >
         {!focusMode && <LottieAnimation2 />}
-      </div>
+      </figure>
 
       {/* This section builds the timeline based on the troubleshootData.
           It uses the Timeline component from Flowbite to render each troubleshooting step.

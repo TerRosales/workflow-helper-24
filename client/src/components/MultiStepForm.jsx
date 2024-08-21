@@ -242,6 +242,8 @@ const MultiStepForm = ({ line, onClose, allLines }) => {
                             : "inherit", // Tailwind's blue-600 color
                         }}
                       >
+                        <span className="font-bold">{index + 1}. </span>{" "}
+                        {/* Added numbering */}
                         {item}
                       </label>
                     </section>

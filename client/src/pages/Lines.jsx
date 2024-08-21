@@ -58,18 +58,18 @@ function Lines() {
 
   // Render the lines page with the selected product's details and options
   return (
-    <div className="h-auto flex flex-col p-2 max-w-2xl overflow-auto mx-auto fadeInSlideIn">
+    <div className="h-auto flex flex-col p-2 max-w-2xl overflow-auto mx-auto">
       {/* Page header with an icon and title */}
       <section className="flex items-center gap-2 mt-4 mb-5 fadeInSlideIn">
         <span className="w-full h-1 border-2 border-neutral-900" />
         <PiNetworkBold className="text-[52px]" />
         <span className="w-full h-1 border-2 border-neutral-900" />
       </section>
-      <h1 className="text-4xl text-center pb-5 mb-2 fadeInSlideIn">Lines</h1>
+      <h1 className="text-4xl text-center pb-5 fadeInSlideIn">Lines</h1>
 
       {/* Main product section with image, description, and action buttons */}
-      <section className="flex flex-col pt-4 gradientCard my-5 rounded-xl shadow-lg shadow-neutral-300 max-w-lg w-full justify-center mx-auto fadeInSlideIn">
-        <figure className="flex justify-between items-center p-6 fadeInSlideIn">
+      <section className="flex flex-col pt-4 gradientCard mb-5 rounded-xl shadow-lg shadow-neutral-300 max-w-lg w-full justify-center mx-auto fadeInSlideIn">
+        <figure className="flex justify-between items-center p-6 lg:px-12 fadeInSlideIn">
           <h2 className="font-bold text-2xl text-white">
             {currentProduct.name}
           </h2>
@@ -93,12 +93,10 @@ function Lines() {
           </p>
 
           {/* Dropdowns for tools and jobs, and a button to navigate to the product page */}
-          <section className="flex buttonGroup gap-2 px-1 justify-between fadeInSlideIn">
-            <Button className="buttonUni buttonLong fadeInSlideIn ml-auto">
-              <Link to={`/product-page/${currentProduct._id}`}>
-                  See More
-              </Link>
-            </Button>
+          <section className="flex buttonGroup gap-2 px-1 justify-between fadeInSlideIn ml-auto">
+            <Link to={`/product-page/${currentProduct._id}`}>
+              <Button className="buttonUni buttonLong">See More</Button>
+            </Link>
           </section>
         </section>
       </section>
