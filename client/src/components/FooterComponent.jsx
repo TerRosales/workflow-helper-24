@@ -24,7 +24,12 @@ function FooterComponent() {
           </Footer.LinkGroup>
         </section>
         <Footer.Divider className="" />
-        <Footer.Copyright href="#" by="TR-DEV" year={2024} />
+        <Footer.Copyright
+          className="text-white"
+          href="#"
+          by="TR-DEV"
+          year={2024}
+        />
       </nav>
     </Footer>
   );

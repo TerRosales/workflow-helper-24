@@ -106,13 +106,13 @@ function Header() {
                   </Link>
                   <Dropdown.Item>
                     <MdOutlineAutoFixHigh className="text-lg mr-2" />
-                    <a className="text-xs" onClick={handleOpenModal}>
+                    <a className="text-sm" onClick={handleOpenModal}>
                       Troubleshoot
                     </a>
                   </Dropdown.Item>
-                  <Dropdown.Item className="text-xs" onClick={handleSignOut}>
+                  <Dropdown.Item onClick={handleSignOut}>
                     <FaSignOutAlt className="text-lg mr-2" />
-                    Sign Out
+                    <span className="text-sm">Sign Out</span>
                   </Dropdown.Item>
                 </>
               ) : (
@@ -122,11 +122,11 @@ function Header() {
                       <li className="">Sign In</li>
                     </Dropdown.Item>
                   </Link>
-                    <Link to="/signup">
-                  <Dropdown.Item>
+                  <Link to="/signup">
+                    <Dropdown.Item>
                       <li>Sign Up</li>
-                  </Dropdown.Item>
-                    </Link>
+                    </Dropdown.Item>
+                  </Link>
                 </>
               )}
             </Dropdown>

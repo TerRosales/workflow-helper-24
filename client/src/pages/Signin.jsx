@@ -122,11 +122,11 @@ function Signin() {
 
   // Render the sign-in form and related elements
   return (
-    <div className="p-7 h-[75vh] overflow-auto max-h-[80vh] max-w-6xl mx-auto mb-10 relative">
+    <div className="p-7 h-[75vh] overflow-auto max-h-[80vh] max-w-2xl mx-auto mb-10 relative">
       <h1 className="text-4xl text-center mt-10 mb-12">Sign In</h1>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-4 mx-auto lg:w-[35%]"
+        className="flex flex-col gap-4 mx-auto lg:w-[50%]"
       >
         {/* Email and Password input fields with floating labels */}
         <FloatingLabel
